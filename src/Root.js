@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
-import FbRouter from './FbRouter';
+import FeibaRouter from './FeibaRouter';
 import configureStore from './store';
 
 let store = configureStore();
@@ -12,7 +12,7 @@ export default class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <FbRouter />
+        <FeibaRouter />
       </Provider>
     )
   }

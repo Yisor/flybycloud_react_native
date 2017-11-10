@@ -1,7 +1,4 @@
 'use strict';
-
-import { Alert } from 'react-native';
-
 import * as TYPES from './types';
 
 //  login

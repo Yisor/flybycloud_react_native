@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:55:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-09 17:40:35
+ * @Last Modified time: 2017-11-10 11:30:19
  */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
@@ -18,6 +18,7 @@ import {
 import LoginPage from './components/LoginPage';
 import UserInfoPage from './components/UserInfoPage';
 import HomePage from './components/HomePage';
+import CustomNavBar from './components/CustomNavBar';
 
 const HomeIcon = (props) => {
   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
@@ -44,7 +45,7 @@ const UserIcon = (props) => {
   );
 }
 
-class FbRouter extends Component {
+class FeibaRouter extends Component {
   render() {
     return (
       <Router >
@@ -63,7 +64,7 @@ class FbRouter extends Component {
               <Scene key="user" component={UserInfoPage} title="我的" />
             </Stack>
           </Tabs>
-          <Scene hideNavBar key="login" component={LoginPage} initial title="登录" />
+          <Scene key="login" navBar={CustomNavBar} component={LoginPage} initial title="登 录" />
         </Stack>
       </Router>
     );
@@ -81,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FbRouter;
+export default FeibaRouter;
