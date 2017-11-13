@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:55:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-10 11:30:19
+ * @Last Modified time: 2017-11-13 10:00:35
  */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
@@ -15,9 +15,9 @@ import {
   Tabs,
   Stack,
 } from 'react-native-router-flux';
-import LoginPage from './components/LoginPage';
-import UserInfoPage from './components/UserInfoPage';
-import HomePage from './components/HomePage';
+import LoginPage from './containers/LoginPage';
+import UserInfoPage from './containers/UserInfoPage';
+import HomePage from './containers/HomePage';
 import CustomNavBar from './components/CustomNavBar';
 
 const HomeIcon = (props) => {
