@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 10:12:47 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-13 10:15:33
+ * @Last Modified time: 2017-11-13 10:21:17
  */
 import React, { Component } from 'react';
 import {
@@ -20,25 +20,24 @@ import { width } from '../common/window';
 
 const boxW = 100;
 const boxM = (width - 2 * boxW) / 3;
-const datas =
-  [
-    {
-      "icon": require('../../icons/airplane.png'),
-      "title": "机票"
-    },
-    {
-      "icon": require('../../icons/car.png'),
-      "title": "用车"
-    },
-    {
-      "icon": require('../../icons/train.png'),
-      "title": "火车票"
-    },
-    {
-      "icon": require('../../icons/hotel.png'),
-      "title": "酒店"
-    }
-  ];
+const datas = [
+  {
+    "icon": require('../../icons/airplane.png'),
+    "title": "机票"
+  },
+  {
+    "icon": require('../../icons/car.png'),
+    "title": "用车"
+  },
+  {
+    "icon": require('../../icons/train.png'),
+    "title": "火车票"
+  },
+  {
+    "icon": require('../../icons/hotel.png'),
+    "title": "酒店"
+  }
+];
 
 class HomePage extends Component {
 
