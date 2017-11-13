@@ -1,3 +1,9 @@
+/*
+ * @Author: lsl 
+ * @Date: 2017-11-09 10:12:47 
+ * @Last Modified by: lsl
+ * @Last Modified time: 2017-11-13 10:15:33
+ */
 import React, { Component } from 'react';
 import {
   View,
@@ -10,11 +16,10 @@ import {
   Dimensions
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { width } from '../common/window';
 
-const witdh = Dimensions.get('window').width;
-var boxW = 100;
-var boxM = (witdh - 2 * boxW) / 3;
-
+const boxW = 100;
+const boxM = (width - 2 * boxW) / 3;
 const datas =
   [
     {
@@ -40,9 +45,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    this.state = {
-      dataSource: ds.cloneWithRows(datas),
-    };
+    this.state = { dataSource: ds.cloneWithRows(datas) };
   }
 
   // 返回cell  
