@@ -7,9 +7,10 @@ const initialState = {
 	status: null,
 };
 
-export default function login(state = initialState, action) {
+const login = (state = initialState, action) => {
 	switch (action.type) {
-		case TYPES.LOGGED_IN:
+		case TYPES.LOGGED_DOING:
+			console.log('login' + JSON.stringify(action.user));
 			return {
 				...state,
 				user: action.user,
@@ -19,3 +20,4 @@ export default function login(state = initialState, action) {
 			return state;
 	}
 }
+export default login;
