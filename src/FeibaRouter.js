@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:55:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-13 10:00:35
+ * @Last Modified time: 2017-11-14 17:05:14
  */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
@@ -15,10 +15,10 @@ import {
   Tabs,
   Stack,
 } from 'react-native-router-flux';
-import LoginPage from './containers/LoginPage';
 import UserInfoPage from './containers/UserInfoPage';
 import HomePage from './containers/HomePage';
 import CustomNavBar from './components/CustomNavBar';
+import { LoginPage } from './containers/login';
 
 const HomeIcon = (props) => {
   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');

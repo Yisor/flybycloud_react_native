@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 10:12:47 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-13 10:21:17
+ * @Last Modified time: 2017-11-14 15:44:35
  */
 import React, { Component } from 'react';
 import {
@@ -16,10 +16,10 @@ import {
   Dimensions
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { width } from '../common/window';
+import window from '../utils/window';
 
 const boxW = 100;
-const boxM = (width - 2 * boxW) / 3;
+const boxM = (window.width - 2 * boxW) / 3;
 const datas = [
   {
     "icon": require('../../icons/airplane.png'),

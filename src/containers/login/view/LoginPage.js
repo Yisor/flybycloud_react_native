@@ -2,13 +2,13 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:58:26 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-13 14:53:35
+ * @Last Modified time: 2017-11-14 14:28:49
  */
 import React, { PureComponent } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { login } from '../actions/login';
+import { login } from '../actions';
 
 class LoginPage extends PureComponent {
 

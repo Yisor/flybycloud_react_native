@@ -1,5 +1,5 @@
 import { fork } from 'redux-saga/effects';
-import { watchFetchRequests } from '../sagas/login';
+import { watchFetchRequests } from '../containers/login';
 
 export default function* rootSaga() {
   yield [
