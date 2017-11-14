@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:58:26 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-14 14:28:49
+ * @Last Modified time: 2017-11-14 17:19:29
  */
 import React, { PureComponent } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';

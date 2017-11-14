@@ -2,12 +2,12 @@ import { takeEvery, delay } from 'redux-saga';
 import { put, call, take, fork, cancel, cancelled } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 import { LOGGED_IN, LOGGED_DOING } from './actionTypes';
-import { login, request, post } from '../../service/request';
-import apiUrl from '../../constants/Urls';
+import { post } from '../../service/request';
+import apiUrl from '../../constants/urls';
 
 export function* fetchUrl(params) {
   try {
-    const result = yield call(post, apiUrl.userLogin, params);
+    const result = yield call(post, apiUrl.login, params);
     console.log("返回结果" + JSON.stringify(result));
     yield put({ type: LOGGED_DOING, result });  // 中间件发起一个 action 到 Store
   } catch (error) {
