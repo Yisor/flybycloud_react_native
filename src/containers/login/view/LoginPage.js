@@ -2,15 +2,14 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:58:26 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-14 19:05:13
+ * @Last Modified time: 2017-11-15 10:46:20
  */
 import React, { PureComponent } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import {NodeRSA} from 'node-rsa'
 import { login } from '../actions';
-import publicKey from '../../../constants/constants';
+import Encrypt from '../../../utils/encrypt';
 
 class LoginPage extends PureComponent {
 
@@ -23,12 +22,10 @@ class LoginPage extends PureComponent {
     }
   }
 
-  rsaEncrypt = (message) => {
-    let clientKey = new NodeRSA(publicKey)
-    // 在node-rsa模块中加解密默认使用 pkcs1_oaep ,而在js中加密解密默认使用的是 pkcs1
-    clientKey.setOptions({ encryptionScheme: 'pkcs1' }) //就是新增这一行代码
-    let encrypted = clientKey.encrypt(message, 'base64')
-    return encrypted
+  updatePasswordState = (text) => {
+    Encrypt.rsa(text).then((encrypted) => {
+      this.setState({ password: encrypted });
+    });
   }
 
   onPressLogin = () => {
@@ -58,7 +55,7 @@ class LoginPage extends PureComponent {
       <View style={styles.loginForm}>
         <TextInput style={styles.textInput} placeholder="请输入企业编码" underlineColorAndroid="transparent" onChangeText={(text) => this.setState({ corpCode: text })} />
         <TextInput style={styles.textInput} placeholder="请输入手机号" keyboardType='numeric' maxLength={11} underlineColorAndroid="transparent" onChangeText={(text) => this.setState({ phone: text })} />
-        <TextInput style={styles.textInput} placeholder="请输入密码" secureTextEntry={true} underlineColorAndroid="transparent" onChangeText={(text) => this.setState({ password: this.rsaEncrypt(text)})} />
+        <TextInput style={styles.textInput} placeholder="请输入密码" secureTextEntry={true} underlineColorAndroid="transparent" onChangeText={(text) => this.updatePasswordState(text)} />
 
         <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 15, marginRight: 15, justifyContent: 'space-between' }}>
           <Text onPress={this.onClickAccountApply} style={{ textDecorationLine: 'underline' }}>账号申请</Text>

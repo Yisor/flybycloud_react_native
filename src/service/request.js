@@ -1,5 +1,6 @@
 import MD5 from 'react-native-md5'
-import apiUrl from '../constants/urls';
+import apiUrl from '../constants/apiUrl';
+import constants from '../constants/constants';
 
 /**
  * 请求头
@@ -9,7 +10,7 @@ const Headers = {
   'Content-Type': 'application/json',
   'appId': '111',
   'appVersion': '1.0.1',
-  'appType': '1',
+  'appType': constants.appType,
   'token': ''
 }
 

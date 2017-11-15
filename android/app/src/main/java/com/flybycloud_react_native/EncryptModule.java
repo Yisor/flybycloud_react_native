@@ -16,7 +16,6 @@ import com.facebook.react.bridge.WritableMap;
 
 public class EncryptModule extends ReactContextBaseJavaModule {
     public static final String MODULE_NAME = "Encrypt";
-    public static final String ENCRYPT_RSA = "encryptRsa";
 
     public EncryptModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -30,9 +29,7 @@ public class EncryptModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void rsa(String encryptStr, Promise promise) {
         try {
-            WritableMap map = Arguments.createMap();
-            map.putString(ENCRYPT_RSA, RSAClientUtil.encrypt(encryptStr));
-            promise.resolve(map);
+            promise.resolve(RSAClientUtil.encrypt(encryptStr));
         } catch (Exception e) {
             e.printStackTrace();
             promise.reject(e);

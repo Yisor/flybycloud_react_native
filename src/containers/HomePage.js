@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 10:12:47 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-14 15:44:35
+ * @Last Modified time: 2017-11-15 13:56:29
  */
 import React, { Component } from 'react';
 import {
@@ -40,13 +40,19 @@ const datas = [
 ];
 
 class HomePage extends Component {
-
   constructor(props) {
     super(props);
     let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = { dataSource: ds.cloneWithRows(datas) };
   }
 
+  componentDidMount() {
+    if (global.token) {
+
+    } else {
+      Actions.login();
+    }
+  }
   // 返回cell  
   renderRow = (rowData) => {
     return (
