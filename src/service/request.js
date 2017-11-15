@@ -9,7 +9,7 @@ const Headers = {
   'Content-Type': 'application/json',
   'appId': '111',
   'appVersion': '1.0.1',
-  'appType': '2',
+  'appType': '1',
   'token': ''
 }
 
