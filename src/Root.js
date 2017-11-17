@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
 
-import FeibaRouter from './FeibaRouter';
+import FeibaRouter from './router';
 import configureStore from './store';
 
 let store = configureStore();

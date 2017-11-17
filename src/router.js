@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:55:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-15 11:28:48
+ * @Last Modified time: 2017-11-17 10:02:40
  */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
@@ -51,7 +51,7 @@ class FeibaRouter extends Component {
       <Router >
         <Stack key="root" titleStyle={{ alignSelf: 'center' }}>
           <Tabs key="tabbar" tabBarPosition="bottom" tabBarStyle={styles.tabbarContainer} >
-            <Stack hideNavBar key="tab_home" title="首页" icon={HomeIcon} initial>
+            <Stack hideNavBar key="tab_home" title="首页" icon={HomeIcon} >
               <Scene key="home" component={HomePage} title="首页" />
             </Stack>
             <Stack hideNavBar key="tab_examine" title="审批" icon={ExamineIcon}>
@@ -64,7 +64,7 @@ class FeibaRouter extends Component {
               <Scene key="user" component={UserInfoPage} title="我的" />
             </Stack>
           </Tabs>
-          <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" />
+          <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" initial />
         </Stack>
       </Router>
     );

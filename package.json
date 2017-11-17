@@ -19,7 +19,8 @@
 		"redux": "^3.7.2",
 		"redux-persist": "^5.3.3",
 		"redux-saga": "^0.16.0",
-		"redux-thunk": "^2.2.0"
+		"redux-thunk": "^2.2.0",
+		"teaset": "^0.4.7"
 	},
 	"devDependencies": {
 		"babel-core": "^6.26.0",

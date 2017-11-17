@@ -2,17 +2,16 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:58:26 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-15 10:46:20
+ * @Last Modified time: 2017-11-17 10:08:12
  */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { login } from '../actions';
 import Encrypt from '../../../utils/encrypt';
 
-class LoginPage extends PureComponent {
-
+class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,51 +21,63 @@ class LoginPage extends PureComponent {
     }
   }
 
-  updatePasswordState = (text) => {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.status == "Done") {
+      Actions.tabbar();
+      return false;
+    }
+    return true;
+  }
+
+  onChangeCorpCode = (text) => {
+    this.setState({ corpCode: text });
+  }
+
+  onChangePhone = (text) => {
+    this.setState({ phone: text });
+  }
+
+  onChangePswd = (text) => {
     Encrypt.rsa(text).then((encrypted) => {
       this.setState({ password: encrypted });
     });
   }
 
-  onPressLogin = () => {
-    let user = {
+  handleLogin = () => {
+    let loginInfo = {
       "corpCode": this.state.corpCode,
       "accountName": this.state.phone,
       "accountPassword": this.state.password
     }
 
-    const { dispatch, status } = this.props;
-    dispatch(login(user));
-    if (status == "Done") {
-      Actions.tabbar();
-    }
+    this.props.dispatch(login(loginInfo));
   }
 
-  onClickAccountApply = () => {
+  handleAccountApply = () => {
     Alert.alert('账号申请');
   }
 
-  onClickForget = () => {
+  handleForget = () => {
     Alert.alert('忘记密码');
   }
 
   render() {
     return (
       <View style={styles.loginForm}>
-        <TextInput style={styles.textInput} placeholder="请输入企业编码" underlineColorAndroid="transparent" onChangeText={(text) => this.setState({ corpCode: text })} />
-        <TextInput style={styles.textInput} placeholder="请输入手机号" keyboardType='numeric' maxLength={11} underlineColorAndroid="transparent" onChangeText={(text) => this.setState({ phone: text })} />
-        <TextInput style={styles.textInput} placeholder="请输入密码" secureTextEntry={true} underlineColorAndroid="transparent" onChangeText={(text) => this.updatePasswordState(text)} />
+        <TextInput style={styles.textInput} placeholder="请输入企业编码" underlineColorAndroid="transparent" onChangeText={this.onChangeCorpCode} />
+        <TextInput style={styles.textInput} placeholder="请输入手机号" keyboardType='numeric' maxLength={11} underlineColorAndroid="transparent" onChangeText={this.onChangePhone} />
+        <TextInput style={styles.textInput} placeholder="请输入密码" secureTextEntry={true} underlineColorAndroid="transparent" onChangeText={this.onChangePswd} />
 
-        <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 15, marginRight: 15, justifyContent: 'space-between' }}>
-          <Text onPress={this.onClickAccountApply} style={{ textDecorationLine: 'underline' }}>账号申请</Text>
-          <Text onPress={this.onClickForget} style={{ textDecorationLine: 'underline' }}>忘记密码？</Text>
+        <View style={styles.otherContainer}>
+          <Text onPress={this.handleAccountApply} style={styles.textUnderline}>账号申请</Text>
+          <Text onPress={this.handleForget} style={styles.textUnderline}>忘记密码？</Text>
         </View>
 
-        <TouchableOpacity onPress={this.onPressLogin} style={styles.loginButton}>
-          <Text style={{ color: '#fff', fontSize: 18 }}>登 录</Text>
+        <TouchableOpacity onPress={this.handleLogin} style={styles.loginButton}>
+          <Text style={styles.textLogin}>登 录</Text>
         </TouchableOpacity>
 
-        <Text style={{ textAlign: 'center', marginTop: 60, color: '#2c3e50', fontSize: 12 }}>该产品暂时只对签约企业开放</Text>
+        <Text style={styles.textTip}>该产品暂时只对签约企业开放</Text>
       </View>
     );
   }
@@ -107,6 +118,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: "#646B6E",
   },
+  textLogin: {
+    color: '#fff',
+    fontSize: 18
+  },
+  textTip: {
+    textAlign: 'center',
+    marginTop: 60,
+    color: '#2c3e50',
+    fontSize: 12
+  },
+  otherContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    justifyContent: 'space-between'
+  },
+  textUnderline: {
+    textDecorationLine: 'underline'
+  }
 });
 
 const select = store => ({
