@@ -3,7 +3,7 @@ import { put, call, take, fork, cancel, cancelled } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 import { LOGGED_IN, LOGGED_DOING } from './actionTypes';
 import { post } from '../../service/request';
-import apiUrl from '../../constants/apiUrl';
+import apiUrl from '../../constants/api';
 import { Actions } from 'react-native-router-flux';
 
 export function* loginToServer(params) {

@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux'
 
 export default class CustomNavBar extends React.Component {
 
-  _renderLeft() {
+  renderLeft() {
     return (
       <TouchableOpacity
         onPress={() => console.log('Hamburger button pressed')}
@@ -17,7 +17,7 @@ export default class CustomNavBar extends React.Component {
     )
   }
 
-  _renderMiddle() {
+  renderMiddle() {
     return (
       <View style={styles.navBarTitle}>
         <Text style={styles.navBarTitleTxt}>{this.props.title}</Text>
@@ -25,7 +25,7 @@ export default class CustomNavBar extends React.Component {
     )
   }
 
-  _renderRight() {
+  renderRight() {
     return (
       <View style={[styles.navBarItem, { flexDirection: 'row', justifyContent: 'flex-end' }]}>
         <TouchableOpacity
@@ -49,9 +49,9 @@ export default class CustomNavBar extends React.Component {
   render() {
     return (
       <View style={[styles.container]} >
-        {this._renderLeft()}
-        {this._renderMiddle()}
-        {this._renderRight()}
+        {this.renderLeft()}
+        {this.renderMiddle()}
+        {this.renderRight()}
       </View>
     )
   }

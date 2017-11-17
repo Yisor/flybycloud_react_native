@@ -25,7 +25,7 @@ export default class ContentInputView extends PureComponent {
     onFocus: PropTypes.func,
   }
 
-  _renderText() {
+  renderText() {
     if (this.props.name) {
       return (
         <Text
@@ -37,11 +37,11 @@ export default class ContentInputView extends PureComponent {
     return null;
   }
 
-  _downloadLayout(e) {
+  downloadLayout(e) {
     console.log(e.nativeEvent.layout.y);
   }
 
-  _downLoadFocus() {
+  downLoadFocus() {
     const scroller = this.refs.scroller;
     iOS && setTimeout(() => {
       const y = this.state.downloadY - 1 / 3 * Dev_height;// Dev_height为屏幕的高度
@@ -53,9 +53,9 @@ export default class ContentInputView extends PureComponent {
     return (
       <View
         style={[styles.container, this.props.style]}
-        onLayout={this._downloadLayout.bind(this)}
+        onLayout={this.downloadLayout.bind(this)}
       >
-        {this._renderText()}
+        {this.renderText()}
         <TextInput
           {...this.props}
           style={[styles.contentInput, this.props.placeholderStyle, { fontSize: 14 }]}

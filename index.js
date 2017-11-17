@@ -6,6 +6,6 @@
  */
 import { AppRegistry } from 'react-native';
 import App from './App';
-import AppRoot from './src/Root';
+import AppRoot from './src/root';
 
 AppRegistry.registerComponent('flybycloud_react_native', () => AppRoot);

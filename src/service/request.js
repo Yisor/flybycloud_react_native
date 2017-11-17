@@ -1,6 +1,12 @@
-import MD5 from 'react-native-md5'
-import apiUrl from '../constants/apiUrl';
-import constants from '../constants/constants';
+import encrypt from '../utils/encrypt';
+import { appType } from '../constants/constDefines';
+
+/**
+ * 正式服务
+ * @type {string}
+ */
+const baseUrl = 'http://mapi.flybycloud.com:8091'
+
 
 /**
  * 请求头
@@ -10,7 +16,7 @@ const Headers = {
   'Content-Type': 'application/json',
   'appId': '111',
   'appVersion': '1.0.1',
-  'appType': constants.appType,
+  'appType': appType,
   'token': ''
 }
 
@@ -19,9 +25,8 @@ const Headers = {
  * @param api 接口名称
  * @returns {Promise.<U>|Promise.<T>}
  */
-const get = (api) => {
-  let url = apiUrl.baseUrl + api;
-  Headers['Content-Type'] = 'application/json';
+export const get = (api) => {
+  let url = baseUrl + api;
   Headers['ts'] = getTs()
   return fetch(url, {
     method: 'GET',
@@ -29,7 +34,7 @@ const get = (api) => {
   })
     .then((response) => response.json())
     .then((json) => { return json })
-    .catch((error) => { return { code: error.code, data: null, message: error.message } })
+    .catch((error) => { return { code: error.code, message: error.message } })
 }
 
 /**
@@ -39,9 +44,9 @@ const get = (api) => {
  * @returns {Promise.<U>|Promise.<T>}
  */
 export const post = (api, params) => {
-  let url = apiUrl.baseUrl + api;
+  let url = baseUrl + api;
   console.log('参数：' + JSON.stringify(params));
-  let tempParams = JSON.parse(JSON.stringify(params));
+  let tempParams = JSON.parse(JSON.stringify(params));//深拷贝
   Headers.ts = getTs()
   Headers.sign = getSign(api, tempParams)
   return fetch(url, {
@@ -51,7 +56,7 @@ export const post = (api, params) => {
   })
     .then((response) => response.json())
     .then((json) => { return json })
-    .catch((error) => { return { code: error.code, data: null, message: error.message } })
+    .catch((error) => { return { code: error.code, message: error.message } })
 }
 
 /**
@@ -74,7 +79,7 @@ const getSign = (api, params) => {
     sign += keyValue;
   }
 
-  return MD5.hex_md5(sign);
+  return encrypt.MD5.hex_md5(sign);
 }
 
 /**
