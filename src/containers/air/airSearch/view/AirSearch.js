@@ -40,11 +40,11 @@ class AirSearch extends Component {
 
   // 出行时间
   renderTime() {
-    return this.state.index == 0 ? this.renderSingleTime() : this.renderDoubleTime();
+    return this.state.index == 0 ? this.renderOneWayTime() : this.renderDoubleWayTime();
   }
 
   // 单程时间
-  renderSingleTime() {
+  renderOneWayTime() {
     return (
       <View>
         <Text style={styles.returnText} > </Text>
@@ -57,7 +57,7 @@ class AirSearch extends Component {
   }
 
   // 往返时间
-  renderDoubleTime() {
+  renderDoubleWayTime() {
     return (
       <View>
         <Text style={styles.returnText}>返程</Text>
