@@ -2,11 +2,7 @@
  * 加密相关
  */
 import { NativeModules } from 'react-native';
-import MD5 from 'react-native-md5'
 
-const RSA = NativeModules.Encrypt;
+export const MD5 = require('react-native-md5');
+export const RSA = NativeModules.EncryptModule;
 
-export default {
-	MD5,
-	RSA
-}

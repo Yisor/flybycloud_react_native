@@ -13,12 +13,23 @@
 
 @implementation EncryptModule
 
-RCT_EXPORT_MODULE(EncryptModule);
+RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(rsa:(NSString *)encryptStr resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(encrypt:(NSString *)encryptStr resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   RSAHandler *handler = [[RSAHandler alloc] init];
   [handler importKeyWithType:KeyTypePublic andkeyString:RSA_Public_key];
-  resolve([handler encryptWithPublicKey:encryptStr]);
+  NSString *str = [handler encryptWithPublicKey:encryptStr];
+  if (str && str.length > 0) {
+    resolve(str);
+  } else {
+    NSError *error = nil;
+    reject(@"999",@"RSA加密出错",error);
+  }
+ 
+}
+
+RCT_EXPORT_METHOD(testMethod:(NSString *)testStr) {
+  NSLog(@"====%@",testStr);
 }
 
 @end

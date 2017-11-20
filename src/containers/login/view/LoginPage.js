@@ -5,11 +5,11 @@
  * @Last Modified time: 2017-11-17 10:08:12
  */
 import React, { Component } from 'react';
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Alert, NativeModules } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { login } from '../actions';
-import Encrypt from '../../../utils/encrypt';
+import { RSA } from '../../../utils/encrypt';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class LoginPage extends Component {
   }
 
   onChangePswd = (text) => {
-    Encrypt.RSA(text).then((encrypted) => {
+    RSA(text).then((encrypted) => {
       this.setState({ password: encrypted });
     });
   }
@@ -55,10 +55,14 @@ class LoginPage extends Component {
 
   handleAccountApply = () => {
     Alert.alert('账号申请');
+
   }
 
   handleForget = () => {
     Alert.alert('忘记密码');
+	  RSA.encrypt('123').then((encyptedStr) => {
+		  console.log(encyptedStr+'ios');
+	  })
   }
 
   render() {
