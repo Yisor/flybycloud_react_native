@@ -1,5 +1,5 @@
 import { takeEvery, delay } from 'redux-saga';
-import { put, call, take, fork, cancel, cancelled } from 'redux-saga/effects';
+import { put, call, take, fork } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 import { LOGGED_IN, LOGGED_DOING } from './actionTypes';
 import { post } from '../../service/request';
@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 export function* loginToServer(params) {
   try {
     // const result = yield call(post, apiUrl.login, params);
-    const result = {code:"1001",message:"登录失败"};
+    const result = { code: "1001", message: "登录失败" };
     console.log("返回结果" + JSON.stringify(result));
     yield put({ type: LOGGED_DOING, data: result });  // 中间件发起一个 action 到 Store
   } catch (error) {
