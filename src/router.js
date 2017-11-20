@@ -20,51 +20,51 @@ import HomePage from './containers/HomePage';
 import CustomNavBar from './components/CustomNavBar';
 import { LoginPage } from './containers/login';
 
-const HomeIcon = (props) => {
-  const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
-  return (
-    <Image source={tab} style={styles.tabItem} />
-  );
-}
-const ExamineIcon = (props) => {
-  const tab = props.focused ? require('../icons/tabbar_examine_down_icon.png') : require('../icons/tabbar_examine_icon.png');
-  return (
-    <Image source={tab} style={styles.tabItem} />
-  );
-}
-const TravelIcon = (props) => {
-  const tab = props.focused ? require('../icons/tabbar_travel_down_icon.png') : require('../icons/tabbar_travel_icon.png');
-  return (
-    <Image source={tab} style={styles.tabItem} />
-  );
-}
-const UserIcon = (props) => {
-  const tab = props.focused ? require('../icons/tabbar_user_down_icon.png') : require('../icons/tabbar_user_icon.png');
-  return (
-    <Image source={tab} style={styles.tabItem} />
-  );
-}
+// const HomeIcon = (props) => {
+//   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
+//   return (
+//     <Image source={tab} style={styles.tabItem} />
+//   );
+// }
+// const ExamineIcon = (props) => {
+//   const tab = props.focused ? require('../icons/tabbar_examine_down_icon.png') : require('../icons/tabbar_examine_icon.png');
+//   return (
+//     <Image source={tab} style={styles.tabItem} />
+//   );
+// }
+// const TravelIcon = (props) => {
+//   const tab = props.focused ? require('../icons/tabbar_travel_down_icon.png') : require('../icons/tabbar_travel_icon.png');
+//   return (
+//     <Image source={tab} style={styles.tabItem} />
+//   );
+// }
+// const UserIcon = (props) => {
+//   const tab = props.focused ? require('../icons/tabbar_user_down_icon.png') : require('../icons/tabbar_user_icon.png');
+//   return (
+//     <Image source={tab} style={styles.tabItem} />
+//   );
+// }
 
-class FeibaRouter extends Component {
+class rootRouter extends Component {
   render() {
     return (
       <Router >
-        <Stack key="root" titleStyle={{ alignSelf: 'center' }}>
-          <Tabs key="tabbar" tabBarPosition="bottom" tabBarStyle={styles.tabbarContainer} >
-            <Stack hideNavBar key="tab_home" title="首页" icon={HomeIcon} >
-              <Scene key="home" component={HomePage} title="首页" />
+        <Stack key="Root" titleStyle={{ alignSelf: 'center' }}>
+          <Tabs key="Tabbar" tabBarPosition="bottom" tabBarStyle={styles.tabbarContainer} >
+            <Stack hideNavBar key="tab_home" title="首页" >
+              <Scene key="Home" component={HomePage} title="首页" />
             </Stack>
-            <Stack hideNavBar key="tab_examine" title="审批" icon={ExamineIcon}>
-              <Scene key="examine" component={HomePage} title="审批" />
+            <Stack hideNavBar key="tab_examine" title="审批" >
+              <Scene key="Approval" component={HomePage} title="审批" />
             </Stack>
-            <Stack hideNavBar key="tab_travel" title="行程" icon={TravelIcon}>
-              <Scene key="travel" component={HomePage} title="行程" />
+            <Stack hideNavBar key="tab_travel" title="行程" >
+              <Scene key="Trip" component={HomePage} title="行程" />
             </Stack>
-            <Stack hideNavBar key="tab_user" title="我的" icon={UserIcon}>
-              <Scene key="user" component={UserInfoPage} title="我的" />
+            <Stack hideNavBar key="tab_user" title="我的" >
+              <Scene key="Mine" component={UserInfoPage} title="我的" />
             </Stack>
           </Tabs>
-          <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" initial />
+          <Scene key="Login" navBar={CustomNavBar} component={LoginPage} title="登 录" initial />
         </Stack>
       </Router>
     );
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FeibaRouter;
+export default rootRouter;

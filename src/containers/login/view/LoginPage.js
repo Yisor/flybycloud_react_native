@@ -38,7 +38,7 @@ class LoginPage extends Component {
   }
 
   onChangePswd = (text) => {
-    Encrypt.rsa(text).then((encrypted) => {
+    Encrypt.RSA(text).then((encrypted) => {
       this.setState({ password: encrypted });
     });
   }

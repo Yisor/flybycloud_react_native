@@ -2,7 +2,7 @@ import encrypt from '../utils/encrypt';
 import { appType } from '../constants/constDefines';
 
 /**
- * 正式服务
+ * 应用环境
  * @type {string}
  */
 const baseUrl = 'http://mapi.flybycloud.com:8091'

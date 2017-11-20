@@ -22,19 +22,19 @@ const boxW = 100;
 const boxM = (window.width - 2 * boxW) / 3;
 const datas = [
   {
-    "icon": require('../../icons/airplane.png'),
+    // "icon": require('../../icons/airplane.png'),
     "title": "机票"
   },
   {
-    "icon": require('../../icons/car.png'),
+    // "icon": require('../../icons/car.png'),
     "title": "用车"
   },
   {
-    "icon": require('../../icons/train.png'),
+    // "icon": require('../../icons/train.png'),
     "title": "火车票"
   },
   {
-    "icon": require('../../icons/hotel.png'),
+    // "icon": require('../../icons/hotel.png'),
     "title": "酒店"
   }
 ];

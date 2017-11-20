@@ -1,4 +1,7 @@
 import { Dimensions, PixelRatio, Platform } from 'react-native';
+
+
+
 export default {
   width: Dimensions.get('window').width,
   heigh: Dimensions.get('window').height,

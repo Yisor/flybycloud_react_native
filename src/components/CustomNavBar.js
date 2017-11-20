@@ -2,6 +2,7 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react
 import React from 'react'
 import { Actions } from 'react-native-router-flux'
 
+
 export default class CustomNavBar extends React.Component {
 
   renderLeft() {
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
     height: (Platform.OS === 'ios') ? 64 : 54,
     flexDirection: 'row',
     paddingTop: 20,
+    backgroundColor: 'white'
   },
   navBarItem: {
     flex: 1,
