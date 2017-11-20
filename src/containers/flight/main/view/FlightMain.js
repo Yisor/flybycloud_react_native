@@ -9,7 +9,7 @@ import window from '../../../../utils/window';
 import RouteSelection from '../../../../components/RouteSelection';
 
 // 机票搜索
-class AirSearch extends Component {
+class FlightMain extends Component {
 
   static propTypes = {
     onOriginClick: PropTypes.func,
@@ -177,4 +177,4 @@ const styles = StyleSheet.create({
     marginRight: 20,
   }
 });
-export default AirSearch;
+export default FlightMain;

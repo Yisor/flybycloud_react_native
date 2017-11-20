@@ -1,1 +1,0 @@
-export const TICKET_QUERY = 'TICKET_QUERY';

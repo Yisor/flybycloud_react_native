@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:55:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-17 10:12:01
+ * @Last Modified time: 2017-11-20 17:29:06
  */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
@@ -19,7 +19,9 @@ import UserInfoPage from './containers/UserInfoPage';
 import HomePage from './containers/HomePage';
 import CustomNavBar from './components/CustomNavBar';
 import { LoginPage } from './containers/login';
-import { AirSearchPage } from './containers/air/airSearch';
+import { FlightMainPage } from './containers/flight/main';
+import SelectCity from './components/CityPick/SelectCity';
+import SelectCityPage from './containers/city/SelectCityPage';
 
 const HomeIcon = (props) => {
   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
@@ -66,7 +68,9 @@ class FeibaRouter extends Component {
             </Stack>
           </Tabs>
           <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" />
-          <Scene key="airSearch" component={AirSearchPage} title="机票" initial />
+          <Scene key="flight" component={FlightMainPage} title="机票" />
+          <Scene key="city" hideNavBar component={SelectCity} title="城市" initial/>
+          <Scene key="cityselect" hideNavBar component={SelectCityPage} title="城市"  />
         </Stack>
       </Router>
     );

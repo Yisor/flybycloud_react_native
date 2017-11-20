@@ -9,7 +9,7 @@ const initialState = {
 
 const ticket = (state = initialState, action) => {
   switch (action.type) {
-    case TYPES.TICKET_QUERY:
+    case TYPES.FLIGHT_QUERY_SUCESS:
       return {
         ...state,
         data: action.data,

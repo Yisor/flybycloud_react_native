@@ -1,5 +1,6 @@
 export default {
-  baseUrl: "http://192.168.1.49:8080/mapi",
+  baseUrl: "http://192.168.1.54:8085/mapi",
   login: "/auth/login",
-  sendSms: "/verifycode/sms"
+  sendSms: "/verifycode/sms",
+  cityList: "/app/city"
 }
