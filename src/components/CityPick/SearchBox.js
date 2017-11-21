@@ -21,7 +21,7 @@ export default class SearchBox extends Component {
         console.log(text);
     }
 
-    onChanegeTextKeyword(text) {
+    onChanegeTextKeyword = (text) => {
         console.log('onChanegeTextKeyword', text);
         this.setState({ value: text });
         this.props.onChanegeTextKeyword(text);
@@ -37,7 +37,7 @@ export default class SearchBox extends Component {
                     <TextInput ref="keyword"
                         autoCapitalize="none"
                         value={this.props.keyword}
-                        onChangeText={this.onChanegeTextKeyword.bind(this)}
+                        onChangeText={this.onChanegeTextKeyword}
                         returnKeyType="search"
                         maxLength={20}
                         style={styles.inputText}

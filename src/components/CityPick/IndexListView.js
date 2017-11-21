@@ -10,10 +10,10 @@ import {
   TouchableOpacity,
   ListView,
   Dimensions,
-  ScrollView
+  ScrollView,
+  InteractionManager
 } from 'react-native';
 
-// import Toast, { DURATION } from 'react-native-easy-toast';
 import Toast from '../Toast/Toast';
 
 const SECTIONHEIGHT = 30;
@@ -23,9 +23,11 @@ const totalheight = []; //每个字母对应的城市和字母的总高度
 
 const { width, height } = Dimensions.get('window');
 
+let dataBlob = {};
 const keyNow = '定位';
 const keyLastVisit = '最近';
 const keyHot = '热门';
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 export default class CityIndexListView extends Component {
 
@@ -38,44 +40,51 @@ export default class CityIndexListView extends Component {
       return dataBlob[sectionID][rowID];
     };
 
+    this.state = {
+      dataSource: new ListView.DataSource({
+        getRowData: getRowData,
+        getSectionHeaderData: getSectionData,
+        rowHasChanged: (row1, row2) => row1 !== row2,
+        sectionHeaderHasChanged: (s1, s2) => s1 !== s2
+      }),
+      letters: []
+    };
+  }
+
+  componentWillMount() {
     let allCityList = this.props.allCityList;
     let currentCityList = this.props.nowCityList;
     let lastVisitCityList = this.props.lastVisitCityList;
     let hotCityList = this.props.hotCityList;
 
-    // let letterList = this.getSortLetters(allCityList);
-
-    let dataBlob = {};
     dataBlob[keyNow] = currentCityList;
     dataBlob[keyLastVisit] = lastVisitCityList;
     dataBlob[keyHot] = hotCityList;
 
-    allCityList.map(cityJson => {
-      let key = cityJson.sortLetters.toUpperCase();
-      if (dataBlob[key]) {
-        let subList = dataBlob[key];
-        subList.push(cityJson);
-      } else {
-        let subList = [];
-        subList.push(cityJson);
-        dataBlob[key] = subList;
-      }
-    });
+    for (let letter of letters) {
+      dataBlob[letter] = [];
+    }
 
+    allCityList.map(city => {
+      let key = city.cityPinyin.substr(0, 1).toUpperCase();
+      if (dataBlob[key]) {
+        dataBlob[key].push(city);
+      }
+    })
+  }
+
+  componentDidMount() {
     let sectionIDs = Object.keys(dataBlob);
     let rowIDs = sectionIDs.map(sectionID => {
       let thisRow = [];
       let count = dataBlob[sectionID].length;
-      for (let ii = 0; ii < count; ii++) {
-        thisRow.push(ii);
+      for (let i = 0; i < count; i++) {
+        thisRow.push(i);
       }
 
       let eachheight = SECTIONHEIGHT + ROWHEIGHT * thisRow.length;
       if (sectionID === keyHot || sectionID === keyNow || sectionID === keyLastVisit) {
-        let rowNum = (thisRow.length % 4 === 0)
-          ? (thisRow.length / 4)
-          : parseInt(thisRow.length / 4) + 1;
-        // console.log('sectionIDs===>' + sectionIDs + ", rowNum=====>" + rowNum);
+        let rowNum = (thisRow.length % 4 === 0) ? (thisRow.length / 4) : parseInt(thisRow.length / 4) + 1;
         eachheight = SECTIONHEIGHT + ROWHEIGHT_BOX * rowNum;
       }
       totalheight.push(eachheight);
@@ -83,46 +92,16 @@ export default class CityIndexListView extends Component {
       return thisRow;
     });
 
-    // console.log(sectionIDs);
-    // console.log(rowIDs);
-    // console.log(dataBlob);
-
-    let ds = new ListView.DataSource({
-      getRowData: getRowData,
-      getSectionHeaderData: getSectionData,
-      rowHasChanged: (row1, row2) => row1 !== row2,
-      sectionHeaderHasChanged: (s1, s2) => s1 !== s2
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs),
+        letters: sectionIDs
+      });
     });
-
-    this.state = {
-      dataSource: ds.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs),
-      letters: sectionIDs
-    };
   }
 
-  getSortLetters(dataList) {
-    let list = [];
-    for (let j = 0; j < dataList.length; j++) {
-      let sortLetters = dataList[j].sortLetters.toUpperCase();
-      let exist = false;
-      for (let xx = 0; xx < list.length; xx++) {
-        if (list[xx] === sortLetters) {
-          exist = true;
-        }
-        if (exist) {
-          break;
-        }
-      }
-      if (!exist) {
-        list.push(sortLetters);
-      }
-    }
-
-    return list;
-  }
-
-  onCityNameClick(cityJson) {
-    this.props.onSelectCity(cityJson);
+  onCityClick(city) {
+    this.props.onSelectCity(city);
   }
 
   onScrollTo(index, letter) {
@@ -144,26 +123,25 @@ export default class CityIndexListView extends Component {
     );
   }
 
-  renderListBox(cityJson, rowId) {
+  renderListBox(city, rowId) {
     return (
-      <TouchableOpacity key={'list_item_' + rowId} style={styles.rowViewBox} onPress={() => { this.onCityNameClick(cityJson) }}>
+      <TouchableOpacity key={'list_item_' + rowId} style={styles.rowViewBox} onPress={() => { this.onCityClick(city) }}>
         <View style={styles.rowdataBox}>
-          <Text style={styles.rowdatatextBox}>{cityJson.name}</Text>
+          <Text style={styles.rowdatatextBox}>{city.cityName}</Text>
         </View>
       </TouchableOpacity>
     );
   }
 
-  renderListRow = (cityJson, sectionID, rowId) => {
-    console.log('rowId===>' + rowId + ":" + sectionID + ", cityJson====>" + JSON.stringify(cityJson));
+  renderListRow = (city, rowId) => {
     if (rowId === keyNow || rowId === keyHot || rowId === keyLastVisit) {
-      return this.renderListBox(cityJson, rowId);
+      return this.renderListBox(city, rowId);
     }
 
     return (
-      <TouchableOpacity key={'list_item_' + rowId} style={styles.rowView} onPress={() => { this.onCityNameClick(cityJson) }}>
+      <TouchableOpacity key={'list_item_' + rowId} style={styles.rowView} onPress={() => { this.onCityClick(city) }}>
         <View style={styles.rowdata}>
-          <Text style={styles.rowdatatext}>{cityJson.name}</Text>
+          <Text style={styles.rowdatatext}>{city.cityName}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -191,8 +169,6 @@ export default class CityIndexListView extends Component {
       </View>
     )
   }
-
-  // <Toast ref="toast" position='top' positionValue={200} fadeInDuration={750} fadeOutDuration={1000} opacity={0.8} />
 }
 
 const styles = StyleSheet.create({
@@ -202,7 +178,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4F4F4',
   },
   listContainner: {
-    height: Dimensions.get('window').height,
+    height: height,
     marginBottom: 10
   },
   contentContainer: {
@@ -220,17 +196,17 @@ const styles = StyleSheet.create({
     right: 10,
     backgroundColor: 'transparent',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-start',
   },
   letter: {
-    height: height * 4 / 100,
+    height: height * 4 / 145,
     width: width * 4 / 50,
     justifyContent: 'center',
     alignItems: 'center'
   },
   letterText: {
     textAlign: 'center',
-    fontSize: height * 1.1 / 50,
+    fontSize: height * 1.1 / 60,
     color: 'gray'
   },
   sectionView: {

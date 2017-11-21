@@ -13,48 +13,36 @@ import {
 
 const { width, height } = Dimensions.get('window');
 
-const that = null;
-
 export default class SearchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ds: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     };
-    that = this;
   }
 
-  onCityNameClick(cityJson) {
-    that.props.onSelectCity(cityJson);
+  onCityClick(cityJson) {
+    this.props.onSelectCity(cityJson);
   }
 
-  renderRow(cityJson) {
+  renderRow = (cityJson) => {
     let keyword = this.props.keyword;
-    let KK = (<Text style={{ color: 'red' }}>{keyword}</Text>);
+    let keyText = (<Text style={{ color: 'red' }}>{keyword}</Text>);
 
-    let Name1 = '';
-    if (cityJson.name.indexOf(keyword) === 0) {
-      Name1 = (<Text>{KK}{cityJson.name.replace(keyword, '')}</Text>);
+    let name = '';
+    if (cityJson.cityName.indexOf(keyword) === 0) {
+      name = (<Text>{keyText}{cityJson.cityName.replace(keyword, '')}</Text>);
     } else {
-      Name1 = (<Text>{cityJson.name}</Text>);
-    }
-
-    let Name2 = '';
-    if (cityJson.spellName.indexOf(keyword) === 0) {
-      Name2 = (<Text>{KK}{cityJson.spellName.replace(keyword, '')}</Text>);
-    } else {
-      Name2 = (
-        <Text>{cityJson.spellName}</Text>
-      );
+      name = (<Text>{cityJson.cityName}</Text>);
     }
 
     return (
       <TouchableOpacity
         key={'list_item_' + cityJson.id}
         style={styles.rowView}
-        onPress={() => { that.onCityNameClick(cityJson) }}>
+        onPress={() => { this.onCityClick(cityJson) }}>
         <View style={styles.rowdata}>
-          <Text style={styles.rowdatatext}>{Name1}</Text>
+          <Text style={styles.rowdatatext}>{name}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -68,7 +56,7 @@ export default class SearchResult extends Component {
           enableEmptySections={true}
           contentContainer={styles.contentContainer}
           dataSource={this.state.ds.cloneWithRows(this.props.searchResultList)}
-          renderRow={this.renderRow.bind(this)} />
+          renderRow={this.renderRow} />
       </View>
     );
   }

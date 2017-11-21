@@ -1,1276 +1,1388 @@
 {
   "lastVisitCityList": [
     {
-      "name": "本溪",
-      "spellName": "benxi",
-      "id": 3914,
-      "fullname": "辽宁/本溪",
-      "sortLetters": "b"
-    },
-    {
-      "name": "长春",
-      "spellName": "changchun",
-      "id": 3987,
-      "fullname": "吉林/长春",
-      "sortLetters": "c"
+      "cityCode": "YIE",
+      "cityName": "阿尔山",
+      "cityPinyin": "AERSHAN"
     }
   ],
   "hotCityList": [
     {
-      "name": "阿坝",
-      "spellName": "aba",
-      "id": 5780,
-      "fullname": "四川/阿坝",
-      "sortLetters": "a"
+      "cityCode": "PEK",
+      "cityName": "北京",
+      "cityPinyin": "BEIJING"
     },
     {
-      "name": "阿克苏",
-      "spellName": "akesudi",
-      "id": 6474,
-      "fullname": "新疆/阿克苏",
-      "sortLetters": "a"
+      "cityCode": "SHA",
+      "cityName": "上海",
+      "cityPinyin": "SHANGHAI"
     },
     {
-      "name": "阿拉善",
-      "spellName": "alashanmeng",
-      "id": 3862,
-      "fullname": "内蒙古/阿拉善",
-      "sortLetters": "a"
+      "cityCode": "SZX",
+      "cityName": "深圳",
+      "cityPinyin": "SHENZHEN"
     },
     {
-      "name": "阿里",
-      "spellName": "alidi",
-      "id": 6134,
-      "fullname": "西藏/阿里",
-      "sortLetters": "a"
+      "cityCode": "HGH",
+      "cityName": "杭州",
+      "cityPinyin": "HANGZHOU"
+    },
+    {
+      "cityCode": "CAN",
+      "cityName": "广州",
+      "cityPinyin": "GUANGZHOU"
+    },
+    {
+      "cityCode": "XIY",
+      "cityName": "西安",
+      "cityPinyin": "XIAN"
+    },
+    {
+      "cityCode": "TYN",
+      "cityName": "太原",
+      "cityPinyin": "TAIYUAN"
+    },
+    {
+      "cityCode": "NKG",
+      "cityName": "南京",
+      "cityPinyin": "NANJING"
+    },
+    {
+      "cityCode": "CGO",
+      "cityName": "郑州",
+      "cityPinyin": "ZHENGZHOU"
+    },
+    {
+      "cityCode": "SHE",
+      "cityName": "沈阳",
+      "cityPinyin": "SHENYANG"
+    },
+    {
+      "cityCode": "SJW",
+      "cityName": "石家庄",
+      "cityPinyin": "SHIJIAZHUANG"
+    },
+    {
+      "cityCode": "TNA",
+      "cityName": "济南",
+      "cityPinyin": "JINAN"
+    },
+    {
+      "cityCode": "HFE",
+      "cityName": "合肥",
+      "cityPinyin": "HEFEI"
+    },
+    {
+      "cityCode": "WUH",
+      "cityName": "武汉",
+      "cityPinyin": "WUHAN"
+    },
+    {
+      "cityCode": "CTU",
+      "cityName": "成都",
+      "cityPinyin": "CHENGDOU"
+    },
+    {
+      "cityCode": "HRB",
+      "cityName": "哈尔滨",
+      "cityPinyin": "HAERBIN"
+    },
+    {
+      "cityCode": "TSN",
+      "cityName": "天津",
+      "cityPinyin": "TIANJIN"
+    },
+    {
+      "cityCode": "CKG",
+      "cityName": "重庆",
+      "cityPinyin": "CHONGQING"
+    },
+    {
+      "cityCode": "CSX",
+      "cityName": "长沙",
+      "cityPinyin": "CHANGSHA"
+    },
+    {
+      "cityCode": "KMG",
+      "cityName": "昆明",
+      "cityPinyin": "KUNMING"
     }
   ],
   "allCityList": [
     {
-      "name": "阿坝",
-      "spellName": "aba",
-      "id": 5780,
-      "fullname": "四川/阿坝",
-      "sortLetters": "a"
+      "cityCode": "YIE",
+      "cityName": "阿尔山",
+      "cityPinyin": "AERSHAN"
     },
     {
-      "name": "阿克苏",
-      "spellName": "akesudi",
-      "id": 6474,
-      "fullname": "新疆/阿克苏",
-      "sortLetters": "a"
+      "cityCode": "AKU",
+      "cityName": "阿克苏",
+      "cityPinyin": "AKESU"
     },
     {
-      "name": "阿拉善",
-      "spellName": "alashanmeng",
-      "id": 3862,
-      "fullname": "内蒙古/阿拉善",
-      "sortLetters": "a"
+      "cityCode": "AXF",
+      "cityName": "阿拉善左旗",
+      "cityPinyin": "ALASHANZUOQI"
     },
     {
-      "name": "阿勒泰",
-      "spellName": "aletaidi",
-      "id": 6542,
-      "fullname": "新疆/阿勒泰",
-      "sortLetters": "a"
+      "cityCode": "AAT",
+      "cityName": "阿勒泰",
+      "cityPinyin": "ALETAI"
     },
     {
-      "name": "阿里",
-      "spellName": "alidi",
-      "id": 6134,
-      "fullname": "西藏/阿里",
-      "sortLetters": "a"
+      "cityCode": "NGQ",
+      "cityName": "阿里",
+      "cityPinyin": "ALI"
     },
     {
-      "name": "安康",
-      "spellName": "ankang",
-      "id": 6248,
-      "fullname": "陕西/安康",
-      "sortLetters": "a"
+      "cityCode": "AKA",
+      "cityName": "安康",
+      "cityPinyin": "ANKANG"
     },
     {
-      "name": "安庆",
-      "spellName": "anqing",
-      "id": 4482,
-      "fullname": "安徽/安庆",
-      "sortLetters": "a"
+      "cityCode": "AQG",
+      "cityName": "安庆",
+      "cityPinyin": "ANQING"
     },
     {
-      "name": "鞍山",
-      "spellName": "anshan",
-      "id": 3898,
-      "fullname": "辽宁/鞍山",
-      "sortLetters": "a"
+      "cityCode": "AOG",
+      "cityName": "鞍山",
+      "cityPinyin": "ANSHAN"
     },
     {
-      "name": "安顺",
-      "spellName": "anshun",
-      "id": 5861,
-      "fullname": "贵州/安顺",
-      "sortLetters": "a"
+      "cityCode": "AVA",
+      "cityName": "安顺",
+      "cityPinyin": "ANSHUN"
     },
     {
-      "name": "安阳",
-      "spellName": "anyang",
-      "id": 4966,
-      "fullname": "河南/安阳",
-      "sortLetters": "a"
+      "cityCode": "AYN",
+      "cityName": "安阳",
+      "cityPinyin": "ANYANG"
     },
     {
-      "name": "白城",
-      "spellName": "baicheng",
-      "id": 4041,
-      "fullname": "吉林/白城",
-      "sortLetters": "b"
+      "cityCode": "MFM",
+      "cityName": "澳门",
+      "cityPinyin": "AOMEN"
     },
     {
-      "name": "百色",
-      "spellName": "baise",
-      "id": 5527,
-      "fullname": "广西/百色",
-      "sortLetters": "b"
+      "cityCode": "AEB",
+      "cityName": "百色",
+      "cityPinyin": "BAISE"
     },
     {
-      "name": "白沙",
-      "spellName": "baishalizuz",
-      "id": 5582,
-      "fullname": "海南/白沙",
-      "sortLetters": "b"
+      "cityCode": "BFU",
+      "cityName": "蚌埠",
+      "cityPinyin": "BANGBU"
     },
     {
-      "name": "白山",
-      "spellName": "baishan",
-      "id": 4028,
-      "fullname": "吉林/白山",
-      "sortLetters": "b"
+      "cityCode": "BAD",
+      "cityName": "保定",
+      "cityPinyin": "BAODING"
     },
     {
-      "name": "白银",
-      "spellName": "baiyin",
-      "id": 6279,
-      "fullname": "甘肃/白银",
-      "sortLetters": "b"
+      "cityCode": "BAJ",
+      "cityName": "宝鸡",
+      "cityPinyin": "BAOJI"
     },
     {
-      "name": "蚌埠",
-      "spellName": "bangbu",
-      "id": 4452,
-      "fullname": "安徽/蚌埠",
-      "sortLetters": "b"
+      "cityCode": "BSD",
+      "cityName": "保山",
+      "cityPinyin": "BAOSHAN"
     },
     {
-      "name": "保定",
-      "spellName": "baoding",
-      "id": 3545,
-      "fullname": "河北/保定",
-      "sortLetters": "b"
+      "cityCode": "BAV",
+      "cityName": "包头",
+      "cityPinyin": "BAOTOU"
     },
     {
-      "name": "宝鸡",
-      "spellName": "baoji",
-      "id": 6169,
-      "fullname": "陕西/宝鸡",
-      "sortLetters": "b"
+      "cityCode": "BHY",
+      "cityName": "北海",
+      "cityPinyin": "BEIHAI"
     },
     {
-      "name": "保山",
-      "spellName": "baoshan",
-      "id": 5961,
-      "fullname": "云南/保山",
-      "sortLetters": "b"
+      "cityCode": "PEK",
+      "cityName": "北京",
+      "cityPinyin": "BEIJING"
     },
     {
-      "name": "保亭",
-      "spellName": "baotinglizu",
-      "id": 5585,
-      "fullname": "海南/保亭",
-      "sortLetters": "b"
+      "cityCode": "NAY",
+      "cityName": "北京南苑",
+      "cityPinyin": "BEIJINGNANYUAN"
     },
     {
-      "name": "包头",
-      "spellName": "baotou",
-      "id": 3770,
-      "fullname": "内蒙古/包头",
-      "sortLetters": "b"
+      "cityCode": "BFJ",
+      "cityName": "毕节",
+      "cityPinyin": "BIJIE"
     },
     {
-      "name": "巴彦淖尔",
-      "spellName": "bayannaoerm",
-      "id": 3854,
-      "fullname": "内蒙古/巴彦淖尔",
-      "sortLetters": "b"
+      "cityCode": "BPL",
+      "cityName": "博乐",
+      "cityPinyin": "BOLE"
     },
     {
-      "name": "巴音郭楞",
-      "spellName": "bayinguolen",
-      "id": 6501,
-      "fullname": "新疆/巴音郭楞",
-      "sortLetters": "b"
+      "cityCode": "NBS",
+      "cityName": "长白山",
+      "cityPinyin": "CHANGBAISHAN"
     },
     {
-      "name": "巴中",
-      "spellName": "bazhong",
-      "id": 5770,
-      "fullname": "四川/巴中",
-      "sortLetters": "b"
+      "cityCode": "CGD",
+      "cityName": "常德",
+      "cityPinyin": "CHANGDE"
     },
     {
-      "name": "北海",
-      "spellName": "beihai",
-      "id": 5501,
-      "fullname": "广西/北海",
-      "sortLetters": "b"
+      "cityCode": "BPX",
+      "cityName": "昌都",
+      "cityPinyin": "CHANGDOU"
     },
     {
-      "name": "北京",
-      "spellName": "beijing",
-      "id": 6550,
-      "fullname": "北京/北京",
-      "sortLetters": "b"
+      "cityCode": "BDU",
+      "cityName": "昌都邦达",
+      "cityPinyin": "CHANGDOUBANGDA"
     },
     {
-      "name": "本溪",
-      "spellName": "benxi",
-      "id": 3914,
-      "fullname": "辽宁/本溪",
-      "sortLetters": "b"
+      "cityCode": "CNI",
+      "cityName": "长海",
+      "cityPinyin": "CHANGHAI"
     },
     {
-      "name": "毕节地",
-      "spellName": "bijiedi",
-      "id": 5879,
-      "fullname": "贵州/毕节地",
-      "sortLetters": "b"
+      "cityCode": "CSX",
+      "cityName": "长沙",
+      "cityPinyin": "CHANGSHA"
     },
     {
-      "name": "滨州",
-      "spellName": "binzhou",
-      "id": 4867,
-      "fullname": "山东/滨州",
-      "sortLetters": "b"
+      "cityCode": "CZX",
+      "cityName": "常州",
+      "cityPinyin": "CHANGZHOU"
     },
     {
-      "name": "博尔塔拉",
-      "spellName": "boertala",
-      "id": 6520,
-      "fullname": "新疆/博尔塔拉",
-      "sortLetters": "b"
+      "cityCode": "CHG",
+      "cityName": "朝阳",
+      "cityPinyin": "CHAOYANG"
     },
     {
-      "name": "沧州",
-      "spellName": "cangzhou",
-      "id": 3601,
-      "fullname": "河北/沧州",
-      "sortLetters": "c"
+      "cityCode": "CCC",
+      "cityName": "潮州",
+      "cityPinyin": "CHAOZHOU"
     },
     {
-      "name": "长春",
-      "spellName": "changchun",
-      "id": 3987,
-      "fullname": "吉林/长春",
-      "sortLetters": "c"
+      "cityCode": "CTU",
+      "cityName": "成都",
+      "cityPinyin": "CHENGDOU"
     },
     {
-      "name": "常德",
-      "spellName": "changde",
-      "id": 5235,
-      "fullname": "湖南/常德",
-      "sortLetters": "c"
+      "cityCode": "CIF",
+      "cityName": "赤峰",
+      "cityPinyin": "CHIFENG"
     },
     {
-      "name": "昌都",
-      "spellName": "changdudi",
-      "id": 6090,
-      "fullname": "西藏/昌都",
-      "sortLetters": "c"
+      "cityCode": "JUH",
+      "cityName": "池州",
+      "cityPinyin": "CHIZHOU"
     },
     {
-      "name": "昌吉",
-      "spellName": "changji",
-      "id": 6511,
-      "fullname": "新疆/昌吉",
-      "sortLetters": "c"
+      "cityCode": "CKG",
+      "cityName": "重庆",
+      "cityPinyin": "CHONGQING"
     },
     {
-      "name": "昌江",
-      "spellName": "changjiangl",
-      "id": 5581,
-      "fullname": "海南/昌江",
-      "sortLetters": "c"
+      "cityCode": "DLU",
+      "cityName": "大理",
+      "cityPinyin": "DALI"
     },
     {
-      "name": "长沙",
-      "spellName": "changsha",
-      "id": 5174,
-      "fullname": "湖南/长沙",
-      "sortLetters": "c"
+      "cityCode": "DLC",
+      "cityName": "大连",
+      "cityPinyin": "DALIAN"
     },
     {
-      "name": "长治",
-      "spellName": "changzhi",
-      "id": 3667,
-      "fullname": "山西/长治",
-      "sortLetters": "c"
+      "cityCode": "DDG",
+      "cityName": "丹东",
+      "cityPinyin": "DANDONG"
     },
     {
-      "name": "常州",
-      "spellName": "changzhou",
-      "id": 4309,
-      "fullname": "江苏/常州",
-      "sortLetters": "c"
+      "cityCode": "DCY",
+      "cityName": "稻城",
+      "cityPinyin": "DAOCHENG"
     },
     {
-      "name": "巢湖",
-      "spellName": "chaohu",
-      "id": 4526,
-      "fullname": "安徽/巢湖",
-      "sortLetters": "c"
+      "cityCode": "DQA",
+      "cityName": "大庆",
+      "cityPinyin": "DAQING"
     },
     {
-      "name": "朝阳",
-      "spellName": "chaoyang",
-      "id": 3979,
-      "fullname": "辽宁/朝阳",
-      "sortLetters": "c"
+      "cityCode": "DAT",
+      "cityName": "大同",
+      "cityPinyin": "DATONG"
     },
     {
-      "name": "潮州",
-      "spellName": "chaozhou",
-      "id": 5436,
-      "fullname": "广东/潮州",
-      "sortLetters": "c"
+      "cityCode": "DAX",
+      "cityName": "达县",
+      "cityPinyin": "DAXIAN"
     },
     {
-      "name": "承德",
-      "spellName": "chengde",
-      "id": 3589,
-      "fullname": "河北/承德",
-      "sortLetters": "c"
+      "cityCode": "HXD",
+      "cityName": "德令哈",
+      "cityPinyin": "DELINGHA"
     },
     {
-      "name": "成都",
-      "spellName": "chengdu",
-      "id": 5630,
-      "fullname": "四川/成都",
-      "sortLetters": "c"
+      "cityCode": "DZO",
+      "cityName": "德州",
+      "cityPinyin": "DEZHOU"
     },
     {
-      "name": "澄迈",
-      "spellName": "chengmai",
-      "id": 5578,
-      "fullname": "海南/澄迈",
-      "sortLetters": "c"
+      "cityCode": "DIG",
+      "cityName": "迪庆",
+      "cityPinyin": "DIQING"
     },
     {
-      "name": "郴州",
-      "spellName": "chenzhou",
-      "id": 5257,
-      "fullname": "湖南/郴州",
-      "sortLetters": "c"
+      "cityCode": "DGM",
+      "cityName": "东莞",
+      "cityPinyin": "DONGGUAN"
     },
     {
-      "name": "赤峰",
-      "spellName": "chifeng",
-      "id": 3784,
-      "fullname": "内蒙古/赤峰",
-      "sortLetters": "c"
+      "cityCode": "DOY",
+      "cityName": "东营",
+      "cityPinyin": "DONGYING"
     },
     {
-      "name": "池州",
-      "spellName": "chizhou",
-      "id": 4545,
-      "fullname": "安徽/池州",
-      "sortLetters": "c"
+      "cityCode": "DNH",
+      "cityName": "敦煌",
+      "cityPinyin": "DUNHUANG"
     },
     {
-      "name": "重庆",
-      "spellName": "chongqing",
-      "id": 5587,
-      "fullname": "重庆/重庆",
-      "sortLetters": "c"
+      "cityCode": "DSN",
+      "cityName": "鄂尔多斯",
+      "cityPinyin": "EERDUOSI"
     },
     {
-      "name": "崇左",
-      "spellName": "chongzuo",
-      "id": 5563,
-      "fullname": "广西/崇左",
-      "sortLetters": "c"
+      "cityCode": "EJN",
+      "cityName": "额济纳旗",
+      "cityPinyin": "EJINAQI"
     },
     {
-      "name": "楚雄",
-      "spellName": "chuxiong",
-      "id": 6031,
-      "fullname": "云南/楚雄",
-      "sortLetters": "c"
+      "cityCode": "OMS",
+      "cityName": "鄂木斯克",
+      "cityPinyin": "EMUSIKE"
     },
     {
-      "name": "滁州",
-      "spellName": "chuzhou",
-      "id": 4502,
-      "fullname": "安徽/滁州",
-      "sortLetters": "c"
+      "cityCode": "ENH",
+      "cityName": "恩施",
+      "cityPinyin": "ENSHI"
     },
     {
-      "name": "大理",
-      "spellName": "dali",
-      "id": 6042,
-      "fullname": "云南/大理",
-      "sortLetters": "d"
+      "cityCode": "ERL",
+      "cityName": "二连浩特",
+      "cityPinyin": "ERLIANHAOTE"
     },
     {
-      "name": "大连",
-      "spellName": "dalian",
-      "id": 3887,
-      "fullname": "辽宁/大连",
-      "sortLetters": "d"
+      "cityCode": "FUO",
+      "cityName": "佛山",
+      "cityPinyin": "FOSHAN"
     },
     {
-      "name": "丹东",
-      "spellName": "dandong",
-      "id": 3921,
-      "fullname": "辽宁/丹东",
-      "sortLetters": "d"
+      "cityCode": "FUG",
+      "cityName": "阜阳",
+      "cityPinyin": "FUYANG"
     },
     {
-      "name": "大庆",
-      "spellName": "daqing",
-      "id": 4120,
-      "fullname": "黑龙江/大庆",
-      "sortLetters": "d"
+      "cityCode": "FYN",
+      "cityName": "富蕴",
+      "cityPinyin": "FUYUN"
     },
     {
-      "name": "大同",
-      "spellName": "datong",
-      "id": 3651,
-      "fullname": "山西/大同",
-      "sortLetters": "d"
+      "cityCode": "FOC",
+      "cityName": "福州",
+      "cityPinyin": "FUZHOU"
     },
     {
-      "name": "大兴安岭",
-      "spellName": "daxinganlin",
-      "id": 4194,
-      "fullname": "黑龙江/大兴安岭",
-      "sortLetters": "d"
+      "cityCode": "GXH",
+      "cityName": "甘南",
+      "cityPinyin": "GANNAN"
     },
     {
-      "name": "达州",
-      "spellName": "dazhou",
-      "id": 5746,
-      "fullname": "四川/达州",
-      "sortLetters": "d"
+      "cityCode": "KOW",
+      "cityName": "赣州",
+      "cityPinyin": "GANZHOU"
     },
     {
-      "name": "德宏",
-      "spellName": "dehong",
-      "id": 6055,
-      "fullname": "云南/德宏",
-      "sortLetters": "d"
+      "cityCode": "KHH",
+      "cityName": "高雄",
+      "cityPinyin": "GAOXIONG"
     },
     {
-      "name": "德阳",
-      "spellName": "deyang",
-      "id": 5671,
-      "fullname": "四川/德阳",
-      "sortLetters": "d"
+      "cityCode": "GOQ",
+      "cityName": "格尔木",
+      "cityPinyin": "GEERMU"
     },
     {
-      "name": "德州",
-      "spellName": "dezhou",
-      "id": 4846,
-      "fullname": "山东/德州",
-      "sortLetters": "d"
+      "cityCode": "GHN",
+      "cityName": "广汉",
+      "cityPinyin": "GUANGHAN"
     },
     {
-      "name": "定安",
-      "spellName": "dingan",
-      "id": 5579,
-      "fullname": "海南/定安",
-      "sortLetters": "d"
+      "cityCode": "GYS",
+      "cityName": "广元",
+      "cityPinyin": "GUANGYUAN"
     },
     {
-      "name": "定西",
-      "spellName": "dingxidi",
-      "id": 6331,
-      "fullname": "甘肃/定西",
-      "sortLetters": "d"
+      "cityCode": "CAN",
+      "cityName": "广州",
+      "cityPinyin": "GUANGZHOU"
     },
     {
-      "name": "迪庆",
-      "spellName": "diqing",
-      "id": 6066,
-      "fullname": "云南/迪庆",
-      "sortLetters": "d"
+      "cityCode": "KWL",
+      "cityName": "桂林",
+      "cityPinyin": "GUILIN"
     },
     {
-      "name": "东莞",
-      "spellName": "dongwan",
-      "id": 5380,
-      "fullname": "广东/东莞",
-      "sortLetters": "d"
+      "cityCode": "KWE",
+      "cityName": "贵阳",
+      "cityPinyin": "GUIYANG"
     },
     {
-      "name": "东营",
-      "spellName": "dongying",
-      "id": 4781,
-      "fullname": "山东/东营",
-      "sortLetters": "d"
+      "cityCode": "GYU",
+      "cityName": "固原",
+      "cityPinyin": "GUYUAN"
     },
     {
-      "name": "鄂尔多斯",
-      "spellName": "eerduosi",
-      "id": 3806,
-      "fullname": "内蒙古/鄂尔多斯",
-      "sortLetters": "e"
+      "cityCode": "HRB",
+      "cityName": "哈尔滨",
+      "cityPinyin": "HAERBIN"
     },
     {
-      "name": "恩施",
-      "spellName": "enshi",
-      "id": 5162,
-      "fullname": "湖北/恩施",
-      "sortLetters": "e"
+      "cityCode": "HAK",
+      "cityName": "海口",
+      "cityPinyin": "HAIKOU"
     },
     {
-      "name": "鄂州",
-      "spellName": "ezhou",
-      "id": 5129,
-      "fullname": "湖北/鄂州",
-      "sortLetters": "e"
+      "cityCode": "HLD",
+      "cityName": "海拉尔",
+      "cityPinyin": "HAILAER"
     },
     {
-      "name": "防城港",
-      "spellName": "fangchengga",
-      "id": 5506,
-      "fullname": "广西/防城港",
-      "sortLetters": "f"
+      "cityCode": "HMI",
+      "cityName": "哈密",
+      "cityPinyin": "HAMI"
     },
     {
-      "name": "佛山",
-      "spellName": "foshan",
-      "id": 5390,
-      "fullname": "广东/佛山",
-      "sortLetters": "f"
+      "cityCode": "HIM",
+      "cityName": "哈密市",
+      "cityPinyin": "HAMISHI"
     },
     {
-      "name": "抚顺",
-      "spellName": "fushun",
-      "id": 3906,
-      "fullname": "辽宁/抚顺",
-      "sortLetters": "f"
+      "cityCode": "HDG",
+      "cityName": "邯郸",
+      "cityPinyin": "HANDAN"
     },
     {
-      "name": "阜新",
-      "spellName": "fuxin",
-      "id": 3955,
-      "fullname": "辽宁/阜新",
-      "sortLetters": "f"
+      "cityCode": "HGH",
+      "cityName": "杭州",
+      "cityPinyin": "HANGZHOU"
     },
     {
-      "name": "阜阳",
-      "spellName": "fuyang",
-      "id": 4511,
-      "fullname": "安徽/阜阳",
-      "sortLetters": "f"
+      "cityCode": "HZG",
+      "cityName": "汉中",
+      "cityPinyin": "HANZHONG"
     },
     {
-      "name": "抚州",
-      "spellName": "fuzhou",
-      "id": 4718,
-      "fullname": "江西/抚州",
-      "sortLetters": "f"
+      "cityCode": "HCJ",
+      "cityName": "河池",
+      "cityPinyin": "HECHI"
     },
     {
-      "name": "福州",
-      "spellName": "fuzhou",
-      "id": 4558,
-      "fullname": "福建/福州",
-      "sortLetters": "f"
+      "cityCode": "HFE",
+      "cityName": "合肥",
+      "cityPinyin": "HEFEI"
     },
     {
-      "name": "甘南",
-      "spellName": "gannan",
-      "id": 6349,
-      "fullname": "甘肃/甘南",
-      "sortLetters": "g"
+      "cityCode": "HEG",
+      "cityName": "鹤岗",
+      "cityPinyin": "HEGANG"
     },
     {
-      "name": "赣州",
-      "spellName": "ganzhou",
-      "id": 4677,
-      "fullname": "江西/赣州",
-      "sortLetters": "g"
+      "cityCode": "HEK",
+      "cityName": "黑河",
+      "cityPinyin": "HEIHE"
     },
     {
-      "name": "甘孜",
-      "spellName": "ganzi",
-      "id": 5794,
-      "fullname": "四川/甘孜",
-      "sortLetters": "g"
+      "cityCode": "HNY",
+      "cityName": "衡阳",
+      "cityPinyin": "HENGYANG"
     },
     {
-      "name": "广安",
-      "spellName": "guangan",
-      "id": 5740,
-      "fullname": "四川/广安",
-      "sortLetters": "g"
+      "cityCode": "HTN",
+      "cityName": "和田",
+      "cityPinyin": "HETIAN"
     },
     {
-      "name": "广元",
-      "spellName": "guangyuan",
-      "id": 5688,
-      "fullname": "四川/广元",
-      "sortLetters": "g"
+      "cityCode": "HIA",
+      "cityName": "淮安",
+      "cityPinyin": "HUAIAN"
     },
     {
-      "name": "广州",
-      "spellName": "guangzhou",
-      "id": 5308,
-      "fullname": "广东/广州",
-      "sortLetters": "g"
+      "cityCode": "HJJ",
+      "cityName": "怀化",
+      "cityPinyin": "HUAIHUA"
     },
     {
-      "name": "贵港",
-      "spellName": "guigang",
-      "id": 5516,
-      "fullname": "广西/贵港",
-      "sortLetters": "g"
+      "cityCode": "HLN",
+      "cityName": "花莲",
+      "cityPinyin": "HUALIAN"
     },
     {
-      "name": "桂林",
-      "spellName": "guilin",
-      "id": 5475,
-      "fullname": "广西/桂林",
-      "sortLetters": "g"
+      "cityCode": "TXN",
+      "cityName": "黄山",
+      "cityPinyin": "HUANGSHAN"
     },
     {
-      "name": "贵阳",
-      "spellName": "guiyang",
-      "id": 5831,
-      "fullname": "贵州/贵阳",
-      "sortLetters": "g"
+      "cityCode": "HET",
+      "cityName": "呼和浩特",
+      "cityPinyin": "HUHEHAOTE"
     },
     {
-      "name": "果洛",
-      "spellName": "guoluo",
-      "id": 6398,
-      "fullname": "青海/果洛",
-      "sortLetters": "g"
+      "cityCode": "HUZ",
+      "cityName": "惠州",
+      "cityPinyin": "HUIZHOU"
     },
     {
-      "name": "固原",
-      "spellName": "guyuan",
-      "id": 6436,
-      "fullname": "宁夏/固原",
-      "sortLetters": "g"
+      "cityCode": "JGD",
+      "cityName": "加格达奇",
+      "cityPinyin": "JIAGEDAQI"
     },
     {
-      "name": "哈尔滨",
-      "spellName": "haerbin",
-      "id": 4056,
-      "fullname": "黑龙江/哈尔滨",
-      "sortLetters": "h"
+      "cityCode": "JMU",
+      "cityName": "佳木斯",
+      "cityPinyin": "JIAMUSI"
     },
     {
-      "name": "海北",
-      "spellName": "haibei",
-      "id": 6382,
-      "fullname": "青海/海北",
-      "sortLetters": "h"
+      "cityCode": "KNC",
+      "cityName": "吉安",
+      "cityPinyin": "JIAN"
     },
     {
-      "name": "海东",
-      "spellName": "haidongdi",
-      "id": 6375,
-      "fullname": "青海/海东",
-      "sortLetters": "h"
+      "cityCode": "JIM",
+      "cityName": "江门",
+      "cityPinyin": "JIANGMEN"
     },
     {
-      "name": "海口",
-      "spellName": "haikou",
-      "id": 5570,
-      "fullname": "海南/海口",
-      "sortLetters": "h"
+      "cityCode": "CYI",
+      "cityName": "嘉义",
+      "cityPinyin": "JIAYI"
     },
     {
-      "name": "海南",
-      "spellName": "hainan",
-      "id": 6392,
-      "fullname": "青海/海南",
-      "sortLetters": "h"
+      "cityCode": "JGN",
+      "cityName": "嘉峪关",
+      "cityPinyin": "JIAYUGUAN"
     },
     {
-      "name": "海西",
-      "spellName": "haixi",
-      "id": 6412,
-      "fullname": "青海/海西",
-      "sortLetters": "h"
+      "cityCode": "SWA",
+      "cityName": "揭阳",
+      "cityPinyin": "JIEYANG"
     },
     {
-      "name": "哈密",
-      "spellName": "hamidi",
-      "id": 6461,
-      "fullname": "新疆/哈密",
-      "sortLetters": "h"
+      "cityCode": "JIL",
+      "cityName": "吉林",
+      "cityPinyin": "JILIN"
     },
     {
-      "name": "邯郸",
-      "spellName": "handan",
-      "id": 3505,
-      "fullname": "河北/邯郸",
-      "sortLetters": "h"
+      "cityCode": "TNA",
+      "cityName": "济南",
+      "cityPinyin": "JINAN"
     },
     {
-      "name": "杭州",
-      "spellName": "hangzhou",
-      "id": 4337,
-      "fullname": "浙江/杭州",
-      "sortLetters": "h"
+      "cityCode": "JIC",
+      "cityName": "金昌",
+      "cityPinyin": "JINCHANG"
     },
     {
-      "name": "汉中",
-      "spellName": "hanzhong",
-      "id": 6223,
-      "fullname": "陕西/汉中",
-      "sortLetters": "h"
+      "cityCode": "JDZ",
+      "cityName": "景德镇",
+      "cityPinyin": "JINGDEZHEN"
     },
     {
-      "name": "亳州",
-      "spellName": "haozhou",
-      "id": 4540,
-      "fullname": "安徽/亳州",
-      "sortLetters": "h"
+      "cityCode": "JGS",
+      "cityName": "井冈山",
+      "cityPinyin": "JINGGANGSHAN"
     },
     {
-      "name": "漯河",
-      "spellName": "he",
-      "id": 4990,
-      "fullname": "河南/漯河",
-      "sortLetters": "h"
+      "cityCode": "JHA",
+      "cityName": "金华",
+      "cityPinyin": "JINHUA"
     },
     {
-      "name": "鹤壁",
-      "spellName": "hebi",
-      "id": 4947,
-      "fullname": "河南/鹤壁",
-      "sortLetters": "h"
+      "cityCode": "JNG",
+      "cityName": "济宁",
+      "cityPinyin": "JINING"
     },
     {
-      "name": "河池",
-      "spellName": "hechi",
-      "id": 5544,
-      "fullname": "广西/河池",
-      "sortLetters": "h"
+      "cityCode": "JJN",
+      "cityName": "晋江",
+      "cityPinyin": "JINJIANG"
     },
     {
-      "name": "合肥",
-      "spellName": "hefei",
-      "id": 4436,
-      "fullname": "安徽/合肥",
-      "sortLetters": "h"
+      "cityCode": "JNZ",
+      "cityName": "锦州",
+      "cityPinyin": "JINZHOU"
     },
     {
-      "name": "鹤岗",
-      "spellName": "hegang",
-      "id": 4092,
-      "fullname": "黑龙江/鹤岗",
-      "sortLetters": "h"
+      "cityCode": "JIU",
+      "cityName": "九江",
+      "cityPinyin": "JIUJIANG"
     },
     {
-      "name": "黑河",
-      "spellName": "heihe",
-      "id": 4176,
-      "fullname": "黑龙江/黑河",
-      "sortLetters": "h"
+      "cityCode": "CHW",
+      "cityName": "酒泉",
+      "cityPinyin": "JIUQUAN"
     },
     {
-      "name": "衡水",
-      "spellName": "hengshui",
-      "id": 3629,
-      "fullname": "河北/衡水",
-      "sortLetters": "h"
+      "cityCode": "JZH",
+      "cityName": "九寨沟",
+      "cityPinyin": "JIUZHAIGOU"
     },
     {
-      "name": "衡阳",
-      "spellName": "hengyang",
-      "id": 5200,
-      "fullname": "湖南/衡阳",
-      "sortLetters": "h"
+      "cityCode": "JXA",
+      "cityName": "鸡西",
+      "cityPinyin": "JIXI"
     },
     {
-      "name": "和田",
-      "spellName": "hetiandi",
-      "id": 6465,
-      "fullname": "新疆/和田",
-      "sortLetters": "h"
+      "cityCode": "KAF",
+      "cityName": "开封",
+      "cityPinyin": "KAIFENG"
     },
     {
-      "name": "河源",
-      "spellName": "heyuan",
-      "id": 5353,
-      "fullname": "广东/河源",
-      "sortLetters": "h"
+      "cityCode": "KJH",
+      "cityName": "凯里",
+      "cityPinyin": "KAILI"
     },
     {
-      "name": "菏泽",
-      "spellName": "heze",
-      "id": 4875,
-      "fullname": "山东/菏泽",
-      "sortLetters": "h"
+      "cityCode": "KAP",
+      "cityName": "开平",
+      "cityPinyin": "KAIPING"
     },
     {
-      "name": "贺州",
-      "spellName": "hezhou",
-      "id": 5539,
-      "fullname": "广西/贺州",
-      "sortLetters": "h"
+      "cityCode": "KJI",
+      "cityName": "喀纳斯",
+      "cityPinyin": "KANASI"
     },
     {
-      "name": "红河",
-      "spellName": "honghe",
-      "id": 6013,
-      "fullname": "云南/红河",
-      "sortLetters": "h"
+      "cityCode": "KGT",
+      "cityName": "康定",
+      "cityPinyin": "KANGDING"
     },
     {
-      "name": "淮安",
-      "spellName": "huaian",
-      "id": 4253,
-      "fullname": "江苏/淮安",
-      "sortLetters": "h"
+      "cityCode": "KHG",
+      "cityName": "喀什",
+      "cityPinyin": "KASHEN"
     },
     {
-      "name": "淮北",
-      "spellName": "huaibei",
-      "id": 4472,
-      "fullname": "安徽/淮北",
-      "sortLetters": "h"
+      "cityCode": "KRY",
+      "cityName": "克拉玛依",
+      "cityPinyin": "KELAMAYI"
     },
     {
-      "name": "怀化",
-      "spellName": "huaihua",
-      "id": 5281,
-      "fullname": "湖南/怀化",
-      "sortLetters": "h"
+      "cityCode": "KCA",
+      "cityName": "库车",
+      "cityPinyin": "KUCHE"
     },
     {
-      "name": "淮南",
-      "spellName": "huainan",
-      "id": 4460,
-      "fullname": "安徽/淮南",
-      "sortLetters": "h"
+      "cityCode": "KRL",
+      "cityName": "库尔勒",
+      "cityPinyin": "KUERLE"
     },
     {
-      "name": "黄冈",
-      "spellName": "huanggang",
-      "id": 5141,
-      "fullname": "湖北/黄冈",
-      "sortLetters": "h"
+      "cityCode": "KMG",
+      "cityName": "昆明",
+      "cityPinyin": "KUNMING"
     },
     {
-      "name": "黄南",
-      "spellName": "huangnan",
-      "id": 6387,
-      "fullname": "青海/黄南",
-      "sortLetters": "h"
+      "cityCode": "LHW",
+      "cityName": "兰州",
+      "cityPinyin": "LANZHOU"
     },
     {
-      "name": "黄山",
-      "spellName": "huangshan",
-      "id": 4494,
-      "fullname": "安徽/黄山",
-      "sortLetters": "h"
+      "cityCode": "LXA",
+      "cityName": "拉萨",
+      "cityPinyin": "LASA"
     },
     {
-      "name": "黄石",
-      "spellName": "huangshi",
-      "id": 5074,
-      "fullname": "湖北/黄石",
-      "sortLetters": "h"
+      "cityCode": "LCX",
+      "cityName": "连城",
+      "cityPinyin": "LIANCHENG"
     },
     {
-      "name": "呼和浩特",
-      "spellName": "huhehaote",
-      "id": 3760,
-      "fullname": "内蒙古/呼和浩特",
-      "sortLetters": "h"
+      "cityCode": "LIA",
+      "cityName": "梁平",
+      "cityPinyin": "LIANGPING"
     },
     {
-      "name": "惠州",
-      "spellName": "huizhou",
-      "id": 5369,
-      "fullname": "广东/惠州",
-      "sortLetters": "h"
+      "cityCode": "LYG",
+      "cityName": "连云港",
+      "cityPinyin": "LIANYUNGANG"
     },
     {
-      "name": "葫芦岛",
-      "spellName": "huludao",
-      "id": 3936,
-      "fullname": "辽宁/葫芦岛",
-      "sortLetters": "h"
+      "cityCode": "LLB",
+      "cityName": "荔波",
+      "cityPinyin": "LIBO"
     },
     {
-      "name": "呼伦贝尔",
-      "spellName": "hulunbeier",
-      "id": 3815,
-      "fullname": "内蒙古/呼伦贝尔",
-      "sortLetters": "h"
+      "cityCode": "LZJ",
+      "cityName": "丽江",
+      "cityPinyin": "LIJIANG"
     },
     {
-      "name": "湖州",
-      "spellName": "huzhou",
-      "id": 4383,
-      "fullname": "浙江/湖州",
-      "sortLetters": "h"
+      "cityCode": "LJG",
+      "cityName": "丽江",
+      "cityPinyin": "LIJIANG"
     },
     {
-      "name": "佳木斯",
-      "spellName": "jiamusi",
-      "id": 4159,
-      "fullname": "黑龙江/佳木斯",
-      "sortLetters": "j"
+      "cityCode": "LNJ",
+      "cityName": "临沧",
+      "cityPinyin": "LINCANG"
     },
     {
-      "name": "吉安",
-      "spellName": "jian",
-      "id": 4695,
-      "fullname": "江西/吉安",
-      "sortLetters": "j"
+      "cityCode": "RLK",
+      "cityName": "临河",
+      "cityPinyin": "LINHE"
     },
     {
-      "name": "江门",
-      "spellName": "jiangmen",
-      "id": 5382,
-      "fullname": "广东/江门",
-      "sortLetters": "j"
+      "cityCode": "LYI",
+      "cityName": "临沂",
+      "cityPinyin": "LINYI"
     },
     {
-      "name": "焦作",
-      "spellName": "jiaozuo",
-      "id": 4936,
-      "fullname": "河南/焦作",
-      "sortLetters": "j"
+      "cityCode": "LZY",
+      "cityName": "林芝",
+      "cityPinyin": "LINZHI"
     },
     {
-      "name": "嘉兴",
-      "spellName": "jiaxing",
-      "id": 4375,
-      "fullname": "浙江/嘉兴",
-      "sortLetters": "j"
+      "cityCode": "HZH",
+      "cityName": "黎平",
+      "cityPinyin": "LIPING"
     },
     {
-      "name": "嘉峪关",
-      "spellName": "jiayuguan",
-      "id": 6293,
-      "fullname": "甘肃/嘉峪关",
-      "sortLetters": "j"
+      "cityCode": "LHN",
+      "cityName": "梨山",
+      "cityPinyin": "LISHAN"
     },
     {
-      "name": "嘉峪关",
-      "spellName": "Jiayuguan",
-      "id": 6556,
-      "fullname": "甘肃/嘉峪关/嘉峪关",
-      "sortLetters": "J"
+      "cityCode": "LPF",
+      "cityName": "六盘水",
+      "cityPinyin": "LIUPANSHUI"
     },
     {
-      "name": "揭阳",
-      "spellName": "jieyang",
-      "id": 5440,
-      "fullname": "广东/揭阳",
-      "sortLetters": "j"
+      "cityCode": "LZH",
+      "cityName": "柳州",
+      "cityPinyin": "LIUZHOU"
     },
     {
-      "name": "吉林",
-      "spellName": "jilin",
-      "id": 3998,
-      "fullname": "吉林/吉林",
-      "sortLetters": "j"
+      "cityCode": "LLV",
+      "cityName": "吕梁",
+      "cityPinyin": "LU:LIANG"
     },
     {
-      "name": "济南",
-      "spellName": "jinan",
-      "id": 4741,
-      "fullname": "山东/济南",
-      "sortLetters": "j"
+      "cityCode": "LYA",
+      "cityName": "洛阳",
+      "cityPinyin": "LUOYANG"
     },
     {
-      "name": "金昌",
-      "spellName": "jinchang",
-      "id": 6276,
-      "fullname": "甘肃/金昌",
-      "sortLetters": "j"
+      "cityCode": "LUZ",
+      "cityName": "庐山",
+      "cityPinyin": "LUSHAN"
     },
     {
-      "name": "晋城",
-      "spellName": "jincheng",
-      "id": 3680,
-      "fullname": "山西/晋城",
-      "sortLetters": "j"
+      "cityCode": "LZO",
+      "cityName": "泸州",
+      "cityPinyin": "LUZHOU"
     },
     {
-      "name": "景德镇",
-      "spellName": "jingdezhen",
-      "id": 4651,
-      "fullname": "江西/景德镇",
-      "sortLetters": "j"
+      "cityCode": "LUM",
+      "cityName": "芒市",
+      "cityPinyin": "MANGSHI"
     },
     {
-      "name": "荆门",
-      "spellName": "jingmen",
-      "id": 5123,
-      "fullname": "湖北/荆门",
-      "sortLetters": "j"
+      "cityCode": "NZH",
+      "cityName": "满洲里",
+      "cityPinyin": "MANZHOULI"
     },
     {
-      "name": "荆州",
-      "spellName": "jingzhou",
-      "id": 5100,
-      "fullname": "湖北/荆州",
-      "sortLetters": "j"
+      "cityCode": "MXZ",
+      "cityName": "梅县",
+      "cityPinyin": "MEIXIAN"
     },
     {
-      "name": "金华",
-      "spellName": "jinhua",
-      "id": 4394,
-      "fullname": "浙江/金华",
-      "sortLetters": "j"
+      "cityCode": "MZU",
+      "cityName": "梅州",
+      "cityPinyin": "MEIZHOU"
     },
     {
-      "name": "济宁",
-      "spellName": "jining",
-      "id": 4818,
-      "fullname": "山东/济宁",
-      "sortLetters": "j"
+      "cityCode": "MIG",
+      "cityName": "绵阳",
+      "cityPinyin": "MIANYANG"
     },
     {
-      "name": "晋中",
-      "spellName": "jinzhong",
-      "id": 3692,
-      "fullname": "山西/晋中",
-      "sortLetters": "j"
+      "cityCode": "OHE",
+      "cityName": "漠河",
+      "cityPinyin": "MOHE"
     },
     {
-      "name": "锦州",
-      "spellName": "jinzhou",
-      "id": 3928,
-      "fullname": "辽宁/锦州",
-      "sortLetters": "j"
+      "cityCode": "MDG",
+      "cityName": "牡丹江",
+      "cityPinyin": "MUDANJIANG"
     },
     {
-      "name": "九江",
-      "spellName": "jiujiang",
-      "id": 4660,
-      "fullname": "江西/九江",
-      "sortLetters": "j"
+      "cityCode": "KHN",
+      "cityName": "南昌",
+      "cityPinyin": "NANCHANG"
     },
     {
-      "name": "酒泉",
-      "spellName": "jiuquan",
-      "id": 6314,
-      "fullname": "甘肃/酒泉",
-      "sortLetters": "j"
+      "cityCode": "NAO",
+      "cityName": "南充",
+      "cityPinyin": "NANCHONG"
     },
     {
-      "name": "鸡西",
-      "spellName": "jixi",
-      "id": 4110,
-      "fullname": "黑龙江/鸡西",
-      "sortLetters": "j"
+      "cityCode": "NKG",
+      "cityName": "南京",
+      "cityPinyin": "NANJING"
     },
     {
-      "name": "开封",
-      "spellName": "kaifeng",
-      "id": 4898,
-      "fullname": "河南/开封",
-      "sortLetters": "k"
+      "cityCode": "NNG",
+      "cityName": "南宁",
+      "cityPinyin": "NANNING"
     },
     {
-      "name": "喀什",
-      "spellName": "kashidi",
-      "id": 6484,
-      "fullname": "新疆/喀什",
-      "sortLetters": "k"
+      "cityCode": "NAP",
+      "cityName": "南平",
+      "cityPinyin": "NANPING"
     },
     {
-      "name": "克拉玛依",
-      "spellName": "kelamayi",
-      "id": 6451,
-      "fullname": "新疆/克拉玛依",
-      "sortLetters": "k"
+      "cityCode": "NTG",
+      "cityName": "南通",
+      "cityPinyin": "NANTONG"
     },
     {
-      "name": "克孜勒苏",
-      "spellName": "kezilesu",
-      "id": 6497,
-      "fullname": "新疆/克孜勒苏",
-      "sortLetters": "k"
+      "cityCode": "NNY",
+      "cityName": "南阳",
+      "cityPinyin": "NANYANG"
     },
     {
-      "name": "昆明",
-      "spellName": "kunming",
-      "id": 5927,
-      "fullname": "云南/昆明",
-      "sortLetters": "k"
+      "cityCode": "NAQ",
+      "cityName": "那曲",
+      "cityPinyin": "NAQU"
     },
     {
-      "name": "来宾",
-      "spellName": "laibin",
-      "id": 5556,
-      "fullname": "广西/来宾",
-      "sortLetters": "l"
+      "cityCode": "NLT",
+      "cityName": "那拉提",
+      "cityPinyin": "NEILATI"
     },
     {
-      "name": "莱芜",
-      "spellName": "laiwu",
-      "id": 4830,
-      "fullname": "山东/莱芜",
-      "sortLetters": "l"
+      "cityCode": "NNN",
+      "cityName": "嫩江",
+      "cityPinyin": "NENJIANG"
     },
     {
-      "name": "廊坊",
-      "spellName": "langfang",
-      "id": 3618,
-      "fullname": "河北/廊坊",
-      "sortLetters": "l"
+      "cityCode": "NGB",
+      "cityName": "宁波",
+      "cityPinyin": "NINGBO"
     },
     {
-      "name": "兰州",
-      "spellName": "lanzhou",
-      "id": 6267,
-      "fullname": "甘肃/兰州",
-      "sortLetters": "l"
+      "cityCode": "PZI",
+      "cityName": "攀枝花",
+      "cityPinyin": "PANZHIHUA"
     },
     {
-      "name": "拉萨",
-      "spellName": "lasa",
-      "id": 6070,
-      "fullname": "西藏/拉萨",
-      "sortLetters": "l"
+      "cityCode": "JIQ",
+      "cityName": "黔江",
+      "cityPinyin": "QIANJIANG"
     },
     {
-      "name": "乐东",
-      "spellName": "ledonglizuz",
-      "id": 5586,
-      "fullname": "海南/乐东",
-      "sortLetters": "l"
+      "cityCode": "IQM",
+      "cityName": "且末",
+      "cityPinyin": "QIEMO"
     },
     {
-      "name": "乐山",
-      "spellName": "leshan",
-      "id": 5707,
-      "fullname": "四川/乐山",
-      "sortLetters": "l"
+      "cityCode": "TAO",
+      "cityName": "青岛",
+      "cityPinyin": "QINGDAO"
     },
     {
-      "name": "凉山",
-      "spellName": "liangshan",
-      "id": 5813,
-      "fullname": "四川/凉山",
-      "sortLetters": "l"
+      "cityCode": "IQN",
+      "cityName": "庆阳",
+      "cityPinyin": "QINGYANG"
     },
     {
-      "name": "连云港",
-      "spellName": "lianyungang",
-      "id": 4245,
-      "fullname": "江苏/连云港",
-      "sortLetters": "l"
+      "cityCode": "SHP",
+      "cityName": "秦皇岛",
+      "cityPinyin": "QINHUANGDAO"
     },
     {
-      "name": "聊城",
-      "spellName": "liaocheng",
-      "id": 4858,
-      "fullname": "山东/聊城",
-      "sortLetters": "l"
+      "cityCode": "NDG",
+      "cityName": "齐齐哈尔",
+      "cityPinyin": "QIQIHAER"
     },
     {
-      "name": "辽阳",
-      "spellName": "liaoyang",
-      "id": 3963,
-      "fullname": "辽宁/辽阳",
-      "sortLetters": "l"
+      "cityCode": "JIY",
+      "cityName": "济源",
+      "cityPinyin": "QIYUAN"
     },
     {
-      "name": "辽源",
-      "spellName": "liaoyuan",
-      "id": 4015,
-      "fullname": "吉林/辽源",
-      "sortLetters": "l"
+      "cityCode": "JJN",
+      "cityName": "泉州",
+      "cityPinyin": "QUANZHOU"
     },
     {
-      "name": "丽江",
-      "spellName": "lijiang",
-      "id": 5999,
-      "fullname": "云南/丽江",
-      "sortLetters": "l"
+      "cityCode": "JUZ",
+      "cityName": "衢州",
+      "cityPinyin": "QUZHOU"
     },
     {
-      "name": "临沧",
-      "spellName": "lincangdi",
-      "id": 5990,
-      "fullname": "云南/临沧",
-      "sortLetters": "l"
+      "cityCode": "RKZ",
+      "cityName": "日喀则",
+      "cityPinyin": "RIKAZE"
     },
     {
-      "name": "临汾",
-      "spellName": "linfen",
-      "id": 3730,
-      "fullname": "山西/临汾",
-      "sortLetters": "l"
+      "cityCode": "RIZ",
+      "cityName": "日照",
+      "cityPinyin": "RIZHAO"
     },
     {
-      "name": "陵水",
-      "spellName": "lingshuiliz",
-      "id": 5584,
-      "fullname": "海南/陵水",
-      "sortLetters": "l"
+      "cityCode": "SYX",
+      "cityName": "三亚",
+      "cityPinyin": "SANYA"
     },
     {
-      "name": "临夏",
-      "spellName": "linxia",
-      "id": 6358,
-      "fullname": "甘肃/临夏",
-      "sortLetters": "l"
+      "cityCode": "SHA",
+      "cityName": "上海",
+      "cityPinyin": "SHANGHAI"
     },
     {
-      "name": "临沂",
-      "spellName": "linyi",
-      "id": 4833,
-      "fullname": "山东/临沂",
-      "sortLetters": "l"
+      "cityCode": "PVG",
+      "cityName": "上海浦东",
+      "cityPinyin": "SHANGHAIPUDONG"
     },
     {
-      "name": "林芝",
-      "spellName": "linzhidi",
-      "id": 6142,
-      "fullname": "西藏/林芝",
-      "sortLetters": "l"
+      "cityCode": "HSC",
+      "cityName": "韶关",
+      "cityPinyin": "SHAOGUAN"
     },
     {
-      "name": "丽水",
-      "spellName": "lishui",
-      "id": 4426,
-      "fullname": "浙江/丽水",
-      "sortLetters": "l"
+      "cityCode": "SHS",
+      "cityName": "沙市",
+      "cityPinyin": "SHASHI"
     },
     {
-      "name": "六安",
-      "spellName": "liuan",
-      "id": 4532,
-      "fullname": "安徽/六安",
-      "sortLetters": "l"
+      "cityCode": "SHE",
+      "cityName": "沈阳",
+      "cityPinyin": "SHENYANG"
     },
     {
-      "name": "六盘水",
-      "spellName": "liupanshui",
-      "id": 5842,
-      "fullname": "贵州/六盘水",
-      "sortLetters": "l"
+      "cityCode": "SZX",
+      "cityName": "深圳",
+      "cityPinyin": "SHENZHEN"
     },
     {
-      "name": "柳州",
-      "spellName": "liuzhou",
-      "id": 5464,
-      "fullname": "广西/柳州",
-      "sortLetters": "l"
+      "cityCode": "SJW",
+      "cityName": "石家庄",
+      "cityPinyin": "SHIJIAZHUANG"
+    },
+    {
+      "cityCode": "AHJ",
+      "cityName": "四川红原",
+      "cityPinyin": "SICHUANHONGYUAN"
+    },
+    {
+      "cityCode": "SYM",
+      "cityName": "思茅",
+      "cityPinyin": "SIMAO"
+    },
+    {
+      "cityCode": "SZV",
+      "cityName": "苏州",
+      "cityPinyin": "SUZHOU"
+    },
+    {
+      "cityCode": "TCG",
+      "cityName": "塔城",
+      "cityPinyin": "TACHENG"
+    },
+    {
+      "cityCode": "TTG",
+      "cityName": "台东",
+      "cityPinyin": "TAIDONG"
+    },
+    {
+      "cityCode": "TNN",
+      "cityName": "台南",
+      "cityPinyin": "TAINAN"
+    },
+    {
+      "cityCode": "TYN",
+      "cityName": "太原",
+      "cityPinyin": "TAIYUAN"
+    },
+    {
+      "cityCode": "TXG",
+      "cityName": "台中",
+      "cityPinyin": "TAIZHONG"
+    },
+    {
+      "cityCode": "HYN",
+      "cityName": "台州",
+      "cityPinyin": "TAIZHOU"
+    },
+    {
+      "cityCode": "TVS",
+      "cityName": "唐山",
+      "cityPinyin": "TANGSHAN"
+    },
+    {
+      "cityCode": "TCZ",
+      "cityName": "腾冲",
+      "cityPinyin": "TENGCHONG"
+    },
+    {
+      "cityCode": "TSN",
+      "cityName": "天津",
+      "cityPinyin": "TIANJIN"
+    },
+    {
+      "cityCode": "THQ",
+      "cityName": "天水",
+      "cityPinyin": "TIANSHUI"
+    },
+    {
+      "cityCode": "TNH",
+      "cityName": "通化",
+      "cityPinyin": "TONGHUA"
+    },
+    {
+      "cityCode": "TGO",
+      "cityName": "通辽",
+      "cityPinyin": "TONGLIAO"
+    },
+    {
+      "cityCode": "TEN",
+      "cityName": "铜仁",
+      "cityPinyin": "TONGREN"
+    },
+    {
+      "cityCode": "TLQ",
+      "cityName": "吐鲁番",
+      "cityPinyin": "TULUFAN"
+    },
+    {
+      "cityCode": "WXN",
+      "cityName": "万州",
+      "cityPinyin": "WANZHOU"
+    },
+    {
+      "cityCode": "WEF",
+      "cityName": "潍坊",
+      "cityPinyin": "WEIFANG"
+    },
+    {
+      "cityCode": "WEH",
+      "cityName": "威海",
+      "cityPinyin": "WEIHAI"
+    },
+    {
+      "cityCode": "WNH",
+      "cityName": "文山",
+      "cityPinyin": "WENSHAN"
+    },
+    {
+      "cityCode": "WNZ",
+      "cityName": "温州",
+      "cityPinyin": "WENZHOU"
+    },
+    {
+      "cityCode": "WUA",
+      "cityName": "乌海",
+      "cityPinyin": "WUHAI"
+    },
+    {
+      "cityCode": "WUH",
+      "cityName": "武汉",
+      "cityPinyin": "WUHAN"
+    },
+    {
+      "cityCode": "HLH",
+      "cityName": "乌兰浩特",
+      "cityPinyin": "WULANHAOTE"
+    },
+    {
+      "cityCode": "UUD",
+      "cityName": "乌兰乌德",
+      "cityPinyin": "WULANWUDE"
+    },
+    {
+      "cityCode": "URC",
+      "cityName": "乌鲁木齐",
+      "cityPinyin": "WULUMUQI"
+    },
+    {
+      "cityCode": "WUX",
+      "cityName": "无锡",
+      "cityPinyin": "WUXI"
+    },
+    {
+      "cityCode": "WUS",
+      "cityName": "武夷山",
+      "cityPinyin": "WUYISHAN"
+    },
+    {
+      "cityCode": "WUZ",
+      "cityName": "梧州",
+      "cityPinyin": "WUZHOU"
+    },
+    {
+      "cityCode": "XMN",
+      "cityName": "厦门",
+      "cityPinyin": "XIAMEN"
+    },
+    {
+      "cityCode": "XIY",
+      "cityName": "西安",
+      "cityPinyin": "XIAN"
+    },
+    {
+      "cityCode": "HKG",
+      "cityName": "香港",
+      "cityPinyin": "XIANGGANG"
+    },
+    {
+      "cityCode": "XIT",
+      "cityName": "湘潭",
+      "cityPinyin": "XIANGTAN"
+    },
+    {
+      "cityCode": "XFN",
+      "cityName": "襄阳",
+      "cityPinyin": "XIANGYANG"
+    },
+    {
+      "cityCode": "XIC",
+      "cityName": "西昌",
+      "cityPinyin": "XICHANG"
+    },
+    {
+      "cityCode": "XIL",
+      "cityName": "锡林浩特",
+      "cityPinyin": "XILINHAOTE"
+    },
+    {
+      "cityCode": "XEN",
+      "cityName": "兴城",
+      "cityPinyin": "XINGCHENG"
+    },
+    {
+      "cityCode": "XNT",
+      "cityName": "邢台",
+      "cityPinyin": "XINGTAI"
+    },
+    {
+      "cityCode": "ACX",
+      "cityName": "兴义",
+      "cityPinyin": "XINGYI"
+    },
+    {
+      "cityCode": "XNN",
+      "cityName": "西宁",
+      "cityPinyin": "XINING"
+    },
+    {
+      "cityCode": "XYA",
+      "cityName": "信阳",
+      "cityPinyin": "XINYANG"
+    },
+    {
+      "cityCode": "JHG",
+      "cityName": "西双版纳",
+      "cityPinyin": "XISHUANGBANNA"
+    },
+    {
+      "cityCode": "XUC",
+      "cityName": "宣城",
+      "cityPinyin": "XUANCHENG"
+    },
+    {
+      "cityCode": "XCA",
+      "cityName": "许昌",
+      "cityPinyin": "XUCHANG"
+    },
+    {
+      "cityCode": "XUZ",
+      "cityName": "徐州",
+      "cityPinyin": "XUZHOU"
+    },
+    {
+      "cityCode": "ENY",
+      "cityName": "延安",
+      "cityPinyin": "YANAN"
+    },
+    {
+      "cityCode": "YNZ",
+      "cityName": "盐城",
+      "cityPinyin": "YANCHENG"
+    },
+    {
+      "cityCode": "YTY",
+      "cityName": "扬州",
+      "cityPinyin": "YANGZHOU"
+    },
+    {
+      "cityCode": "YNJ",
+      "cityName": "延吉",
+      "cityPinyin": "YANJI"
+    },
+    {
+      "cityCode": "YNT",
+      "cityName": "烟台",
+      "cityPinyin": "YANTAI"
+    },
+    {
+      "cityCode": "YBP",
+      "cityName": "宜宾",
+      "cityPinyin": "YIBIN"
+    },
+    {
+      "cityCode": "YIH",
+      "cityName": "宜昌",
+      "cityPinyin": "YICHANG"
+    },
+    {
+      "cityCode": "YIC",
+      "cityName": "宜春",
+      "cityPinyin": "YICHUN"
+    },
+    {
+      "cityCode": "LDS",
+      "cityName": "伊春",
+      "cityPinyin": "YICHUN"
+    },
+    {
+      "cityCode": "INC",
+      "cityName": "银川",
+      "cityPinyin": "YINCHUAN"
+    },
+    {
+      "cityCode": "YIT",
+      "cityName": "鹰潭",
+      "cityPinyin": "YINGTAN"
+    },
+    {
+      "cityCode": "YIN",
+      "cityName": "伊宁",
+      "cityPinyin": "YINING"
+    },
+    {
+      "cityCode": "YIW",
+      "cityName": "义乌",
+      "cityPinyin": "YIWU"
+    },
+    {
+      "cityCode": "LLF",
+      "cityName": "永州",
+      "cityPinyin": "YONGZHOU"
+    },
+    {
+      "cityCode": "YUY",
+      "cityName": "岳阳",
+      "cityPinyin": "YUEYANG"
+    },
+    {
+      "cityCode": "UYN",
+      "cityName": "榆林",
+      "cityPinyin": "YULIN"
+    },
+    {
+      "cityCode": "YCU",
+      "cityName": "运城",
+      "cityPinyin": "YUNCHENG"
+    },
+    {
+      "cityCode": "YUS",
+      "cityName": "玉树",
+      "cityPinyin": "YUSHU"
+    },
+    {
+      "cityCode": "CGQ",
+      "cityName": "长春",
+      "cityPinyin": "ZHANGCHUN"
+    },
+    {
+      "cityCode": "ZHJ",
+      "cityName": "张家港",
+      "cityPinyin": "ZHANGJIAGANG"
+    },
+    {
+      "cityCode": "DYG",
+      "cityName": "张家界",
+      "cityPinyin": "ZHANGJIAJIE"
+    },
+    {
+      "cityCode": "ZQZ",
+      "cityName": "张家口",
+      "cityPinyin": "ZHANGJIAKOU"
+    },
+    {
+      "cityCode": "YZY",
+      "cityName": "张掖",
+      "cityPinyin": "ZHANGYE"
+    },
+    {
+      "cityCode": "CIH",
+      "cityName": "长治",
+      "cityPinyin": "ZHANGZHI"
+    },
+    {
+      "cityCode": "ZHZ",
+      "cityName": "漳州",
+      "cityPinyin": "ZHANGZHOU"
+    },
+    {
+      "cityCode": "ZHA",
+      "cityName": "湛江",
+      "cityPinyin": "ZHANJIANG"
+    },
+    {
+      "cityCode": "ZAT",
+      "cityName": "昭通",
+      "cityPinyin": "ZHAOTONG"
+    },
+    {
+      "cityCode": "CGO",
+      "cityName": "郑州",
+      "cityPinyin": "ZHENGZHOU"
+    },
+    {
+      "cityCode": "THY",
+      "cityName": "中卫",
+      "cityPinyin": "ZHONGWEI"
+    },
+    {
+      "cityCode": "ZHY",
+      "cityName": "中卫",
+      "cityPinyin": "ZHONGWEI"
+    },
+    {
+      "cityCode": "HSN",
+      "cityName": "舟山",
+      "cityPinyin": "ZHOUSHAN"
+    },
+    {
+      "cityCode": "ZUH",
+      "cityName": "珠海",
+      "cityPinyin": "ZHUHAI"
+    },
+    {
+      "cityCode": "ZIG",
+      "cityName": "自贡",
+      "cityPinyin": "ZIGONG"
+    },
+    {
+      "cityCode": "ZYI",
+      "cityName": "遵义",
+      "cityPinyin": "ZUNYI"
     }
-  ],
-  "bcode": 0
+  ]
 }

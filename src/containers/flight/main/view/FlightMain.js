@@ -12,9 +12,14 @@ import RouteSelection from '../../../../components/RouteSelection';
 class FlightMain extends Component {
 
   static propTypes = {
-    onOriginClick: PropTypes.func,
-    onDestinationClick: PropTypes.func,
+    onSelectCityStart: PropTypes.func,
+    onSelectCityEnd: PropTypes.func,
+    onSelectStartDate: PropTypes.func,
+    onSelectBackDate: PropTypes.func,
     onQuery: PropTypes.func,
+    startCity: PropTypes.string,
+    endCity: PropTypes.string,
+    onReverse: PropTypes.func,
   }
 
   constructor(props) {
@@ -106,7 +111,13 @@ class FlightMain extends Component {
     return (
       <View style={styles.container}>
         {this.renderAirTop()}
-        <RouteSelection style={styles.routeSelect} />
+        <RouteSelection
+          startCity={this.props.startCity}
+          endCity={this.props.endCity}
+          onSelectCityStart={this.props.onSelectCityStart}
+          onSelectCityEnd={this.props.onSelectCityEnd}
+          onReverse={this.props.onReverse}
+          style={styles.routeSelect} />
         {this.renderTime()}
         <Button title='查询' onPress={this.props.onQuery} type='primary' style={styles.queryButton} />
         <Text style={styles.appText}>飞巴商旅</Text>

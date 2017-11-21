@@ -1,5 +1,11 @@
+/*
+ * @Author: lsl 
+ * @Date: 2017-11-21 14:48:00 
+ * @Last Modified by: lsl
+ * @Last Modified time: 2017-11-21 17:34:48
+ */
 'use strict';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   Alert,
   View,
@@ -8,8 +14,9 @@ import {
   StyleSheet,
   Platform,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 import Header from './Header';
 import SearchBox from './SearchBox';
@@ -18,36 +25,41 @@ import CityList from './IndexListView';
 
 // 下面是数据部分
 import CityJson from './city-list.json';
-import JsonData from './list.json';
-const nowCityList = [
-  {
-    "name": "阿里",
-    "spellName": "alidi",
-    "id": 6134,
-    "fullname": "西藏/阿里",
-    "sortLetters": "a"
-  }
-];
 const allCityList = CityJson.allCityList;
 const hotCityList = CityJson.hotCityList;
 const lastVisitCityList = CityJson.lastVisitCityList;
 
-export default class SelectCity extends Component {
+const nowCityList = [
+  {
+    "cityCode": "YIE",
+    "cityName": "阿尔山",
+    "cityPinyin": "AERSHAN"
+  }
+];
+
+export default class SelectCity extends PureComponent {
+  static defaultProps = {
+    allCityList: allCityList,
+    hotCityList: hotCityList,
+    lastVisitCityList: lastVisitCityList,
+    nowCityList: nowCityList,
+  }
+
+  static propTypes = {
+    allCityList: PropTypes.array,
+    hotCityList: PropTypes.array,
+    lastVisitCityList: PropTypes.array,
+    nowCityList: PropTypes.array,
+    onSelectCity: PropTypes.func
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       showSearchResult: false,
       keyword: '',
       searchResultList: [],
-      allCityList: allCityList,
-      hotCityList: hotCityList,
-      lastVisitCityList: lastVisitCityList,
-      nowCityList: nowCityList
     };
-  }
-
-  onPressBack = () => {
-    alert('你选择了返回');
   }
 
   onChanegeTextKeyword = (text) => {
@@ -63,9 +75,10 @@ export default class SelectCity extends Component {
   filterCityData(text) {
     console.log('search for list', text);
     let rst = [];
-    for (let idx = 0; idx < allCityList.length; idx++) {
-      let item = allCityList[idx];
-      if (item.name.indexOf(text) === 0 || item.spellName.indexOf(text) === 0) {
+    let upperCase = text.toUpperCase();
+    for (let i = 0; i < this.props.allCityList.length; i++) {
+      let item = this.props.allCityList[i];
+      if (item.cityName.indexOf(text) === 0 || item.cityPinyin.indexOf(upperCase) === 0) {
         rst.push(item);
       }
     }
@@ -76,14 +89,12 @@ export default class SelectCity extends Component {
     if (this.state.showSearchResult) {
       this.setState({ showSearchResult: false, keyword: '' });
     }
-
-    alert('你选择了城市====》' + cityJson.id + '#####' + cityJson.name);
+    this.props.onSelectCity(cityJson);
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Header onPressBack={this.onPressBack} title="当前城市：北京" />
         <SearchBox
           keyword={this.state.keyword}
           onChanegeTextKeyword={this.onChanegeTextKeyword} />
@@ -96,10 +107,10 @@ export default class SelectCity extends Component {
             : (<View style={{ flex: 1 }}>
               <CityList
                 onSelectCity={this.onSelectCity}
-                allCityList={this.state.allCityList}
-                hotCityList={this.state.hotCityList}
-                lastVisitCityList={this.state.lastVisitCityList}
-                nowCityList={this.state.nowCityList} />
+                allCityList={this.props.allCityList}
+                hotCityList={this.props.hotCityList}
+                lastVisitCityList={this.props.lastVisitCityList}
+                nowCityList={this.props.nowCityList} />
             </View>
             )
         }
