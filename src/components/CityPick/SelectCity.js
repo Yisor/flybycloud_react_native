@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-21 14:48:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-21 17:34:48
+ * @Last Modified time: 2017-11-21 18:28:55
  */
 'use strict';
 import React, { PureComponent } from 'react';
@@ -24,7 +24,7 @@ import SearchResult from './SearchResult';
 import CityList from './IndexListView';
 
 // 下面是数据部分
-import CityJson from './city-list.json';
+import CityJson from './cities.json';
 const allCityList = CityJson.allCityList;
 const hotCityList = CityJson.hotCityList;
 const lastVisitCityList = CityJson.lastVisitCityList;

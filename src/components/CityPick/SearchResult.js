@@ -41,8 +41,8 @@ export default class SearchResult extends Component {
         key={'list_item_' + cityJson.id}
         style={styles.rowView}
         onPress={() => { this.onCityClick(cityJson) }}>
-        <View style={styles.rowdata}>
-          <Text style={styles.rowdatatext}>{name}</Text>
+        <View style={styles.rowData}>
+          <Text style={styles.rowDataText}>{name}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -80,11 +80,11 @@ const styles = StyleSheet.create({
     borderBottomColor: '#F4F4F4',
     borderBottomWidth: 0.5
   },
-  rowdata: {
+  rowData: {
     paddingTop: 10,
     paddingBottom: 2
   },
-  rowdatatext: {
+  rowDataText: {
     color: 'gray',
     width: width
   }

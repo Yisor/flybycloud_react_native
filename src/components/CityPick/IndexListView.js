@@ -126,8 +126,8 @@ export default class CityIndexListView extends Component {
   renderListBox(city, rowId) {
     return (
       <TouchableOpacity key={'list_item_' + rowId} style={styles.rowViewBox} onPress={() => { this.onCityClick(city) }}>
-        <View style={styles.rowdataBox}>
-          <Text style={styles.rowdatatextBox}>{city.cityName}</Text>
+        <View style={styles.rowDataBox}>
+          <Text style={styles.rowDataTextBox}>{city.cityName}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -140,8 +140,8 @@ export default class CityIndexListView extends Component {
 
     return (
       <TouchableOpacity key={'list_item_' + rowId} style={styles.rowView} onPress={() => { this.onCityClick(city) }}>
-        <View style={styles.rowdata}>
-          <Text style={styles.rowdatatext}>{city.cityName}</Text>
+        <View style={styles.rowData}>
+          <Text style={styles.rowDataText}>{city.cityName}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -228,11 +228,11 @@ const styles = StyleSheet.create({
     borderBottomColor: '#F4F4F4',
     borderBottomWidth: 0.5
   },
-  rowdata: {
+  rowData: {
     paddingTop: 10,
     paddingBottom: 2
   },
-  rowdatatext: {
+  rowDataText: {
     color: 'gray',
     width: width
   },
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  rowdataBox: {
+  rowDataBox: {
     borderWidth: 1,
     borderColor: '#DBDBDB',
     marginTop: 5,
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 32,
   },
-  rowdatatextBox: {
+  rowDataTextBox: {
     textAlign: 'center',
   }
 });
