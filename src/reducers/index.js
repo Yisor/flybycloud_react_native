@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { loginReducer } from '../containers/login';
-import { flightReducer } from '../containers/flight/main';
+import { flightReducer } from '../containers/flight/list';
 
 export default combineReducers({
   userStore: loginReducer,

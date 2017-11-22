@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-21 14:48:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-21 18:28:55
+ * @Last Modified time: 2017-11-22 13:50:51
  */
 'use strict';
 import React, { PureComponent } from 'react';
@@ -85,11 +85,11 @@ export default class SelectCity extends PureComponent {
     return rst;
   }
 
-  onSelectCity = (cityJson) => {
+  onSelectCity = (city) => {
     if (this.state.showSearchResult) {
       this.setState({ showSearchResult: false, keyword: '' });
     }
-    this.props.onSelectCity(cityJson);
+    this.props.onSelectCity(city);
   }
 
   render() {

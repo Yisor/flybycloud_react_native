@@ -5,7 +5,8 @@ import { appType } from '../constants/constDefines';
  * 应用环境
  * @type {string}
  */
-const baseUrl = 'http://mapi.flybycloud.com:8091'
+const baseUrl = 'http://192.168.1.49:8080/mapi'
+const mockToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0bWNJZCI6MTExLCJjb3JwSWQiOjEwMDYsInVzZXJJZCI6MTE1NzcyLCJ0cyI6MTUxMTMzNTA4ODk1OX0.gELoJRf0GBLcLfaPdjS2CQmgag1IA5w3BzoZYwTEgtE';
 
 
 /**
@@ -30,7 +31,7 @@ export const get = (api) => {
   console.log('路径：' + url);
   Headers.ts = getTs()
   Headers.sign = getSign(api)
-  Headers.token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0bWNJZCI6MTExLCJjb3JwSWQiOjEwNTIsInVzZXJJZCI6MTExMTE2MzQyLCJ0cyI6MTUxMTE2ODQ5OTk2Nn0.5K0LyYPM_m7h45Lg8Sk0N3srxiCMnfBR4UkTIckvgmk'
+  Headers.token = mockToken
   return fetch(url, {
     method: 'GET',
     headers: Headers

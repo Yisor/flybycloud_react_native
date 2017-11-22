@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-17 11:44:31 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-22 10:22:14
+ * @Last Modified time: 2017-11-22 14:44:11
  * @Desc 路线选择
  */
 import PropTypes from 'prop-types';
@@ -17,14 +17,14 @@ class RouteSelection extends Component {
     onSelectCityStart: PropTypes.func,
     onSelectCityEnd: PropTypes.func,
     icon: PropTypes.any,
-    onReverse: PropTypes.func,
+    onExchange: PropTypes.func,
   }
 
   static defaultProps = {
     startCity: '杭州',
     endCity: '北京',
     icon: require('../resources/assets/plane/plane_exchange_icon.png'),
-  };
+  }
 
   constructor(props) {
     super(props);
@@ -35,8 +35,8 @@ class RouteSelection extends Component {
   }
 
   // 往返对调
-  onReverse = () => {
-    this.props.onReverse();
+  onExchange = () => {
+    this.props.onExchange();
   }
 
   // 出发城市
@@ -66,7 +66,7 @@ class RouteSelection extends Component {
   // 转化按钮
   renderReverse() {
     return (
-      <TouchableOpacity onPress={this.onReverse} activeOpacity={0.8}>
+      <TouchableOpacity onPress={this.onExchange} activeOpacity={0.8}>
         <ImageBackground style={styles.imgReverse} resizeMode="center" source={require('../resources/assets/plane/plane_exchange_round.png')} >
           <Image style={styles.imgReverse} resizeMode="center" source={this.props.icon} />
         </ImageBackground>

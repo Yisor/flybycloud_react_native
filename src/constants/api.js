@@ -1,5 +1,6 @@
 export default {
   login: "/auth/login",
   sendSms: "/verifycode/sms",
-  cityList: "/app/city"
+  cityList: "/app/city",
+  flightTicket: "/flight/ticket/"
 }

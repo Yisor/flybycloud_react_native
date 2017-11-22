@@ -1,0 +1,2 @@
+export const FLIGHT_QUERY = 'FLIGHT_QUERY';
+export const FLIGHT_QUERY_SUCESS = 'FLIGHT_QUERY_SUCESS';

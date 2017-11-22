@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-21 14:45:36 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-22 10:16:48
+ * @Last Modified time: 2017-11-22 13:51:39
  */
 import React, { Component } from 'react';
 import { Alert, View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
@@ -41,7 +41,7 @@ class SelectCityPage extends Component {
 
 
   onSelectCity = (city) => {
-    Actions.pop({ refresh: ({ 'city': city.cityName, 'action': this.props.action }) });
+    Actions.pop({ refresh: ({ 'city': city, 'action': this.props.action }) });
   }
 
   render() {

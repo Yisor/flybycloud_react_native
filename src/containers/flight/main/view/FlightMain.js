@@ -19,7 +19,9 @@ class FlightMain extends Component {
     onQuery: PropTypes.func,
     startCity: PropTypes.string,
     endCity: PropTypes.string,
-    onReverse: PropTypes.func,
+    onExchange: PropTypes.func,
+    startDate: PropTypes.string,
+    endDate: PropTypes.string
   }
 
   constructor(props) {
@@ -54,7 +56,7 @@ class FlightMain extends Component {
       <View>
         <Text style={styles.returnText} > </Text>
         <TouchableOpacity activeOpacity={0.5}>
-          <Text style={styles.dateText}>2017-09-23 周四</Text>
+          <Text ref="start_date" style={styles.dateText}>{this.getDateAndWeek(this.props.startDate)}</Text>
         </TouchableOpacity>
         <Divider style={styles.divider} />
       </View>
@@ -68,10 +70,10 @@ class FlightMain extends Component {
         <Text style={styles.returnText}>返程</Text>
         <View style={styles.timeContainer}>
           <TouchableOpacity activeOpacity={0.5}>
-            <Text style={styles.dateText}>2017-09-23 周四</Text>
+            <Text style={styles.dateText}>{this.getDateAndWeek(this.props.startDate)}</Text>
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.5}>
-            <Text style={styles.dateText}>2017-09-23 周四</Text>
+            <Text style={styles.dateText}>{this.getDateAndWeek(this.props.endDate)}</Text>
           </TouchableOpacity>
         </View>
         <Divider style={styles.divider} />
@@ -107,6 +109,30 @@ class FlightMain extends Component {
     );
   }
 
+  onQuery = () => {
+    this.props.onQuery();
+  }
+
+  /** 
+ * 根据日期字符串获取星期几 
+ * @param dateString 日期字符串（如：2016-12-29）
+ * @returns {String} 
+ */
+  getWeek(dateString) {
+    let date;
+    if (dateString) {
+      let dateArray = dateString.split("-");
+      date = new Date(dateArray[0], parseInt(dateArray[1] - 1), dateArray[2]);
+    } else {
+      date = new Date();
+    }
+    return "周" + "日一二三四五六".charAt(date.getDay());
+  }
+
+  getDateAndWeek(dateString) {
+    return dateString + ' ' + this.getWeek(dateString);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -116,10 +142,10 @@ class FlightMain extends Component {
           endCity={this.props.endCity}
           onSelectCityStart={this.props.onSelectCityStart}
           onSelectCityEnd={this.props.onSelectCityEnd}
-          onReverse={this.props.onReverse}
+          onExchange={this.props.onExchange}
           style={styles.routeSelect} />
         {this.renderTime()}
-        <Button title='查询' onPress={this.props.onQuery} type='primary' style={styles.queryButton} />
+        <Button title='查询' onPress={this.onQuery} type='primary' style={styles.queryButton} />
         <Text style={styles.appText}>飞巴商旅</Text>
         {this.renderTakePhone()}
         {this.renderBottomTab()}
