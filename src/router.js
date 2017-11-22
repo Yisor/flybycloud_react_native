@@ -19,8 +19,7 @@ import UserInfoPage from './containers/UserInfoPage';
 import HomePage from './containers/HomePage';
 import CustomNavBar from './components/CustomNavBar';
 import { LoginPage } from './containers/login';
-import { AirSearchPage } from './containers/air/airSearch';
-
+import {} from './containers/calendar'
 // const HomeIcon = (props) => {
 //   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
 //   return (
@@ -50,24 +49,23 @@ class rootRouter extends Component {
   render() {
     return (
       <Router >
-        <Stack key="Root" titleStyle={{ alignSelf: 'center' }}>
-          <Tabs key="Tabbar" tabBarPosition="bottom" tabBarStyle={styles.tabbarContainer} >
+        <Stack key="root" titleStyle={{ alignSelf: 'center' }}>
+          <Tabs key="tabbar" tabBarPosition="bottom" tabBarStyle={styles.tabbarContainer} >
             <Stack hideNavBar key="tab_home" title="首页" >
-              <Scene key="Home" component={HomePage} title="首页" />
+              <Scene key="home" component={HomePage} title="首页" />
             </Stack>
             <Stack hideNavBar key="tab_examine" title="审批" >
-              <Scene key="Approval" component={HomePage} title="审批" />
+              <Scene key="approval" component={HomePage} title="审批" />
             </Stack>
             <Stack hideNavBar key="tab_travel" title="行程" >
-              <Scene key="Trip" component={HomePage} title="行程" />
+              <Scene key="trip" component={HomePage} title="行程" />
             </Stack>
             <Stack hideNavBar key="tab_user" title="我的" >
-              <Scene key="Mine" component={UserInfoPage} title="我的" />
+              <Scene key="mine" component={UserInfoPage} title="我的" />
             </Stack>
           </Tabs>
 
           <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" />
-          <Scene key="airSearch" component={AirSearchPage} title="机票" initial />
         </Stack>
       </Router>
     );
