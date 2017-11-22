@@ -1,4 +1,4 @@
 // Button.js
 'use strict';
-import { Button } from 'teaset';
+import { Button } from 'antd-mobile';
 export default Button;

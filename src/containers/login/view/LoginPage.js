@@ -54,14 +54,14 @@ class LoginPage extends Component {
   }
 
   handleAccountApply = () => {
-    Alert.alert('账号申请');
-
+    // Alert.alert('账号申请');
+    Actions.calendar();
   }
 
   handleForget = () => {
     Alert.alert('忘记密码');
     RSA.encrypt('123').then((encyptedStr) => {
-      console.log(encyptedStr + 'ios');
+      console.log(encyptedStr);
     })
   }
 

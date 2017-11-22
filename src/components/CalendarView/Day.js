@@ -13,7 +13,7 @@ import { deepCompare } from '../../utils/deepCompare'
 const propTypes = {
 	dayInfo: PropTypes.object,
 	onPress: PropTypes.func,
-	state: PropTypes.oneOf(['disabled','today','selected'])
+	status: PropTypes.oneOf(['disabled','today','selected'])
 }
 
 class Day extends Component {

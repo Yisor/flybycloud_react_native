@@ -21,6 +21,8 @@ import CustomNavBar from './components/CustomNavBar';
 import { LoginPage } from './containers/login';
 import { FlightMainPage } from './containers/flight/main';
 import SelectCityPage from './containers/city/SelectCityPage';
+import CalendarPage from './containers/calendar/CalendarPage';
+
 // const HomeIcon = (props) => {
 //   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
 //   return (
@@ -69,6 +71,7 @@ class rootRouter extends Component {
           <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" initial />
           <Scene key="flight" component={FlightMainPage} title="机票" />
           <Scene back key="city" component={SelectCityPage} title="城市" />
+          <Scene back key="calendar" component={CalendarPage} title="日历" />
         </Stack>
       </Router>
     );

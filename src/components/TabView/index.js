@@ -1,3 +1,3 @@
 'use strict';
-import { TabView } from 'teaset';
-export default TabView;
+import { ListView } from 'antd-mobile';
+export default ListView;

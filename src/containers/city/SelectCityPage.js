@@ -41,7 +41,7 @@ class SelectCityPage extends Component {
 
 
   onSelectCity = (city) => {
-    Actions.pop({ refresh: ({ 'city': city.cityName, 'action': this.props.action }) });
+    Actions.pop({ refresh: ({ 'city': city.cityName, 'action': this.props.action })});
   }
 
   render() {

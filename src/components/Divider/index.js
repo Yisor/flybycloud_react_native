@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 
 class Divider extends Component {
   render() {

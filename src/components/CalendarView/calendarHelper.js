@@ -2,18 +2,6 @@
  * Created by feiba on 2017/11/21.
  */
 
-/**
- * 当月的有多少天
- * @param date
- * @returns {number}
- */
-function numberOfDaysInCurrentMonth(date) {
-	if (date && (date instanceof Date)) {
-		let d = new Date(date.getFullYear(),date.getMonth() + 1,0);
-		return d.getDate();
-	}
-	return 0;
-}
 
 /**
  * 当月的第一天是星期几
@@ -57,7 +45,6 @@ function getDayInfoOfPreMonth(date = new Date()) {
 function getDayInfoOfCurrentMonth(date = new Date()) {
 	let currentDate = [];
 	let lastDate = new Date(date.getFullYear(), date.getMonth()+1, 0);
-	let dayType = 'normal';
 	for (let i = 1; i <= lastDate.getDate(); i++) {
 		let d = new Date(date.getFullYear(), date.getMonth(), i);
 		currentDate.push({
@@ -65,9 +52,10 @@ function getDayInfoOfCurrentMonth(date = new Date()) {
 			month: d.getMonth(),
 			day: d.getDate(),
 			week: d.getDay(),
-			dayType: dayType
+			dayType: 'normal'
 		})
 	}
+	return currentDate;
 }
 
 /**
@@ -82,3 +70,17 @@ function getWeeks(isEng = false) {
 	return ['日','一','二','三','四','五','六'];
 }
 
+/**
+ * 获取整个月日期信息
+ * @param date
+ */
+function getOneMonth(date = new Date()) {
+	let preDayInfo = getDayInfoOfPreMonth(date);
+	let currentDayInfo = getDayInfoOfCurrentMonth(date);
+	return preDayInfo.concat(currentDayInfo);
+}
+
+export default {
+	getWeeks,
+	getOneMonth
+}

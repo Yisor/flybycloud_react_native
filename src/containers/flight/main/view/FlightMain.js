@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import SegmentedBar from '../../../../components/SegmentedBar';
+// import SegmentedBar from '../../../../components/SegmentedBar';
 import TabView from '../../../../components/TabView';
 import Button from '../../../../components/Button';
 import Divider from '../../../../components/Divider';
@@ -35,10 +35,10 @@ class FlightMain extends Component {
         style={styles.imgAirTop}
         resizeMode="cover"
         source={require('../../../../resources/assets/plane/plane_head_bg.png')}>
-        <SegmentedBar indicatorPosition='top' style={{ width: 100 }} onChange={(index) => { this.setState({ index: index }) }}>
-          <SegmentedBar.Item title='单程' />
-          <SegmentedBar.Item title='往返' />
-        </SegmentedBar>
+        {/*<SegmentedBar indicatorPosition='top' style={{ width: 100 }} onChange={(index) => { this.setState({ index: index }) }}>*/}
+          {/*<SegmentedBar.Item title='单程' />*/}
+          {/*<SegmentedBar.Item title='往返' />*/}
+        {/*</SegmentedBar>*/}
       </ImageBackground>
     );
   }
@@ -100,8 +100,8 @@ class FlightMain extends Component {
         <TabView.Sheet
           type='button'
           title='机票订单'
-          icon={require('../../../../resources/assets/plane/plane_orderForm.png')}
-          activeIcon={require('../../../../resources/assets/plane/plane_orderForm.png')}
+          icon={require('../../../../resources/assets/plane/plane_order_form.png')}
+          activeIcon={require('../../../../resources/assets/plane/plane_order_form.png')}
         />
       </TabView>
     );

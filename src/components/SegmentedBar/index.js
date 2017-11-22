@@ -1,3 +1,3 @@
 'use strict';
-import { SegmentedBar } from 'teaset';
-export default SegmentedBar;
+import { SearchBar } from 'antd-mobile';
+export default SearchBar;
