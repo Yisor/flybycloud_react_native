@@ -8,8 +8,8 @@ import { Actions } from 'react-native-router-flux';
 
 export function* loginToServer(params) {
   try {
-    // const result = yield call(post, apiUrl.login, params);
-    const result = { code: "1001", message: "登录失败" };
+    const result = yield call(post, apiUrl.login, params);
+    global.token = result.token;
     console.log("返回结果" + JSON.stringify(result));
     yield put({ type: LOGGED_DOING, data: result });  // 中间件发起一个 action 到 Store
   } catch (error) {
@@ -21,7 +21,6 @@ export function* loginToServer(params) {
 export function* watchLoginRequests() {
   while (true) {
     const action = yield take(LOGGED_IN);  // 等待 Store 上指定的 action，即监听 action
-    console.log('watchLoginRequests' + JSON.stringify(action));
     yield fork(loginToServer, action.user);  // 以无阻塞调用方式执行
   }
 }

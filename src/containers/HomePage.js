@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 10:12:47 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-15 13:56:29
+ * @Last Modified time: 2017-11-22 10:53:56
  */
 import React, { Component } from 'react';
 import {
@@ -46,13 +46,6 @@ class HomePage extends Component {
     this.state = { dataSource: ds.cloneWithRows(datas) };
   }
 
-  componentDidMount() {
-    if (global.token) {
-
-    } else {
-      Actions.login();
-    }
-  }
   // 返回cell  
   renderRow = (rowData) => {
     return (

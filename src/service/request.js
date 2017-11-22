@@ -1,4 +1,4 @@
-import encrypt from '../utils/encrypt';
+import { MD5 } from '../utils/encrypt';
 import { appType } from '../constants/constDefines';
 
 /**
@@ -27,14 +27,17 @@ const Headers = {
  */
 export const get = (api) => {
   let url = baseUrl + api;
-  Headers['ts'] = getTs()
+  console.log('路径：' + url);
+  Headers.ts = getTs()
+  Headers.sign = getSign(api)
+  Headers.token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0bWNJZCI6MTExLCJjb3JwSWQiOjEwNTIsInVzZXJJZCI6MTExMTE2MzQyLCJ0cyI6MTUxMTE2ODQ5OTk2Nn0.5K0LyYPM_m7h45Lg8Sk0N3srxiCMnfBR4UkTIckvgmk'
   return fetch(url, {
     method: 'GET',
     headers: Headers
   })
     .then((response) => response.json())
     .then((json) => { return json })
-    .catch((error) => { return { code: error.code, message: error.message } })
+    .catch((error) => { return { code: error.code, data: null, message: error.message } })
 }
 
 /**
@@ -56,7 +59,7 @@ export const post = (api, params) => {
   })
     .then((response) => response.json())
     .then((json) => { return json })
-    .catch((error) => { return { code: error.code, message: error.message } })
+    .catch((error) => { return { code: error.code, data: null, message: error.message } })
 }
 
 /**
@@ -66,8 +69,8 @@ export const post = (api, params) => {
  * @returns {string} 签名
  */
 const getSign = (api, params) => {
-  var sign = api;
-  var allParams = Object.assign(params, Headers);
+  let sign = api;
+  let allParams = params ? Object.assign(params, Headers) : Headers;
   //清空value为对象的值
   for (let props in allParams) {
     if ((props instanceof Object) === true) {
@@ -78,8 +81,7 @@ const getSign = (api, params) => {
     let keyValue = key + '=' + allParams[key];
     sign += keyValue;
   }
-
-  return encrypt.MD5.hex_md5(sign);
+  return MD5.hex_md5(sign);
 }
 
 /**
