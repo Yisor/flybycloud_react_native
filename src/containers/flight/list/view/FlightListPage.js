@@ -132,14 +132,16 @@ class FlightListPage extends Component {
   renderNar() {
     return (
       <View style={{ flexDirection: 'row', height: 45, backgroundColor: "#51a6f0", justifyContent: 'space-between', alignItems: 'center', }}>
-        <View>
-          <Text>前一天</Text>
-        </View>
+        <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, alignItems: 'center', }}>
+          <Image style={{ width: 7, height: 12, marginRight: 10 }} resizeMode="contain" source={require('../../../../resources/assets/common/arrow_white_icon.png')} />
+          <Text style={{ color: 'white' }}>前一天</Text>
+        </TouchableOpacity>
         <View>
           <Text>一天</Text>
         </View>
-        <View>
-          <Text>后一天</Text>
+        <View style={{ flexDirection: 'row', marginRight: 10 , alignItems: 'center',}}>
+          <Text style={{ color: 'white' }}>后一天</Text>
+          <Image style={{ width: 7, height: 12, marginLeft: 10 }} resizeMode="contain" source={require('../../../../resources/assets/common/arrow_white_icon.png')} />
         </View>
       </View>
     );
