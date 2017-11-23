@@ -31,86 +31,14 @@ class FlightMain extends Component {
     }
   }
 
-  renderAirTop() {
-    return (
-      <ImageBackground
-        style={styles.imgAirTop}
-        resizeMode="cover"
-        source={require('../../../../resources/assets/plane/plane_head_bg.png')}>
-        <SegmentedBar indicatorPosition='top' style={{ width: 100 }} onChange={(index) => { this.setState({ index: index }) }}>
-          <SegmentedBar.Item title='单程' />
-          <SegmentedBar.Item title='往返' />
-        </SegmentedBar>
-      </ImageBackground>
-    );
-  }
-
-  // 出行时间
-  renderTime() {
-    return this.state.index == 0 ? this.renderOneWayTime() : this.renderDoubleWayTime();
-  }
-
-  // 单程时间
-  renderOneWayTime() {
-    return (
-      <View>
-        <Text style={styles.returnText} > </Text>
-        <TouchableOpacity activeOpacity={0.5}>
-          <Text ref="start_date" style={styles.dateText}>{this.getDateAndWeek(this.props.startDate)}</Text>
-        </TouchableOpacity>
-        <Divider style={styles.divider} />
-      </View>
-    )
-  }
-
-  // 往返时间
-  renderDoubleWayTime() {
-    return (
-      <View>
-        <Text style={styles.returnText}>返程</Text>
-        <View style={styles.timeContainer}>
-          <TouchableOpacity activeOpacity={0.5}>
-            <Text style={styles.dateText}>{this.getDateAndWeek(this.props.startDate)}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5}>
-            <Text style={styles.dateText}>{this.getDateAndWeek(this.props.endDate)}</Text>
-          </TouchableOpacity>
-        </View>
-        <Divider style={styles.divider} />
-      </View>
-    )
-  }
-
-  // 致电咨询
-  renderTakePhone() {
-    return (
-      <TouchableOpacity onPress={() => { Alert.alert('确认致电?') }}>
-        <Text style={styles.phoneLink}>致电咨询</Text>
-      </TouchableOpacity>
-    );
-  }
-
-  renderBottomTab() {
-    return (
-      <TabView style={{ flex: 1 }} type='projector'>
-        <TabView.Sheet
-          type='button'
-          title='航班动态'
-          icon={require('../../../../resources/assets/plane/plane_dynamics.png')}
-          activeIcon={require('../../../../resources/assets/plane/plane_dynamics.png')}
-        />
-        <TabView.Sheet
-          type='button'
-          title='机票订单'
-          icon={require('../../../../resources/assets/plane/plane_orderForm.png')}
-          activeIcon={require('../../../../resources/assets/plane/plane_orderForm.png')}
-        />
-      </TabView>
-    );
-  }
-
+  // 查询
   onQuery = () => {
     this.props.onQuery();
+  }
+
+  // 政采查询
+  onQueryGovernment = () => {
+    Alert.alert('功能未开放！');
   }
 
   /** 
@@ -130,13 +58,82 @@ class FlightMain extends Component {
   }
 
   getDateAndWeek(dateString) {
-    return dateString + ' ' + this.getWeek(dateString);
+    return `${dateString} ${this.getWeek(dateString)}`;
   }
 
-  render() {
+  renderAirTop() {
     return (
-      <View style={styles.container}>
-        {this.renderAirTop()}
+      <ImageBackground
+        style={styles.imgAirTop}
+        resizeMode="cover"
+        source={require('../../../../resources/assets/plane/plane_head_bg.png')}>
+        <SegmentedBar indicatorPosition='bottom' onChange={(index) => { this.setState({ index: index }) }}>
+          <SegmentedBar.Item title='单程' />
+          <SegmentedBar.Item title='往返' />
+          <SegmentedBar.Item title='国际多程' />
+        </SegmentedBar>
+      </ImageBackground>
+
+    );
+  }
+
+  // 出行时间
+  renderTime() {
+    return this.state.index == 0 ? this.renderOneWayTime() : this.renderDoubleWayTime();
+  }
+
+  // 单程时间
+  renderOneWayTime() {
+    return (
+      <View style={{ marginTop: 19, marginBottom: 19 }}>
+        <TouchableOpacity activeOpacity={0.5}>
+          <Text ref="start_date" style={styles.dateText}>{this.getDateAndWeek(this.props.startDate)}</Text>
+        </TouchableOpacity>
+        <Divider style={styles.divider} />
+      </View>
+    )
+  }
+
+  // 往返时间
+  renderDoubleWayTime() {
+    return (
+      <View style={{ marginTop: 19, marginBottom: 19 }}>
+        <View style={styles.timeContainer}>
+          <TouchableOpacity activeOpacity={0.5}>
+            <Text style={styles.dateText}>{this.getDateAndWeek(this.props.startDate)}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.5}>
+            <Text style={styles.dateText}>{this.getDateAndWeek(this.props.endDate)}</Text>
+          </TouchableOpacity>
+        </View>
+        <Divider style={styles.divider} />
+      </View>
+    )
+  }
+
+  renderBottomTab() {
+    return (
+      <TabView barStyle={{ backgroundColor: 'white' }} type='projector'>
+        <TabView.Sheet
+          type='button'
+          title='航班动态'
+          icon={require('../../../../resources/assets/plane/plane_dynamics.png')}
+          activeIcon={require('../../../../resources/assets/plane/plane_dynamics.png')}
+        />
+        <TabView.Sheet
+          type='button'
+          title='机票订单'
+          icon={require('../../../../resources/assets/plane/plane_orderForm.png')}
+          activeIcon={require('../../../../resources/assets/plane/plane_orderForm.png')}
+        />
+      </TabView>
+    );
+  }
+
+  // 查询表单
+  renderMainContent() {
+    return (
+      <View style={{ backgroundColor: 'white' }}>
         <RouteSelection
           startCity={this.props.startCity}
           endCity={this.props.endCity}
@@ -145,9 +142,31 @@ class FlightMain extends Component {
           onExchange={this.props.onExchange}
           style={styles.routeSelect} />
         {this.renderTime()}
-        <Button title='查询' onPress={this.onQuery} type='primary' style={styles.queryButton} />
-        <Text style={styles.appText}>飞巴商旅</Text>
-        {this.renderTakePhone()}
+        <View style={{ flexDirection: 'row', margin: 20 }}>
+          <Button title='查询' onPress={this.onQuery} style={styles.queryButton} titleStyle={{ color: 'white' }} />
+          <Button title='政采' onPress={this.onQueryGovernment} style={styles.govQueryBtn} titleStyle={{ color: 'white' }} />
+        </View>
+      </View>
+    )
+  }
+
+  renderExtra() {
+    return (
+      <View style={styles.extraContainer}>
+        <Text style={styles.appText}>机票服务由萧山票务公司提供</Text>
+        <TouchableOpacity onPress={() => { Alert.alert('确认致电?') }}>
+          <Text style={styles.phoneLink}>致电咨询</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.renderAirTop()}
+        {this.renderMainContent()}
+        {this.renderExtra()}
         {this.renderBottomTab()}
       </View>
     );
@@ -164,10 +183,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
-  imgReverse: {
-    width: 80,
-    height: 80,
-  },
   divider: {
     backgroundColor: 'gray',
     marginLeft: 20,
@@ -181,14 +196,21 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline'
   },
   queryButton: {
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20
+    flex: 1,
+    height: 44,
+    marginRight: 10,
+    backgroundColor: "#51a6f0"
+  },
+  govQueryBtn: {
+    width: 80,
+    backgroundColor: "#f0b051",
+    borderColor: "#f0b051"
   },
   dateText: {
     textAlign: 'center',
     marginBottom: 10,
-    fontSize: 12
+    fontSize: 18,
+    color: "#323b43"
   },
   appText: {
     textAlign: 'center',
@@ -197,21 +219,21 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   routeSelect: {
-    marginTop: 10,
+    marginTop: 18,
     marginLeft: 20,
     marginRight: 20,
-  },
-  returnText: {
-    fontSize: 12,
-    textAlign: 'right',
-    marginRight: 20,
-    marginTop: 10
   },
   timeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginLeft: 20,
     marginRight: 20,
+  },
+  extraContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 export default FlightMain;

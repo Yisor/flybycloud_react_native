@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-17 14:11:13 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-22 16:01:40
+ * @Last Modified time: 2017-11-23 17:33:36
  */
 import React, { Component } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
@@ -10,9 +10,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import FlightMain from './FlightMain';
 import { ticketQuery } from '../action';
-
 import * as TYPES from '../actionTypes';
-
 
 // 机票搜索
 class FlightMainPage extends Component {
@@ -35,12 +33,6 @@ class FlightMainPage extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.status == "Done") {
-      return false;
-    }
-    return true;
-  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === TYPES.SELECT_START_CITY) {
@@ -77,12 +69,13 @@ class FlightMainPage extends Component {
     let fromCity = this.state.startCity.cityCode;
     let toCity = this.state.endCity.cityCode;
     let params = { flightDate, fromCity, toCity }
-    let title = fromCity + "-" + toCity;
+    let title = this.state.startCity.cityName + "-" + this.state.endCity.cityName;
     Actions.flightList({ 'title': title, 'params': params });
     // this.props.dispatch(ticketQuery(params));
   }
 
   render() {
+    console.log('出发：' + this.state.startCity.cityName);
     return (
       <FlightMain
         startDate={this.state.startDate}

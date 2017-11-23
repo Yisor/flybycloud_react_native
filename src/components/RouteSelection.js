@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-17 11:44:31 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-22 14:44:11
+ * @Last Modified time: 2017-11-23 15:45:11
  * @Desc 路线选择
  */
 import PropTypes from 'prop-types';
@@ -43,7 +43,6 @@ class RouteSelection extends Component {
   renderDepartureCity() {
     return (
       <TouchableOpacity onPress={this.props.onSelectCityStart} activeOpacity={0.5} style={{ flex: 1 }}>
-        <Text style={styles.textSetOff}>出发</Text>
         <Text style={[styles.textCity, { marginLeft: 8 }]}>{this.props.startCity}</Text>
         <Divider style={styles.divider} />
       </TouchableOpacity>
@@ -55,7 +54,6 @@ class RouteSelection extends Component {
     return (
       <TouchableOpacity onPress={this.props.onSelectCityEnd} activeOpacity={0.5} style={{ flex: 1 }}>
         <View style={{ alignItems: 'flex-end' }}>
-          <Text style={styles.textArrive}>到达</Text>
           <Text style={[styles.textCity, { marginRight: 8 }]}>{this.props.endCity}</Text>
         </View>
         <Divider style={styles.divider} />
@@ -91,8 +89,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   textCity: {
-    fontSize: 16,
+    fontSize: 18,
     marginTop: 10,
+    color: "#323b43"
   },
   textSetOff: {
     fontSize: 12,
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     backgroundColor: 'gray',
-    marginTop: 6,
+    marginTop: 10,
   }
 });
 
