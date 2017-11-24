@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:55:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-24 10:29:06
+ * @Last Modified time: 2017-11-24 18:38:46
  */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
@@ -73,9 +73,9 @@ class rootRouter extends Component {
           </Tabs>
 
           <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" />
-          <Scene key="flight" component={FlightMainPage} title="机票" />
+          <Scene key="flight" component={FlightMainPage} title="机票" initial />
           <Scene back key="city" component={SelectCityPage} title="城市" />
-          <Scene back key="flightList" component={FlightListPage} title="航班" initial />
+          <Scene back key="flightList" component={FlightListPage} title="航班" />
           <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" />
         </Stack>
       </Router>
