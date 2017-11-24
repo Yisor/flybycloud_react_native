@@ -6,6 +6,8 @@ import { flightQuery } from '../action';
 import TabView from '../../../../components/TabView';
 import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
+import { formatTime } from '../../../../utils/timeUtils';
+
 const MealTypes = ['无餐食', '早餐', '午餐', '正餐', '小吃', '点心'];
 const isShare = [false, true];// 是否共享
 const isStopover = [false, true]; // 是否经停
@@ -21,15 +23,6 @@ class FlightListPage extends Component {
 
   componentDidMount() {
     this.props.dispatch(flightQuery(this.props.params));
-  }
-
-  getFormatTime(timeString) {
-    if (timeString) {
-      let hour = timeString.substr(0, 2);
-      let min = timeString.substr(2, 3);
-      return `${hour}:${min}`;
-    }
-    return null;
   }
 
   //机场名称
@@ -56,9 +49,9 @@ class FlightListPage extends Component {
   renderFlightTime(rowData) {
     return (
       <View style={styles.flightTimeContainer}>
-        <Text style={styles.flightTime}>{this.getFormatTime(rowData.departureTime)}</Text>
+        <Text style={styles.flightTime}>{formatTime(rowData.departureTime)}</Text>
         {this.renderFlightArrow(rowData)}
-        <Text style={styles.flightTime}>{this.getFormatTime(rowData.destinationTime)}</Text>
+        <Text style={styles.flightTime}>{formatTime(rowData.destinationTime)}</Text>
       </View>
     );
   }
@@ -81,13 +74,14 @@ class FlightListPage extends Component {
     );
   }
 
-  onItemClick = () => {
-
+  onPressItem(rowData) {
+    Actions.flightDetail({ 'flight': rowData });
+    // Alert.alert(rowData.airlineShortName);
   }
 
   renderRow = (rowData) => {
     return (
-      <TouchableOpacity style={styles.rowContainer} activeOpacity={0.6}>
+      <TouchableOpacity style={styles.rowContainer} activeOpacity={0.6} onPress={() => this.onPressItem(rowData)}>
         <View style={{ flex: 1 }}>
           {this.renderFlightTime(rowData)}
           {this.renderAirfield(rowData)}
@@ -129,27 +123,31 @@ class FlightListPage extends Component {
     );
   }
 
-  renderNar() {
+  renderCalendarNar() {
     return (
-      <View style={{ flexDirection: 'row', height: 45, backgroundColor: "#51a6f0", justifyContent: 'space-between', alignItems: 'center', }}>
-        <TouchableOpacity style={{ flexDirection: 'row', marginLeft: 10, alignItems: 'center', }}>
-          <Image style={{ width: 7, height: 12, marginRight: 10 }} resizeMode="contain" source={require('../../../../resources/assets/common/arrow_white_icon.png')} />
+      <View style={styles.calendar}>
+        <TouchableOpacity style={[styles.rowCenter, { marginLeft: 10 }]} activeOpacity={0.6}>
+          <Image style={[styles.arrowImg, { marginRight: 10 }]} resizeMode="contain" source={require('../../../../resources/assets/common/arrow_white_icon.png')} />
           <Text style={{ color: 'white' }}>前一天</Text>
         </TouchableOpacity>
-        <View>
-          <Text>一天</Text>
-        </View>
-        <View style={{ flexDirection: 'row', marginRight: 10 , alignItems: 'center',}}>
+        <TouchableOpacity style={[styles.rowCenter, styles.dateView]} activeOpacity={0.6}>
+          <Text style={{ marginLeft: 10 }}>02月27日</Text>
+          <Text style={{ marginLeft: 10 }}>周一</Text>
+          <Image style={{ marginLeft: 10, marginRight: 10 }} resizeMode="contain" source={require('../../../../resources/assets/common/vertical_divider.png')} />
+          <Image style={{ width: 15, height: 15 }} resizeMode="contain" source={require('../../../../resources/assets/plane/plane_calendar.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.rowCenter, { marginRight: 10 }]} activeOpacity={0.6}>
           <Text style={{ color: 'white' }}>后一天</Text>
-          <Image style={{ width: 7, height: 12, marginLeft: 10 }} resizeMode="contain" source={require('../../../../resources/assets/common/arrow_white_icon.png')} />
-        </View>
+          <Image style={[styles.arrowImg, { marginLeft: 10 }]} resizeMode="contain" source={require('../../../../resources/assets/common/arrow_next.png')} />
+        </TouchableOpacity>
       </View>
     );
   }
+
   render() {
     return (
       <View style={styles.container}>
-        {this.renderNar()}
+        {this.renderCalendarNar()}
         <View style={{ height: window.heigh - 175, }}>
           <ListView
             contentContainerStyle={styles.contentContainer}
@@ -236,6 +234,28 @@ const styles = StyleSheet.create({
   verticalDivider: {
     marginLeft: 5,
     marginRight: 5
+  },
+  calendar: {
+    flexDirection: 'row',
+    height: 45,
+    backgroundColor: "#51a6f0",
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  rowCenter: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  dateView: {
+    backgroundColor: 'white',
+    width: 160,
+    height: 32,
+    borderRadius: 3
+  },
+  arrowImg: {
+    width: 7,
+    height: 12,
   }
 });
 

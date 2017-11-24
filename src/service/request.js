@@ -5,7 +5,7 @@ import { appType } from '../constants/constDefines';
  * 应用环境
  * @type {string}
  */
-const baseUrl = 'http://192.168.1.49:8080/mapi'
+const baseUrl = 'http://mapi.flybycloud.com:8091'
 const mockToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0bWNJZCI6MTExLCJjb3JwSWQiOjEwMDYsInVzZXJJZCI6MTE1NzcyLCJ0cyI6MTUxMTMzNTA4ODk1OX0.gELoJRf0GBLcLfaPdjS2CQmgag1IA5w3BzoZYwTEgtE';
 
 
