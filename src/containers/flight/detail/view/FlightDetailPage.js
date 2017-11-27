@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity, Platform } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { get } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
 import Divider from '../../../../components/Divider';
@@ -45,10 +46,15 @@ class FlightDetailPage extends Component {
 
     this.setState({ index: 0 });
 
-    let url = apiUrl.flightSeat + this.props.flight.flightId;
+    // let url = apiUrl.flightSeat + this.props.flight.flightId;
     // get(url).then((response) => {
     //   console.log('get返回：' + JSON.stringify(response));
     // });
+  }
+
+  // 预定
+  onBooked(item) {
+    Actions.orderWrite({ 'flight': flight, 'ticket': item });
   }
 
   renderFlight() {
@@ -90,7 +96,7 @@ class FlightDetailPage extends Component {
     );
   }
 
-  renderRow(item) {
+  renderRow = (item) => {
     return (
       <View style={styles.rowContainer}>
         <View style={{ marginTop: 16, marginBottom: 16 }}>
@@ -102,10 +108,10 @@ class FlightDetailPage extends Component {
         </View>
         <View style={{ flexDirection: 'row', }}>
           <View style={{ alignItems: 'center', justifyContent: 'center', marginRight: 28 }}>
-            <Text style={{ fontSize: 11, color: "#323b43" }}>650</Text>
+            <Text style={{ fontSize: 11, color: "#323b43" }}>{`￥${item.price}`}</Text>
             <Text style={{ fontSize: 10, color: "#e26a6a" }}>剩余3张</Text>
           </View>
-          <TouchableOpacity activeOpacity={0.6} style={styles.preset}>
+          <TouchableOpacity activeOpacity={0.6} style={styles.preset} onPress={() => this.onBooked(item)}>
             <Text style={{ fontSize: 12, color: "#ffffff" }}>预定</Text>
           </TouchableOpacity>
         </View>

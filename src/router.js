@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:55:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-24 18:38:46
+ * @Last Modified time: 2017-11-27 11:01:54
  */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
@@ -23,6 +23,7 @@ import { FlightMainPage } from './containers/flight/main';
 import SelectCityPage from './containers/city/SelectCityPage';
 import FlightListPage from './containers/flight/list/view/FlightListPage';
 import FlightDetailPage from './containers/flight/detail/view/FlightDetailPage';
+import OrderWrite from './containers/order/flight/write/OrderWrite';
 // const HomeIcon = (props) => {
 //   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
 //   return (
@@ -73,10 +74,11 @@ class rootRouter extends Component {
           </Tabs>
 
           <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" />
-          <Scene key="flight" component={FlightMainPage} title="机票" initial />
+          <Scene key="flight" component={FlightMainPage} title="机票" />
           <Scene back key="city" component={SelectCityPage} title="城市" />
           <Scene back key="flightList" component={FlightListPage} title="航班" />
-          <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" />
+          <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" initial />
+          <Scene back key="orderWrite" component={OrderWrite} title="订单填写" />
         </Stack>
       </Router>
     );

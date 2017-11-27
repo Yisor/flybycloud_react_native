@@ -76,7 +76,6 @@ class FlightListPage extends Component {
 
   onPressItem(rowData) {
     Actions.flightDetail({ 'flight': rowData });
-    // Alert.alert(rowData.airlineShortName);
   }
 
   renderRow = (rowData) => {
