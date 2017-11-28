@@ -2,7 +2,7 @@
  * @Author: lsl 
  * @Date: 2017-11-09 16:55:00 
  * @Last Modified by: lsl
- * @Last Modified time: 2017-11-27 11:01:54
+ * @Last Modified time: 2017-11-28 17:08:41
  */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
@@ -24,6 +24,8 @@ import SelectCityPage from './containers/city/SelectCityPage';
 import FlightListPage from './containers/flight/list/view/FlightListPage';
 import FlightDetailPage from './containers/flight/detail/view/FlightDetailPage';
 import OrderWrite from './containers/order/flight/write/OrderWrite';
+import PassengerList from './containers/user/passenger/view/PassengerList';
+import PassengerSelectPage from './containers/user/passenger/view/PassengerSelectPage';
 // const HomeIcon = (props) => {
 //   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
 //   return (
@@ -77,8 +79,9 @@ class rootRouter extends Component {
           <Scene key="flight" component={FlightMainPage} title="机票" />
           <Scene back key="city" component={SelectCityPage} title="城市" />
           <Scene back key="flightList" component={FlightListPage} title="航班" />
-          <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" initial />
+          <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" />
           <Scene back key="orderWrite" component={OrderWrite} title="订单填写" />
+          <Scene back key="passengerSelect" component={PassengerSelectPage} title="选择乘客" initial />
         </Stack>
       </Router>
     );

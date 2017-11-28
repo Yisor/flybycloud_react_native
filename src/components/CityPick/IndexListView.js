@@ -161,7 +161,14 @@ export default class CityIndexListView extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.listContainner}>
-          <ListView ref={listView => this._listView = listView} contentContainerStyle={styles.contentContainer} dataSource={this.state.dataSource} renderRow={this.renderListRow} renderSectionHeader={this.renderListSectionHeader} enableEmptySections={true} initialListSize={500} />
+          <ListView
+            ref={listView => this._listView = listView}
+            contentContainerStyle={styles.contentContainer}
+            dataSource={this.state.dataSource}
+            renderRow={this.renderListRow}
+            renderSectionHeader={this.renderListSectionHeader}
+            enableEmptySections={true}
+            initialListSize={500} />
           <View style={styles.letters}>
             {this.state.letters.map((letter, index) => this.renderRightLetters(letter, index))}
           </View>

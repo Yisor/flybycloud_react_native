@@ -6,6 +6,7 @@ export default {
   flightSeat: '/flight/ticket/seat/',
   insurances: '/insurances/',
   express: '/passenger/corp/express',
-  contacts: '/user/contact/list',
+  passengers: '/user/passenger/list',
+  emplist: '/user/emplist',
   allSeat: '/flight/all/ticket/seat/info/{flightId}/{type}'
 }

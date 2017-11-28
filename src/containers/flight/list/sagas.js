@@ -44,7 +44,7 @@ export function* queryFlight(params) {
     // const result = yield call(get, url);
     // const result = { code: "1001", message: "模拟请求" };
     const result = mockData;
-    console.log("返回结果" + JSON.stringify(result));
+    // console.log("返回结果" + JSON.stringify(result));
     yield put({ type: FLIGHT_QUERY_SUCESS, data: result });
   } catch (error) {
     Alert('网络故障' + error);

@@ -24,7 +24,7 @@ class FlightDetailPage extends Component {
   componentWillMount() {
     // flight = this.props.flight;
     tickets = flight.tickets;
-    console.log('机票：' + JSON.stringify(tickets));
+    // console.log('机票：' + JSON.stringify(tickets));
   }
 
   componentDidMount() {

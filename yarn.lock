@@ -1541,6 +1541,12 @@ commander@^2.9.0, commander@~2.11.0:
   version "2.11.0"
   resolved "http://registry.npm.taobao.org/commander/download/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
 
+commander@~1.1.1:
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/commander/download/commander-1.1.1.tgz#50d1651868ae60eccff0a2d9f34595376bc6b041"
+  dependencies:
+    keypress "0.1.x"
+
 commondir@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/commondir/download/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
@@ -3632,6 +3638,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+keypress@0.1.x:
+  version "0.1.0"
+  resolved "http://registry.npm.taobao.org/keypress/download/keypress-0.1.0.tgz#4a3188d4291b66b4f65edb99f806aa9ae293592a"
+
 killable@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/killable/download/killable-1.0.0.tgz#da8b84bd47de5395878f95d64d02f2449fe05e6b"
@@ -4146,6 +4156,10 @@ nan@^2.3.0:
   version "2.7.0"
   resolved "http://registry.npm.taobao.org/nan/download/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
 
+nan@~2.3.0:
+  version "2.3.5"
+  resolved "http://registry.npm.taobao.org/nan/download/nan-2.3.5.tgz#822a0dc266290ce4cd3a12282ca3e7e364668a08"
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "http://registry.npm.taobao.org/natural-compare/download/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -4232,6 +4246,12 @@ node-pre-gyp@^0.6.36:
     semver "^5.3.0"
     tar "^2.2.1"
     tar-pack "^3.4.0"
+
+nodejieba@^2.2.1:
+  version "2.2.5"
+  resolved "http://registry.npm.taobao.org/nodejieba/download/nodejieba-2.2.5.tgz#821441a683fad25ebd2c8dde1401dd43dbeb027a"
+  dependencies:
+    nan "~2.3.0"
 
 nopt@^4.0.1:
   version "4.0.1"
@@ -4593,6 +4613,15 @@ pinkie-promise@^2.0.0:
 pinkie@^2.0.0:
   version "2.0.4"
   resolved "http://registry.npm.taobao.org/pinkie/download/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
+
+pinyin@^2.8.3:
+  version "2.8.3"
+  resolved "http://registry.npm.taobao.org/pinyin/download/pinyin-2.8.3.tgz#301ccb4358ccfe802523c4bd640a612bee4d7c4b"
+  dependencies:
+    commander "~1.1.1"
+    object-assign "^4.0.1"
+  optionalDependencies:
+    nodejieba "^2.2.1"
 
 pkg-dir@^2.0.0:
   version "2.0.0"
