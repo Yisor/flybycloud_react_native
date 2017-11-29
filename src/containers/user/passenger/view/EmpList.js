@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-import { View, Text, Image, CheckBox, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, Image, CheckBox, TextInput, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import SegmentedBar from '../../../../components/SegmentedBar';
 import window from '../../../../utils/window';
 import { getPinyinLetter } from '../../../../utils/pinyin';
+import Divider from '../../../../components/Divider';
 import { get } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
 import emplist from './emplist.json';
+import SearchBox from './SearchBox';
 
-let dataBlob = {};
 class EmpList extends Component {
-
   constructor(props) {
     super(props);
-    const getSectionData = (dataBlob, sectionID) => {
+    let getSectionData = (dataBlob, sectionID) => {
       return sectionID;
     };
-    const getRowData = (dataBlob, sectionID, rowID) => {
+    let getRowData = (dataBlob, sectionID, rowID) => {
       return dataBlob[sectionID][rowID];
     };
     this.state = {
@@ -26,15 +25,16 @@ class EmpList extends Component {
         rowHasChanged: (r1, r2) => r1 !== r2,
         sectionHeaderHasChanged: (s1, s2) => s1 !== s2
       }),
-      index: 0,
-      tempDataSource:[]
+      isSelected: false,
     };
+    selected = [];
+    dataBlob = {};
   }
 
   componentWillMount() {
     emplist.map(passenger => {
       passenger['isSelected'] = false;
-      let key = getPinyinLetter(passenger.userName);
+      let key = getPinyinLetter(passenger.userName).substr(0, 1);
       if (dataBlob[key]) {
         dataBlob[key].push(passenger);
       } else {
@@ -46,45 +46,36 @@ class EmpList extends Component {
   }
 
   componentDidMount() {
-    let sectionIDs = Object.keys(dataBlob);
-    let rowIDs = sectionIDs.map(sectionID => {
-      let thisRow = [];
-      let count = dataBlob[sectionID].length;
-      for (let i = 0; i < count; i++) {
-        thisRow.push(i);
-      }
-      return thisRow;
-    });
-
     InteractionManager.runAfterInteractions(() => {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs),
-        letters: sectionIDs
+        dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob),
       });
     });
 
+    // console.log(JSON.stringify(dataBlob));
     // get(apiUrl.passengers).then((response) => {
     //   console.log('get返回：' + JSON.stringify(response));
     // });
   }
 
+  onSelected = (datas) => {
+    this.props.onSelected(datas);
+  }
+
   renderRow = (data, sectionID, rowID) => {
-    let newData = emplist;
     return (
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginLeft: 10, marginRight: 10, marginTop: 15, marginBottom: 15 }}>
+      <View style={styles.rowItem}>
         <Text>{data.userName}</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
           <Text>{data.departmentName}</Text>
           <CheckBox
             onValueChange={(value) => {
-              newData[rowID].isSelected = !newData[rowID].isSelected;
-              if(value){
-                let temp = [];
-                temp.push(data);
-                this.setState({tempDataSource:temp});
-              }
+              dataBlob[sectionID][rowID].isSelected = value;
+              value ? selected.push(data) : selected.splice(selected.indexOf(data), 1);
+              this.setState({ isSelected: value });
+              this.onSelected(selected);
             }}
-            value={data.isSelected} />
+            value={dataBlob[sectionID][rowID].isSelected} />
         </View>
       </View>
     );
@@ -100,16 +91,29 @@ class EmpList extends Component {
     );
   }
 
+  onChanegeText = (text) => {
+    if (text) {
+      this.filterData(text);
+    }
+  }
+
+  filterData(text) {
+    let upperCase = text.toUpperCase();
+    alert(text);
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <SearchBox onChanegeTextKeyword={this.onChanegeText} />
         <ListView
           contentContainerStyle={styles.contentContainer}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
           renderSectionHeader={this.renderSectionHeader}
           enableEmptySections={true}
-          initialListSize={500} />
+          initialListSize={500}
+          renderSeparator={() => <Divider style={{ marginLeft: 10 }} />} />
       </View>
     );
   }
@@ -135,6 +139,22 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontWeight: 'bold'
   },
+  rowItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 15,
+    marginBottom: 15
+  },
+  textInput: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 8,
+    borderRadius: 5,
+    backgroundColor: "#ffffff"
+  }
 });
 
 export default EmpList;

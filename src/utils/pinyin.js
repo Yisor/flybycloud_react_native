@@ -1,7 +1,6 @@
-import pinyin from 'pinyin';
+import pinyin from 'tiny-pinyin';
 
 export const getPinyinLetter = (data) => {
-  const letters = pinyin(data, { style: pinyin.STYLE_FIRST_LETTER })[0];
-  return letters[0].toUpperCase();
+  return pinyin.convertToPinyin(data);;
 }
 

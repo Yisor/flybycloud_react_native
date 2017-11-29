@@ -5877,6 +5877,10 @@ timers-browserify@^2.0.2:
   dependencies:
     setimmediate "^1.0.4"
 
+tiny-pinyin@^1.2.1:
+  version "1.2.1"
+  resolved "http://registry.npm.taobao.org/tiny-pinyin/download/tiny-pinyin-1.2.1.tgz#d7e63ec3fd591925acb5d5956a95a4bcf088460d"
+
 tmp@^0.0.33:
   version "0.0.33"
   resolved "http://registry.npm.taobao.org/tmp/download/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"

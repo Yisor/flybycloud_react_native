@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, ListView, CheckBox, StyleSheet, InteractionManager, Alert, TouchableOpacity, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import SegmentedBar from '../../../../components/SegmentedBar';
+import Divider from '../../../../components/Divider';
 import window from '../../../../utils/window';
 import { getPinyinLetter } from '../../../../utils/pinyin';
 import { get } from '../../../../service/request';
@@ -32,7 +32,7 @@ class PassengerList extends Component {
 
   componentWillMount() {
     passengers.map(passenger => {
-      let key = getPinyinLetter(passenger.name);
+      let key = getPinyinLetter(passenger.name).substr(0, 1);
       if (dataBlob[key]) {
         dataBlob[key].push(passenger);
       } else {
@@ -58,11 +58,9 @@ class PassengerList extends Component {
     InteractionManager.runAfterInteractions(() => {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs),
-        letters: sectionIDs
       });
     });
-    // console.log(JSON.stringify(dataBlob));
-    console.log('转化：' + getPinyinLetter('测试'));
+    console.log(JSON.stringify(dataBlob));
 
     // get(apiUrl.passengers).then((response) => {
     //   console.log('get返回：' + JSON.stringify(response));
@@ -94,14 +92,14 @@ class PassengerList extends Component {
   render() {
     return (
       <View style={styles.container}>
-
         <ListView
           contentContainerStyle={styles.contentContainer}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
           renderSectionHeader={this.renderSectionHeader}
           enableEmptySections={true}
-          initialListSize={500} />
+          initialListSize={500}
+          renderSeparator={() => <Divider style={{ marginLeft: 10 }} />} />
       </View>
     );
   }

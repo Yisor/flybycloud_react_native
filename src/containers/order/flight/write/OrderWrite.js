@@ -12,12 +12,20 @@ class OrderWrite extends Component {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
+      passengers: []
     };
   }
 
   componentWillMount() {
     flight = this.props.flight;
     ticket = this.props.ticket;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.passengers) {
+      console.log(JSON.stringify(nextProps.passengers));
+      this.setState({ passengers: nextProps.passengers });
+    }
   }
 
   // 添加乘客
@@ -242,7 +250,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginLeft: 10
   },
-  rowItemRightText:{
+  rowItemRightText: {
     fontSize: 14,
     color: "#323b43",
     marginTop: 15,

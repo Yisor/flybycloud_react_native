@@ -11,29 +11,78 @@ import EmpList from './EmpList';
 import PassengerList from './PassengerList';
 
 
-class PassengerSelectPage extends Component {
+let empList;
+let passengerList;
 
+class PassengerSelectPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0
+      index: 0,
+      total: 0,
     };
+    empList = [];
+    passengerList = [];
   }
 
   componentDidMount() {
 
   }
 
+  // 员工选择
+  onEmpSelected = (datas) => {
+    empList = datas;
+    this.setState({ total: empList.length + passengerList.length });
+  }
+
+  // 常旅客选择
+  onPassengerSelected = (datas) => {
+    console.log(JSON.stringify(datas));
+    passengerList = datas;
+    this.setState({ total: empList.length + passengerList.length });
+  }
+
+  renderSegmentedBar() {
+    return (
+      <SegmentedBar style={{ height: 50 }} indicatorPosition='bottom' indicatorType='boxWidth' onChange={(index) => { this.setState({ index: index }) }}>
+        <SegmentedBar.Item title='员工' titleStyle={{ fontSize: 15, color: "#323b43" }} activeTitleStyle={{ fontSize: 15 }} />
+        <SegmentedBar.Item title='常用出行人' titleStyle={{ fontSize: 15, color: "#323b43" }} activeTitleStyle={{ fontSize: 15 }} />
+      </SegmentedBar>
+    );
+  }
+
+  renderList() {
+    return (
+      <View style={{ flex: 1, position: 'relative', bottom: 60, marginTop: 60 }}>
+        {this.state.index == 0 ? <EmpList onSelected={this.onEmpSelected} /> : <PassengerList onSelected={this.onPassengerSelected} />}
+      </View>
+    );
+  }
+
+  renderBottom() {
+    return (
+      <View style={{ position: 'absolute', bottom: 0, flexDirection: 'row', }}>
+        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: "#ffffff", alignItems: 'center' }}>
+          <Text style={{ fontSize: 18, color: "#323b43", marginLeft: 10 }}>已选</Text>
+          <Text style={{ fontSize: 18, color: "#323b43", marginLeft: 10 }}>{`${this.state.total}人`}</Text>
+        </View>
+        <TouchableOpacity style={styles.submit} activeOpacity={0.6} onPress={this.onSubmit}>
+          <Text style={{ fontSize: 20, color: "#f1f2f3", marginTop: 17, marginBottom: 17 }}>确定</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  onSubmit() {
+    Actions.pop({ refresh: ({ 'passengers': empList }) });
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <SegmentedBar style={{ height: 50 }} indicatorPosition='bottom' indicatorType='boxWidth' onChange={(index) => { this.setState({ index: index }) }}>
-          <SegmentedBar.Item title='员工' titleStyle={{ fontSize: 15, color: "#323b43" }} activeTitleStyle={{ fontSize: 15 }} />
-          <SegmentedBar.Item title='常用出行人' titleStyle={{ fontSize: 15, color: "#323b43" }} activeTitleStyle={{ fontSize: 15 }} />
-        </SegmentedBar>
-
-        {this.state.index == 0 ? <EmpList /> : <PassengerList />}
+        {this.renderSegmentedBar()}
+        {this.renderList()}
+        {this.renderBottom()}
       </View>
     );
   }
@@ -43,6 +92,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  submit: {
+    flex: 1,
+    backgroundColor: "#f0b051",
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 export default PassengerSelectPage;

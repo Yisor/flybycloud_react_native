@@ -9,7 +9,6 @@
 		"dev-webserver": "webpack-dev-server --inline"
 	},
 	"dependencies": {
-		"pinyin": "^2.8.3",
 		"react": "16.0.0",
 		"react-dom": "^16.0.0",
 		"react-native": "0.50.3",
@@ -22,7 +21,8 @@
 		"redux-persist": "^5.3.3",
 		"redux-saga": "^0.16.0",
 		"redux-thunk": "^2.2.0",
-		"teaset": "^0.4.7"
+		"teaset": "^0.4.7",
+		"tiny-pinyin": "^1.2.1"
 	},
 	"devDependencies": {
 		"babel-core": "^6.26.0",
