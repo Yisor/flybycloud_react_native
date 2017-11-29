@@ -32,15 +32,24 @@ class EmpList extends Component {
   }
 
   componentWillMount() {
-    emplist.map(passenger => {
-      passenger['isSelected'] = false;
-      let key = getPinyinLetter(passenger.userName).substr(0, 1);
-      if (dataBlob[key]) {
-        dataBlob[key].push(passenger);
+
+    let newList = [];
+    for (let emp of emplist) {
+      emp['isSelected'] = false;
+      emp['pinyin'] = getPinyinLetter(emp.userName);
+      newList.push(emp);
+    }
+
+    console.log(JSON.stringify(newList));
+    let sortList = newList.sort(this.compareUp("pinyin"));
+    sortList.map(passenger => {
+      let firstLetter = passenger.pinyin.substr(0, 1);
+      if (dataBlob[firstLetter]) {
+        dataBlob[firstLetter].push(passenger);
       } else {
         let subList = [];
         subList.push(passenger);
-        dataBlob[key] = subList;
+        dataBlob[firstLetter] = subList;
       }
     })
   }
@@ -56,6 +65,15 @@ class EmpList extends Component {
     // get(apiUrl.passengers).then((response) => {
     //   console.log('get返回：' + JSON.stringify(response));
     // });
+  }
+
+  // 升序排序
+  compareUp(propertyName) {   
+    return (object1, object2) => {
+      var value1 = object1[propertyName];
+      var value2 = object2[propertyName];
+      return value1.localeCompare(value2);
+    }
   }
 
   onSelected = (datas) => {
