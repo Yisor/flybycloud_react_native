@@ -53,7 +53,7 @@ class OrderWrite extends Component {
       <Overlay.PullView side={'bottom'} modal={modal} rootTransform={rootTransform} ref={v => this.overlayPullView = v}>
         <View style={{ backgroundColor: '#fff', minWidth: 300, minHeight: 260, justifyContent: 'center', alignItems: 'center' }}>
           <ListView
-            contentContainerStyle={styles.contentContainer}
+            contentContainerStyle={{ width: window.width }}
             dataSource={this.state.dataSource.cloneWithRows(costCenter)}
             renderRow={this.renderCostCenterRow}
             enableEmptySections={true}
@@ -84,7 +84,7 @@ class OrderWrite extends Component {
             <View style={{ borderRadius: 2, marginRight: 10, backgroundColor: "#f0b051" }}>
               <Text style={{ fontSize: 9, color: "#ffffff", marginLeft: 5, marginRight: 5 }}>实际承运</Text>
             </View>
-            <Text style={{ fontSize: 11, color: "#797f85" }}>东航DH1703</Text>
+            <Text style={{ fontSize: 11, color: "#797f85" }}>{`${flight.airlineShortName}${flight.planeType}`}</Text>
           </View>
           <View style={[styles.rowCenter, { marginTop: 10 }]}>
             <Text style={{ fontSize: 24, color: "#323b43" }}>{formatTime(flight.departureTime)}</Text>
@@ -137,7 +137,7 @@ class OrderWrite extends Component {
             <Text style={{ fontSize: 11, color: "#323b43", marginLeft: 10 }}>仅支持成人票预定</Text>
           </View>
           <TouchableOpacity style={styles.addPassengerBtn} activeOpacity={0.6} onPress={() => this.onAddPassenger()}>
-            <Text style={{ fontSize: 10, color: "#ffffff", marginLeft: 8, marginRight: 8, marginTop: 5, marginBottom: 5 }}>
+            <Text style={styles.addPassengerTxt}>
               新增乘客
           </Text>
           </TouchableOpacity>
@@ -369,6 +369,14 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 10,
     backgroundColor: "#51a6f0"
+  },
+  addPassengerTxt: {
+    fontSize: 10,
+    color: "#ffffff",
+    marginLeft: 8,
+    marginRight: 8,
+    marginTop: 5,
+    marginBottom: 5
   },
   approverView: {
     flexDirection: 'row',
