@@ -1,6 +1,8 @@
-import pinyin from 'tiny-pinyin';
+/**
+ * 汉字转拼音
+ */
+import { NativeModules } from 'react-native';
 
-export const getPinyinLetter = (data) => {
-  return pinyin.convertToPinyin(data);;
-}
+export const pinyin = NativeModules.PinYinModule;
+
 

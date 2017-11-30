@@ -1,0 +1,22 @@
+﻿[
+    {
+        "costCenterId":1006,
+        "costCenterName":"默认成本中心"
+    },
+    {
+        "costCenterId":14080,
+        "costCenterName":"技术部"
+    },
+    {
+        "costCenterId":15396,
+        "costCenterName":"测试部"
+    },
+    {
+        "costCenterId":15761,
+        "costCenterName":"市场运营部"
+    },
+    {
+        "costCenterId":16485,
+        "costCenterName":"机械公司"
+    }
+]

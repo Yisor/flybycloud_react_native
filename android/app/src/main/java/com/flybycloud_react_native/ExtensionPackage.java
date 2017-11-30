@@ -19,6 +19,7 @@ public class ExtensionPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new EncryptModule(reactContext));
+        modules.add(new PinYinModule(reactContext));
         return modules;
     }
 

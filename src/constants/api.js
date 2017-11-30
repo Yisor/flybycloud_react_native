@@ -8,5 +8,6 @@ export default {
   express: '/passenger/corp/express',
   passengers: '/user/passenger/list',
   emplist: '/user/emplist',
-  allSeat: '/flight/all/ticket/seat/info/{flightId}/{type}'
+  allSeat: '/flight/all/ticket/seat/info/{flightId}/{type}',
+  costCenter: '/user/cost/center'
 }

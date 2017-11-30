@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ListView,
+  StyleSheet,
+  InteractionManager,
+  Alert,
+  TouchableOpacity,
+  Platform
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import SegmentedBar from '../../../../components/SegmentedBar';
 import window from '../../../../utils/window';
-import { getPinyinLetter } from '../../../../utils/pinyin';
+import { pinyin } from '../../../../utils/pinyin';
 import { get } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
-import passengers from './passengers.json';
+import passengerJson from './passengers.json';
+import empJson from './emplist.json'
 import EmpList from './EmpList';
 import PassengerList from './PassengerList';
-
 
 let empList;
 let passengerList;
@@ -20,6 +30,8 @@ class PassengerSelectPage extends Component {
     this.state = {
       index: 0,
       total: 0,
+      empList: [],
+      passengerList: []
     };
     empList = [];
     passengerList = [];
@@ -27,6 +39,32 @@ class PassengerSelectPage extends Component {
 
   componentDidMount() {
 
+  }
+
+  async formatEmplist(datas) {
+    let newList = [];
+    for (let item of datas) {
+      let newObj = {};
+      let letter = await pinyin.getPinYin(item.userName);
+      newObj['name'] = item.userName;
+      newObj['idcardType'] = item.idcardType;
+      newObj['idcardCode'] = item.idcardCode;
+      newObj['userId'] = item.userId;
+      newObj['phone'] = item.userPhone;
+      newObj['corpId'] = item.corpId;
+      newObj['userName'] = item.userName;
+      newObj['orderRole'] = item.orderRole;
+      newObj['departmentName'] = item.departmentName;
+      newObj['pinyin'] = letter;
+      newObj['roleName'] = item.roleName;
+      newObj['isEmployee'] = 1;
+      newObj['desc'] = '';
+      newObj['isSelected'] = false;
+      newObj['userPosition'] = item.userPosition;
+      // TODO 已有选择数据，要更改isSelected状态
+      newList.push(newObj);
+    }
+    return newList
   }
 
   // 员工选择
@@ -42,11 +80,20 @@ class PassengerSelectPage extends Component {
     this.setState({ total: empList.length + passengerList.length });
   }
 
+  onSubmit() {
+    
+    Actions.pop({ refresh: ({ 'passengers': empList }) });
+  }
+
   renderSegmentedBar() {
     return (
-      <SegmentedBar style={{ height: 50 }} indicatorPosition='bottom' indicatorType='boxWidth' onChange={(index) => { this.setState({ index: index }) }}>
-        <SegmentedBar.Item title='员工' titleStyle={{ fontSize: 15, color: "#323b43" }} activeTitleStyle={{ fontSize: 15 }} />
-        <SegmentedBar.Item title='常用出行人' titleStyle={{ fontSize: 15, color: "#323b43" }} activeTitleStyle={{ fontSize: 15 }} />
+      <SegmentedBar
+        style={{ height: 50 }}
+        indicatorPosition='bottom'
+        indicatorType='boxWidth'
+        onChange={(index) => { this.setState({ index: index }) }}>
+        <SegmentedBar.Item title='员工' titleStyle={styles.itemBarTitle} activeTitleStyle={{ fontSize: 15 }} />
+        <SegmentedBar.Item title='常用出行人' titleStyle={styles.itemBarTitle} activeTitleStyle={{ fontSize: 15 }} />
       </SegmentedBar>
     );
   }
@@ -54,7 +101,8 @@ class PassengerSelectPage extends Component {
   renderList() {
     return (
       <View style={{ flex: 1, position: 'relative', bottom: 60, marginTop: 60 }}>
-        {this.state.index == 0 ? <EmpList onSelected={this.onEmpSelected} /> : <PassengerList onSelected={this.onPassengerSelected} />}
+        {this.state.index == 0 ? <EmpList ref='emplist' dataSet={empJson} onSelected={this.onEmpSelected} />
+          : <PassengerList dataSet={passengerJson} onSelected={this.onPassengerSelected} />}
       </View>
     );
   }
@@ -62,7 +110,7 @@ class PassengerSelectPage extends Component {
   renderBottom() {
     return (
       <View style={{ position: 'absolute', bottom: 0, flexDirection: 'row', }}>
-        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: "#ffffff", alignItems: 'center' }}>
+        <View style={styles.resultView}>
           <Text style={{ fontSize: 18, color: "#323b43", marginLeft: 10 }}>已选</Text>
           <Text style={{ fontSize: 18, color: "#323b43", marginLeft: 10 }}>{`${this.state.total}人`}</Text>
         </View>
@@ -71,10 +119,6 @@ class PassengerSelectPage extends Component {
         </TouchableOpacity>
       </View>
     );
-  }
-
-  onSubmit() {
-    Actions.pop({ refresh: ({ 'passengers': empList }) });
   }
 
   render() {
@@ -96,6 +140,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f0b051",
     justifyContent: 'center',
+    alignItems: 'center'
+  },
+  itemBarTitle: {
+    fontSize: 15,
+    color: "#323b43"
+  },
+  resultView: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: "#ffffff",
     alignItems: 'center'
   }
 });

@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, Image, CheckBox, TextInput, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import window from '../../../../utils/window';
-import { getPinyinLetter } from '../../../../utils/pinyin';
+import { pinyin } from '../../../../utils/pinyin';
 import Divider from '../../../../components/Divider';
 import { get } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
-import emplist from './emplist.json';
 import SearchBox from './SearchBox';
 
 class EmpList extends Component {
@@ -31,19 +30,19 @@ class EmpList extends Component {
     dataBlob = {};
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    this.handleData(this.props.dataSet);
+    // get(apiUrl.passengers).then((response) => {
+    //   console.log('get返回：' + JSON.stringify(response));
+    // });
+  }
 
-    let newList = [];
-    for (let emp of emplist) {
-      emp['isSelected'] = false;
-      emp['pinyin'] = getPinyinLetter(emp.userName);
-      newList.push(emp);
-    }
-
-    console.log(JSON.stringify(newList));
+  async handleData(datas) {
+    dataBlob = [];
+    let newList = await this.extendedAttr(datas);
     let sortList = newList.sort(this.compareUp("pinyin"));
     sortList.map(passenger => {
-      let firstLetter = passenger.pinyin.substr(0, 1);
+      let firstLetter = passenger.pinyin.substr(0, 1).toUpperCase();
       if (dataBlob[firstLetter]) {
         dataBlob[firstLetter].push(passenger);
       } else {
@@ -52,23 +51,60 @@ class EmpList extends Component {
         dataBlob[firstLetter] = subList;
       }
     })
-  }
 
-  componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRowsAndSections(dataBlob),
       });
     });
+  }
 
-    // console.log(JSON.stringify(dataBlob));
-    // get(apiUrl.passengers).then((response) => {
-    //   console.log('get返回：' + JSON.stringify(response));
-    // });
+  async formatEmplist(datas) {
+    let newList = [];
+    for (let item of datas) {
+      if (item['pinyin']) {
+        newList.push(item);
+      } else {
+        let newObj = {};
+        let letter = await pinyin.getPinYin(item.userName);
+        newObj['name'] = item.userName;
+        newObj['idcardType'] = item.idcardType;
+        newObj['idcardCode'] = item.idcardCode;
+        newObj['userId'] = item.userId;
+        newObj['phone'] = item.userPhone;
+        newObj['corpId'] = item.corpId;
+        newObj['userName'] = item.userName;
+        newObj['orderRole'] = item.orderRole;
+        newObj['departmentName'] = item.departmentName;
+        newObj['pinyin'] = letter;
+        newObj['roleName'] = item.roleName;
+        newObj['isEmployee'] = 1;
+        newObj['desc'] = '';
+        newObj['isSelected'] = false;
+        newObj['userPosition'] = item.userPosition;
+        // TODO 已有选择数据，要更改isSelected状态
+        newList.push(newObj);
+      }
+    }
+    return newList
+  }
+
+  // 扩展属性
+  async extendedAttr(datas) {
+    let newList = [];
+    for (let item of datas) {
+      if (!item['pinyin']) {
+        let letter = await pinyin.getPinYin(item.userName);
+        item['pinyin'] = letter;
+        item['isSelected'] = false;
+      }
+      newList.push(item);
+    }
+    return newList
   }
 
   // 升序排序
-  compareUp(propertyName) {   
+  compareUp(propertyName) {
     return (object1, object2) => {
       var value1 = object1[propertyName];
       var value2 = object2[propertyName];
@@ -76,24 +112,25 @@ class EmpList extends Component {
     }
   }
 
+  // Item选择
   onSelected = (datas) => {
     this.props.onSelected(datas);
   }
 
-  renderRow = (data, sectionID, rowID) => {
+  renderRow = (rowData, sectionID, rowID) => {
     return (
       <View style={styles.rowItem}>
-        <Text>{data.userName}</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-          <Text>{data.departmentName}</Text>
+        <Text>{rowData.userName}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text>{rowData.departmentName}</Text>
           <CheckBox
             onValueChange={(value) => {
               dataBlob[sectionID][rowID].isSelected = value;
-              value ? selected.push(data) : selected.splice(selected.indexOf(data), 1);
+              value ? selected.push(rowData) : selected.splice(selected.indexOf(rowData), 1);
               this.setState({ isSelected: value });
               this.onSelected(selected);
             }}
-            value={dataBlob[sectionID][rowID].isSelected} />
+            value={rowData.isSelected} />
         </View>
       </View>
     );
@@ -110,14 +147,20 @@ class EmpList extends Component {
   }
 
   onChanegeText = (text) => {
-    if (text) {
-      this.filterData(text);
-    }
+    this.filterData(text);
   }
 
+  // 数据筛选
   filterData(text) {
-    let upperCase = text.toUpperCase();
-    alert(text);
+    if (text) {
+      let lowerCase = text.toLowerCase();
+      let filters = this.props.dataSet.filter((item) => {
+        return item.pinyin.includes(lowerCase) || item.userName.includes(lowerCase);
+      });
+      this.handleData(filters);
+    } else {
+      this.handleData(this.props.dataSet);
+    }
   }
 
   render() {
