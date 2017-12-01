@@ -1,0 +1,32 @@
+﻿[
+    {
+        "insuranceName":"综合交通工具意外伤害保险1天有效",
+        "insuranceId":1024,
+        "insuranceCompanyId":1024,
+        "insuranceCompanyName":"飞巴保险",
+        "insuranceType":1,
+        "insuranceDesc":"阿斯顿发大水发打发第三方",
+        "unitPrice":50,
+        "isPaper":"1",
+        "isDefault":"1",
+        "validityDay":1,
+        "withdrawFee":5,
+        "withdrawCost":1,
+        "maxNumber":1
+    },
+    {
+        "insuranceName":"延误险",
+        "insuranceId":1009,
+        "insuranceCompanyId":1009,
+        "insuranceCompanyName":"飞巴保险",
+        "insuranceType":1,
+        "insuranceDesc":"仅限测试使用",
+        "unitPrice":20,
+        "isPaper":"1",
+        "isDefault":"1",
+        "validityDay":10,
+        "withdrawFee":0,
+        "withdrawCost":0,
+        "maxNumber":1
+    }
+]

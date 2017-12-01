@@ -10,8 +10,9 @@ import apiUrl from '../../../../constants/api';
 import { formatTime, getTimeString } from '../../../../utils/timeUtils';
 const isStopover = [false, true]; // 是否经停
 import costCenter from './costcenter.json';
+import InsuranceList from './InsuranceList';
 
-class OrderWrite extends Component {
+class FillOrderPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +29,10 @@ class OrderWrite extends Component {
 
   componentDidMount() {
     // get(apiUrl.costCenter).then((response) => {
+    //   console.log('get返回：' + JSON.stringify(response));
+    // });
+
+    //  get(apiUrl.auditing).then((response) => {
     //   console.log('get返回：' + JSON.stringify(response));
     // });
   }
@@ -84,7 +89,7 @@ class OrderWrite extends Component {
             <View style={{ borderRadius: 2, marginRight: 10, backgroundColor: "#f0b051" }}>
               <Text style={{ fontSize: 9, color: "#ffffff", marginLeft: 5, marginRight: 5 }}>实际承运</Text>
             </View>
-            <Text style={{ fontSize: 11, color: "#797f85" }}>{`${flight.airlineShortName}${flight.planeType}`}</Text>
+            <Text style={{ fontSize: 11, color: "#797f85" }}>{`${flight.airlineShortName}${flight.flightNumber}`}</Text>
           </View>
           <View style={[styles.rowCenter, { marginTop: 10 }]}>
             <Text style={{ fontSize: 24, color: "#323b43" }}>{formatTime(flight.departureTime)}</Text>
@@ -122,7 +127,7 @@ class OrderWrite extends Component {
   // 审批人
   renderApprover() {
     return (
-      <TouchableOpacity style={styles.approverView} activeOpacity={0.6}>
+      <TouchableOpacity style={styles.approverView} activeOpacity={0.6} onPress={() => { Actions.auditorList() }}>
         <Text style={{ fontSize: 14, color: "#323b43", marginTop: 15, marginBottom: 15, marginLeft: 20 }}>查看审批人</Text>
       </TouchableOpacity>
     );
@@ -277,7 +282,8 @@ class OrderWrite extends Component {
           {this.renderApprover()}
           {this.renderPassenger()}
           {this.renderContacts()}
-          {this.renderInsurance()}
+          {/* this.renderInsurance() */}
+         {<InsuranceList style={{ marginTop: 8 }} />} 
           {this.renderDeliveries()}
           {this.renderPayment()}
           {this.renderCostCenter()}
@@ -391,5 +397,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default OrderWrite;
+export default FillOrderPage;
 
