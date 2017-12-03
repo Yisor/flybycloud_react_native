@@ -101,7 +101,7 @@ class FlightDetailPage extends Component {
       </View>
     );
   }
-
+     
   renderSegmentedBar() {
     return (
       <SegmentedBar

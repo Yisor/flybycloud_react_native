@@ -150,7 +150,7 @@ class FlightListPage extends Component {
         <View style={{ height: window.heigh - 175, }}>
           <ListView
             contentContainerStyle={styles.contentContainer}
-            dataSource={this.state.dataSource.cloneWithRows(mockData)}
+            dataSource={this.state.dataSource.cloneWithRows(this.props.flights)}
             renderRow={this.renderRow}
             enableEmptySections={true}
             renderSeparator={() => <Divider />} />

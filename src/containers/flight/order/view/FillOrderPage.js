@@ -190,26 +190,7 @@ class FillOrderPage extends Component {
   }
 
   // 保险
-  renderInsurance() {
-    return (
-      <View style={{ backgroundColor: "#ffffff", marginTop: 8, }}>
-        <View style={styles.insuranceView}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
-            <Text style={{ fontSize: 14, color: "#797f85" }}>意外险</Text>
-            <Text style={{ fontSize: 11, color: "#51a6f0", marginLeft: 5 }}>详细说明</Text>
-          </View>
-          <Text style={{ marginRight: 10 }}>￥50/份</Text>
-        </View>
-        <View style={styles.insuranceView}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
-            <Text style={{ fontSize: 14, color: "#797f85" }}>延误险</Text>
-            <Text style={{ fontSize: 11, color: "#51a6f0", marginLeft: 5 }}>详细说明</Text>
-          </View>
-          <Text style={{ marginRight: 10 }}>￥50/份</Text>
-        </View>
-      </View>
-    );
-  }
+  renderInsurance() { return (<InsuranceList style={{ marginTop: 8 }} />); }
 
   // 配送方式
   renderDeliveries() {
@@ -282,8 +263,7 @@ class FillOrderPage extends Component {
           {this.renderApprover()}
           {this.renderPassenger()}
           {this.renderContacts()}
-          {/* this.renderInsurance() */}
-         {<InsuranceList style={{ marginTop: 8 }} />} 
+          {this.renderInsurance()}
           {this.renderDeliveries()}
           {this.renderPayment()}
           {this.renderCostCenter()}

@@ -5,7 +5,7 @@
  * @Last Modified time: 2017-11-23 17:33:36
  */
 import React, { Component } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import FlightMain from './FlightMain';
@@ -90,11 +90,6 @@ class FlightMainPage extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 const select = store => ({
   status: store.flightStore.status,
