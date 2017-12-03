@@ -3,41 +3,45 @@ import { View, Text, Image, CheckBox, ListView, StyleSheet, InteractionManager, 
 import window from '../../../../utils/window';
 import insurances from './insurances.json';
 
-let newList = [];
+
 class InsuranceList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
-      isChecked: false
     };
+    this.newList = [];
   }
 
   componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
+    let tempList = [];
     insurances.map((item) => {
       item['isChecked'] = false;
-      newList.push(item);
+      tempList.push(item);
     });
-
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(newList)
+      dataSource: this.state.dataSource.cloneWithRows(tempList)
     });
+    this.newList = JSON.parse(JSON.stringify(tempList));
   }
 
   onPressRow(rowData, sectionID, rowID) {
-    // alert(rowData.insuranceName);
+    this.newList[rowID].isChecked = !this.newList[rowID].isChecked;
+    // console.log('点击：' + JSON.stringify(this.newList));
 
-    let newData = Objcet.assign(newList);
-    console.log('点击：' + JSON.stringify(newData[rowID]));
-    newData[rowID].isChecked = !newData[rowID].isChecked;//重点在这里，给数据源动态添加一个isSelected属性。
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(newData)
-    });
+    this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.newList) });
   }
 
   renderRow = (rowData, sectionID, rowID) => {
     return (
-      <TouchableOpacity activeOpacity={0.6} style={styles.insuranceView} onPress={() => this.onPressRow(rowData, rowID)} >
+      <TouchableOpacity
+        activeOpacity={0.6}
+        style={styles.insuranceView}
+        onPress={() => this.onPressRow(rowData, sectionID, rowID)} >
         <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
           <Text style={{ fontSize: 14, color: "#797f85" }}>{rowData.insuranceName}</Text>
           <View >
@@ -47,6 +51,7 @@ class InsuranceList extends Component {
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text style={{ marginRight: 10, fontSize: 14, color: "#323b43" }}>{`￥${rowData.unitPrice}/份`}</Text>
           <CheckBox
+            disabled={true}
             value={rowData.isChecked} />
         </View>
       </TouchableOpacity>
@@ -54,6 +59,7 @@ class InsuranceList extends Component {
   }
 
   render() {
+    // console.log('点击后：' + JSON.stringify(this.state.dataSource));
     return (
       <ListView
         contentContainerStyle={[styles.contentContainer, this.props.style]}

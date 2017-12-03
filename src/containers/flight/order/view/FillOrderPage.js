@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ListView, ScrollView, StyleSheet, InteractionManager, Alert, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, Image, ListView, ScrollView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Overlay } from 'teaset';
@@ -7,6 +7,7 @@ import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
 import { get } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
+import { auditingQuery, costCenterQuery } from '../action';
 import { formatTime, getTimeString } from '../../../../utils/timeUtils';
 const isStopover = [false, true]; // 是否经停
 import costCenter from './costcenter.json';
@@ -28,6 +29,8 @@ class FillOrderPage extends Component {
   }
 
   componentDidMount() {
+    this.props.dispatch(auditingQuery());
+    this.props.dispatch(costCenterQuery());
     // get(apiUrl.costCenter).then((response) => {
     //   console.log('get返回：' + JSON.stringify(response));
     // });
@@ -377,5 +380,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FillOrderPage;
+// export default FillOrderPage;
 
+const select = store => ({
+  audits: store.auditingStore.audits,
+  status: store.auditingStore.status,
+  user: store.userStore.user,
+})
+export default connect(select)(FillOrderPage);
