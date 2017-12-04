@@ -1,0 +1,30 @@
+﻿[
+    {
+        "addressId":1285,
+        "receiveName":"刘家惠",
+        "receivePhone":"13758241239",
+        "receiveAddress":"纳爱斯大楼1101",
+        "receiveProvince":"山西省",
+        "receiveCity":"阳泉市",
+        "receiveDistrict":"平定县",
+        "updateTime":1511345989000,
+        "expressType":1,
+        "expressDate":"01",
+        "postcode":"310052",
+        "addressType":1
+    },
+    {
+        "addressId":1044,
+        "receiveName":"陈磊",
+        "receivePhone":"13616532010",
+        "receiveAddress":"测试地址",
+        "receiveProvince":"浙江省",
+        "receiveCity":"杭州市",
+        "receiveDistrict":"市辖区",
+        "updateTime":1495785958000,
+        "expressType":null,
+        "expressDate":null,
+        "postcode":null,
+        "addressType":2
+    }
+]

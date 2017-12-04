@@ -18,7 +18,7 @@ const flight = (state = initialState, action) => {
     case TYPES.COST_CENTER_QUERY_SUCESS:
       return {
         ...state,
-        audits: action.data,
+        costCenter: action.data,
         status: "Done"
       };
     default:

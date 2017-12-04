@@ -20,6 +20,7 @@ import HomePage from './containers/HomePage';
 import CustomNavBar from './components/CustomNavBar';
 import { LoginPage } from './containers/login';
 import { FlightMainPage } from './containers/flight/main';
+import { AddressListPage } from './containers/user/address';
 import SelectCityPage from './containers/city/SelectCityPage';
 import FlightListPage from './containers/flight/list/view/FlightListPage';
 import FlightDetailPage from './containers/flight/detail/view/FlightDetailPage';
@@ -80,11 +81,11 @@ class rootRouter extends Component {
           <Scene key="flight" component={FlightMainPage} title="机票" />
           <Scene back key="city" component={SelectCityPage} title="城市" />
           <Scene back key="flightList" component={FlightListPage} title="航班" />
-          <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情"  initial/>
+          <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" initial />
           <Scene back key="passengerSelect" component={PassengerSelectPage} title="选择乘客" />
           <Scene back key="fillOrder" component={FillOrderPage} title="订单填写" />
           <Scene back key="auditorList" component={AuditorListPage} title="查看审批人" />
-
+          <Scene back key="addressList" component={AddressListPage} title="选择配送地址" />
 
         </Stack>
       </Router>

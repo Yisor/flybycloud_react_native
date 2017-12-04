@@ -12,5 +12,6 @@ export default {
   goverSeat: '/flight/government/ticket/seat/info/{flightId}',
   costCenter: '/user/cost/center',
   orderSubmit: '/corp/auditing/order/submit',
-  auditing: '/corp/auditing/default/person'
+  auditing: '/corp/auditing/default/person',
+  addressList: '/user/address/list'
 }

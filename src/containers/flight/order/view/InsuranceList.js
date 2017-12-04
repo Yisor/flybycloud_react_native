@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, Image, CheckBox, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import window from '../../../../utils/window';
 import insurances from './insurances.json';
-
+import InsuranceItem from './InsuranceItem';
 
 class InsuranceList extends Component {
+
+  static propTypes = {
+    onSelect: PropTypes.func,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,43 +29,22 @@ class InsuranceList extends Component {
       item['isChecked'] = false;
       tempList.push(item);
     });
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(tempList)
-    });
+
+    this.setState({ dataSource: this.state.dataSource.cloneWithRows(tempList) });
     this.newList = JSON.parse(JSON.stringify(tempList));
   }
 
   onPressRow(rowData, sectionID, rowID) {
+    let { onSelect } = this.props;
     this.newList[rowID].isChecked = !this.newList[rowID].isChecked;
-    // console.log('点击：' + JSON.stringify(this.newList));
-
-    this.setState({ dataSource: this.state.dataSource.cloneWithRows(this.newList) });
+    onSelect && onSelect(this.newList, rowID);
   }
 
   renderRow = (rowData, sectionID, rowID) => {
-    return (
-      <TouchableOpacity
-        activeOpacity={0.6}
-        style={styles.insuranceView}
-        onPress={() => this.onPressRow(rowData, sectionID, rowID)} >
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
-          <Text style={{ fontSize: 14, color: "#797f85" }}>{rowData.insuranceName}</Text>
-          <View >
-            <Text style={{ fontSize: 11, color: "#51a6f0", marginLeft: 5 }}>详细说明</Text>
-          </View>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ marginRight: 10, fontSize: 14, color: "#323b43" }}>{`￥${rowData.unitPrice}/份`}</Text>
-          <CheckBox
-            disabled={true}
-            value={rowData.isChecked} />
-        </View>
-      </TouchableOpacity>
-    );
+    return (<InsuranceItem insurance={rowData} onPressItem={() => this.onPressRow(rowData, sectionID, rowID)} />);
   }
 
   render() {
-    // console.log('点击后：' + JSON.stringify(this.state.dataSource));
     return (
       <ListView
         contentContainerStyle={[styles.contentContainer, this.props.style]}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, ListView, ScrollView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { Overlay } from 'teaset';
+import Overlay from '../../../../components/Overlay';
 import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
 import { get } from '../../../../service/request';
@@ -12,6 +12,11 @@ import { formatTime, getTimeString } from '../../../../utils/timeUtils';
 const isStopover = [false, true]; // 是否经停
 import costCenter from './costcenter.json';
 import InsuranceList from './InsuranceList';
+import CostCenterPicker from './CostCenterPicker';
+import ExpressTypePicker from './ExpressTypePicker';
+const expressTypes = ['不需要配送', '快递', '自取', '票务公司自取', '企业统一配送'];
+import FlightInfo from './FlightInfo';
+import DeliveryMode from './DeliveryMode';
 
 class FillOrderPage extends Component {
   constructor(props) {
@@ -19,7 +24,8 @@ class FillOrderPage extends Component {
     this.state = {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
       passengers: [],
-      costCenter: '默认成本中心',
+      costCenterSelectedIndex: 0,
+      expressTypeSelectedIndex: 0,
     };
   }
 
@@ -31,9 +37,6 @@ class FillOrderPage extends Component {
   componentDidMount() {
     this.props.dispatch(auditingQuery());
     this.props.dispatch(costCenterQuery());
-    // get(apiUrl.costCenter).then((response) => {
-    //   console.log('get返回：' + JSON.stringify(response));
-    // });
 
     //  get(apiUrl.auditing).then((response) => {
     //   console.log('get返回：' + JSON.stringify(response));
@@ -52,86 +55,41 @@ class FillOrderPage extends Component {
     Actions.passengerSelect();
   }
 
-  onPressCostCenter = () => {
-    this.showPull(false);
-  }
-
-  showPull(modal, rootTransform) {
-    let overlayView = (
-      <Overlay.PullView side={'bottom'} modal={modal} rootTransform={rootTransform} ref={v => this.overlayPullView = v}>
-        <View style={{ backgroundColor: '#fff', minWidth: 300, minHeight: 260, justifyContent: 'center', alignItems: 'center' }}>
-          <ListView
-            contentContainerStyle={{ width: window.width }}
-            dataSource={this.state.dataSource.cloneWithRows(costCenter)}
-            renderRow={this.renderCostCenterRow}
-            enableEmptySections={true}
-            renderSeparator={() => <Divider />} />
-        </View>
-      </Overlay.PullView>
-    );
-    Overlay.show(overlayView);
-  }
-
-  renderCostCenterRow = (rowData) => {
-    return (
-      <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
-        onPress={() => {
-          this.setState({ costCenter: rowData.costCenterName });
-          this.overlayPullView && this.overlayPullView.close();
-        }}>
-        <Text style={{ fontSize: 14, color: "#333b43", margin: 10 }}>{rowData.costCenterName}</Text>
-      </TouchableOpacity>
+  // 配送方式
+  onPressDeliveries() {
+    ExpressTypePicker.show(
+      expressTypes,
+      this.state.expressTypeSelectedIndex,
+      (item, index) => { this.setState({ expressTypeSelectedIndex: index }) }
     );
   }
 
-  renderFlightInfo() {
-    return (
-      <View style={{ width: window.width, backgroundColor: "#51a6f0" }}>
-        <View style={{ backgroundColor: "white", borderRadius: 5, margin: 10 }}>
-          <View style={{ flexDirection: 'row', marginLeft: 10, marginTop: 10, }}>
-            <View style={{ borderRadius: 2, marginRight: 10, backgroundColor: "#f0b051" }}>
-              <Text style={{ fontSize: 9, color: "#ffffff", marginLeft: 5, marginRight: 5 }}>实际承运</Text>
-            </View>
-            <Text style={{ fontSize: 11, color: "#797f85" }}>{`${flight.airlineShortName}${flight.flightNumber}`}</Text>
-          </View>
-          <View style={[styles.rowCenter, { marginTop: 10 }]}>
-            <Text style={{ fontSize: 24, color: "#323b43" }}>{formatTime(flight.departureTime)}</Text>
-            <View style={{ alignItems: 'center', }}>
-              <Text style={{ fontSize: 11, color: "#797f85" }}>{isStopover[flight.isStopover] ? 经停 : ' '}</Text>
-              <Divider style={{ width: 60, marginLeft: 32, marginRight: 32, marginTop: 5, marginBottom: 5 }} />
-              <Text style={{ fontSize: 11, color: "#797f85" }}>{getTimeString(flight.flyingTime)}</Text>
-            </View>
-            <Text style={{ fontSize: 24, color: "#323b43" }}>{formatTime(flight.destinationTime)}</Text>
-          </View>
-          <View style={[styles.rowCenter, { marginTop: 5 }]}>
-            <Text style={{ fontSize: 14, color: "#797f85", marginRight: 124 }}>{flight.departureAirport}</Text>
-            <Text style={{ fontSize: 14, color: "#797f85" }}>{flight.destinationAirport}</Text>
-          </View>
-          <View style={[styles.rowCenter, { marginTop: 10 }]}>
-            <Text style={{ fontSize: 11, color: "#797f85" }}>{flight.planeType}</Text>
-            <Text style={{ marginLeft: 5, marginRight: 5 }}>|</Text>
-            <Text style={{ fontSize: 11, color: "#797f85" }}>{ticket.mainClassName}</Text>
-          </View>
-          <Divider style={{ marginTop: 10, borderStyle: "solid", }} />
-          <View style={{ flexDirection: 'row', margin: 10, justifyContent: 'space-between', }}>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 11, color: "#797f85", marginRight: 20 }}>{`成人票价￥${ticket.price}`}</Text>
-              <Text style={{ fontSize: 11, color: "#797f85" }}>{`机建燃油￥${ticket.buildFee}`}</Text>
-            </View>
-            <TouchableOpacity activeOpacity={0.6}>
-              <Text style={{ fontSize: 11, color: "#51a6f0" }}>查看退改签</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+  // 配送地址
+  onReceiveAddress() {
+    Actions.addressList();
+  }
+
+  // 成本中心点击
+  onPressCostCenter() {
+    CostCenterPicker.show(
+      this.props.costCenter,
+      this.state.costCenterSelectedIndex,
+      (item, index) => { this.setState({ costCenterSelectedIndex: index }) }
     );
   }
+
+  // 保险选择
+  onSelectInsurance(datas) {
+    console.log(JSON.stringify(datas));
+  }
+
+  renderFlightInfo() { return (<FlightInfo flight={flight} ticket={ticket} />) }
 
   // 审批人
   renderApprover() {
     return (
       <TouchableOpacity style={styles.approverView} activeOpacity={0.6} onPress={() => { Actions.auditorList() }}>
-        <Text style={{ fontSize: 14, color: "#323b43", marginTop: 15, marginBottom: 15, marginLeft: 20 }}>查看审批人</Text>
+        <Text style={styles.approverTxt}>查看审批人</Text>
       </TouchableOpacity>
     );
   }
@@ -193,15 +151,17 @@ class FillOrderPage extends Component {
   }
 
   // 保险
-  renderInsurance() { return (<InsuranceList style={{ marginTop: 8 }} />); }
+  renderInsurance() {
+    return (<InsuranceList style={{ marginTop: 8 }} onSelect={(datas, index) => this.onSelectInsurance(datas)} />);
+  }
 
   // 配送方式
   renderDeliveries() {
     return (
-      <TouchableOpacity style={styles.rowItem} activeOpacity={0.6}>
-        <Text style={styles.rowItemLeftText}>配送方式</Text>
-        <Text style={styles.rowItemRightText}>不需要配送</Text>
-      </TouchableOpacity>
+      <DeliveryMode
+        selectedIndex={this.state.expressTypeSelectedIndex}
+        onPressDelivery={() => this.onPressDeliveries()}
+        onPressAddress={() => this.onReceiveAddress()} />
     );
   }
 
@@ -217,14 +177,18 @@ class FillOrderPage extends Component {
 
   // 成本中心
   renderCostCenter() {
+    let { costCenterSelectedIndex } = this.state;
+    let selected = this.props.costCenter ? this.props.costCenter[costCenterSelectedIndex] : null;
+    let costCenterName = (selected && selected.costCenterName) ? selected.costCenterName : null;
     return (
-      <TouchableOpacity style={styles.rowItem} activeOpacity={0.6} onPress={this.onPressCostCenter}>
+      <TouchableOpacity style={styles.rowItem} activeOpacity={0.6} onPress={() => this.onPressCostCenter()}>
         <Text style={styles.rowItemLeftText}>成本中心</Text>
-        <Text style={styles.rowItemRightText}>{this.state.costCenter}</Text>
+        <Text style={styles.rowItemRightText}>{costCenterName}</Text>
       </TouchableOpacity>
     );
   }
 
+  // 常旅客卡积分
   renderIntegral() {
     return (
       <TouchableOpacity style={styles.rowItem} activeOpacity={0.6}>
@@ -299,7 +263,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: "#ffffff",
-    marginTop: 8
+    marginTop: 8,
+    alignItems: 'center',
   },
   rowItemLeftText: {
     fontSize: 14,
@@ -311,8 +276,6 @@ const styles = StyleSheet.create({
   rowItemRightText: {
     fontSize: 14,
     color: "#323b43",
-    marginTop: 15,
-    marginBottom: 15,
     marginRight: 10
   },
   passengerView: {
@@ -373,17 +336,31 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     marginTop: 8
   },
+  approverTxt: {
+    fontSize: 14,
+    color: "#323b43",
+    marginTop: 15,
+    marginBottom: 15,
+    marginLeft: 20
+  },
   deleteIcon: {
     marginLeft: 10,
     marginTop: 20,
     marginBottom: 20
+  },
+  expressTypeView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 15,
+    marginBottom: 15,
+    marginRight: 10
   }
 });
 
-// export default FillOrderPage;
-
 const select = store => ({
   audits: store.auditingStore.audits,
+  costCenter: store.auditingStore.costCenter,
   status: store.auditingStore.status,
   user: store.userStore.user,
 })
