@@ -26,6 +26,7 @@ class FillOrderPage extends Component {
       passengers: [],
       costCenterSelectedIndex: 0,
       expressTypeSelectedIndex: 0,
+      receiveAddress: null
     };
   }
 
@@ -47,6 +48,9 @@ class FillOrderPage extends Component {
     if (nextProps.passengers) {
       console.log(JSON.stringify(nextProps.passengers));
       this.setState({ passengers: nextProps.passengers });
+    }
+    if (nextProps.address) {
+      this.setState({ receiveAddress: nextProps.address.receiveAddress });
     }
   }
 
@@ -159,6 +163,7 @@ class FillOrderPage extends Component {
   renderDeliveries() {
     return (
       <DeliveryMode
+        receiveAddress={this.state.receiveAddress}
         selectedIndex={this.state.expressTypeSelectedIndex}
         onPressDelivery={() => this.onPressDeliveries()}
         onPressAddress={() => this.onReceiveAddress()} />

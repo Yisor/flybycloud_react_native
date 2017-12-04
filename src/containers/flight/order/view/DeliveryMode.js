@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, Alert, TouchableOpacity } from 'react-native';
 const expressTypes = ['不需要配送', '快递', '自取', '票务公司自取', '企业统一配送']
 
 class DeliveryMode extends Component {
@@ -9,6 +9,7 @@ class DeliveryMode extends Component {
     onPressDelivery: PropTypes.func,
     onPressAddress: PropTypes.func,
     selectedIndex: PropTypes.number.isRequired,
+    receiveAddress: PropTypes.string,
   }
 
   // 配送方式
@@ -33,14 +34,16 @@ class DeliveryMode extends Component {
             <View style={styles.expressTypeView}>
               <Text style={styles.rowItemRightText}>{expressType}</Text>
               <Text style={{ fontSize: 14, color: "#51a6f0" }}>{'(快递费￥)'}</Text>
+              <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/common/arrow_ash.png')} />
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+            style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginRight: 10 }}
             activeOpacity={0.6}
             onPress={() => this.onPressAddress()}>
             <Text style={styles.rowItemLeftText}>配送地址</Text>
-            <Text style={styles.rowItemRightText}></Text>
+            <Text style={styles.rowItemRightText}>{this.props.receiveAddress}</Text>
+            <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/common/arrow_ash.png')} />
           </TouchableOpacity>
         </View>
       );
@@ -50,6 +53,7 @@ class DeliveryMode extends Component {
           <Text style={styles.rowItemLeftText}>配送方式</Text>
           <View style={styles.expressTypeView}>
             <Text style={styles.rowItemRightText}>{expressType}</Text>
+            <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/common/arrow_ash.png')} />
           </View>
         </TouchableOpacity>
       );
