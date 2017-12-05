@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ListView, ScrollView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Modal, ListView, ScrollView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Overlay from '../../../../components/Overlay';
@@ -17,7 +17,6 @@ import ExpressTypePicker from './ExpressTypePicker';
 const expressTypes = ['不需要配送', '快递', '自取', '票务公司自取', '企业统一配送'];
 import FlightInfo from './FlightInfo';
 import DeliveryMode from './DeliveryMode';
-
 
 
 class FillOrderPage extends Component {
@@ -42,10 +41,6 @@ class FillOrderPage extends Component {
     this.props.dispatch(auditingQuery());
     this.props.dispatch(costCenterQuery());
     this.props.dispatch(insuranceQuery());
-
-    //  get(apiUrl.auditing).then((response) => {
-    //   console.log('get返回：' + JSON.stringify(response));
-    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -88,15 +83,12 @@ class FillOrderPage extends Component {
 
   // 保险选择
   onSelectInsurance(datas) {
-    // console.log('选择前：' + JSON.stringify(this.props.insurances));
-    // let filters = datas.filter((item) => {
-    //   return item['isChecked'] == true;
-    // });
     this.props.dispatch(insuranceChecked(datas));
   }
 
   onPressDetail() {
-    alert('明细');
+    // alert('明细');
+    Actions.costDetail({ flight: flight, ticket: ticket, passengers: this.state.passengers, insurances: this.props.insurances });
   }
 
   renderFlightInfo() { return (<FlightInfo flight={flight} ticket={ticket} />) }
