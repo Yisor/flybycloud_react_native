@@ -5,6 +5,7 @@ import window from '../../../utils/window';
 import auditors from './auditors.json';
 
 class AuditorListPage extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +44,7 @@ class AuditorListPage extends Component {
         <Text style={styles.promptTxt}>您需要经过如下领导的审批方可订票</Text>
         <ListView
           contentContainerStyle={{ flex: 1 }}
-          dataSource={this.state.dataSource.cloneWithRows(auditors)}
+          dataSource={this.state.dataSource.cloneWithRows(this.props.audits)}
           renderRow={this.renderRow}
           enableEmptySections={true}
           renderSeparator={() => <Divider />} />

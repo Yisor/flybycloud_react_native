@@ -34,7 +34,7 @@ class DeliveryMode extends Component {
             <View style={styles.expressTypeView}>
               <Text style={styles.rowItemRightText}>{expressType}</Text>
               <Text style={{ fontSize: 14, color: "#51a6f0" }}>{'(快递费￥)'}</Text>
-              <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/common/arrow_ash.png')} />
+              <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/order/orderwrite_arrowright.png')} />
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -43,7 +43,7 @@ class DeliveryMode extends Component {
             onPress={() => this.onPressAddress()}>
             <Text style={styles.rowItemLeftText}>配送地址</Text>
             <Text style={styles.rowItemRightText}>{this.props.receiveAddress}</Text>
-            <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/common/arrow_ash.png')} />
+            <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/order/orderwrite_arrowright.png')} />
           </TouchableOpacity>
         </View>
       );
@@ -53,7 +53,7 @@ class DeliveryMode extends Component {
           <Text style={styles.rowItemLeftText}>配送方式</Text>
           <View style={styles.expressTypeView}>
             <Text style={styles.rowItemRightText}>{expressType}</Text>
-            <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/common/arrow_ash.png')} />
+            <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/order/orderwrite_arrowright.png')} />
           </View>
         </TouchableOpacity>
       );

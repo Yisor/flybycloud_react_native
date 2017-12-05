@@ -9,6 +9,7 @@ class InsuranceList extends Component {
 
   static propTypes = {
     onSelect: PropTypes.func,
+    datas: PropTypes.array
   }
 
   constructor(props) {
@@ -16,28 +17,12 @@ class InsuranceList extends Component {
     this.state = {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
     };
-    this.newList = [];
-  }
-
-  componentDidMount() {
-    this.getData();
-  }
-
-  getData() {
-    let tempList = [];
-    insurances.map((item) => {
-      item['isChecked'] = false;
-      tempList.push(item);
-    });
-
-    this.setState({ dataSource: this.state.dataSource.cloneWithRows(tempList) });
-    this.newList = JSON.parse(JSON.stringify(tempList));
   }
 
   onPressRow(rowData, sectionID, rowID) {
-    let { onSelect } = this.props;
-    this.newList[rowID].isChecked = !this.newList[rowID].isChecked;
-    onSelect && onSelect(this.newList, rowID);
+    let { onSelect, datas } = this.props;
+    datas[rowID].isChecked = !datas[rowID].isChecked;
+    onSelect && onSelect(datas, rowID);
   }
 
   renderRow = (rowData, sectionID, rowID) => {
@@ -48,7 +33,7 @@ class InsuranceList extends Component {
     return (
       <ListView
         contentContainerStyle={[styles.contentContainer, this.props.style]}
-        dataSource={this.state.dataSource}
+        dataSource={this.state.dataSource.cloneWithRows(this.props.datas)}
         renderRow={this.renderRow}
         enableEmptySections={true} />
     );

@@ -53,7 +53,7 @@ class FlightInfo extends Component {
           <View style={{ flexDirection: 'row', margin: 10, justifyContent: 'space-between', }}>
             <View style={{ flexDirection: 'row' }}>
               <Text style={{ fontSize: 11, color: "#797f85", marginRight: 20 }}>{`成人票价￥${ticket.price}`}</Text>
-              <Text style={{ fontSize: 11, color: "#797f85" }}>{`机建燃油￥${ticket.buildFee}`}</Text>
+              <Text style={{ fontSize: 11, color: "#797f85" }}>{`机建燃油￥${ticket.buildFee + ticket.oilFee}`}</Text>
             </View>
             <TouchableOpacity activeOpacity={0.6}>
               <Text style={{ fontSize: 11, color: "#51a6f0" }}>查看退改签</Text>
