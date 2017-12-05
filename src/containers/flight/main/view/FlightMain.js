@@ -143,8 +143,8 @@ class FlightMain extends Component {
           style={styles.routeSelect} />
         {this.renderTime()}
         <View style={{ flexDirection: 'row', margin: 20 }}>
-          <Button title='查询' onPress={this.onQuery} style={styles.queryButton} titleStyle={{ color: 'white' }} />
-          <Button title='政采' onPress={this.onQueryGovernment} style={styles.govQueryBtn} titleStyle={{ color: 'white' }} />
+          <Button type='primary' title='查询' onPress={this.onQuery} style={styles.queryButton} titleStyle={{ color: 'white' }} />
+          <Button type='primary' title='政采' onPress={this.onQueryGovernment} style={styles.govQueryBtn} titleStyle={{ color: 'white' }} />
         </View>
       </View>
     )
@@ -199,7 +199,8 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 44,
     marginRight: 10,
-    backgroundColor: "#51a6f0"
+    backgroundColor: "#51a6f0",
+    borderColor: '#51a6f0'
   },
   govQueryBtn: {
     width: 80,
@@ -231,7 +232,6 @@ const styles = StyleSheet.create({
   },
   extraContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     justifyContent: 'center'
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, CheckBox, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import window from '../../../../utils/window';
 
 class InsuranceItem extends Component {
   static propTypes = {
@@ -23,16 +24,14 @@ class InsuranceItem extends Component {
   render() {
     let rowData = this.props.insurance;
     return (
-      <TouchableOpacity
-        activeOpacity={0.6}
-        style={styles.insuranceView} >
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
-          <Text style={{ fontSize: 14, color: "#797f85" }}>{rowData.insuranceName}</Text>
-          <View >
+      <View style={styles.insuranceView} >
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10}}>
+          <Text numberOfLines={1} style={{ fontSize: 14, color: "#797f85" }}>{rowData.insuranceName}</Text>
+          <TouchableOpacity >
             <Text style={{ fontSize: 11, color: "#51a6f0", marginLeft: 5 }}>详细说明</Text>
-          </View>
+          </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10, marginRight: 10, width: 100 }}>
           <Text style={{ marginRight: 10, fontSize: 14, color: "#323b43" }}>{`￥${rowData.unitPrice}/份`}</Text>
           <CheckBox
             value={this.state.isChecked}
@@ -42,7 +41,7 @@ class InsuranceItem extends Component {
             }}
           />
         </View>
-      </TouchableOpacity>
+      </View>
     );
   }
 }

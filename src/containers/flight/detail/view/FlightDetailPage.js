@@ -8,7 +8,7 @@ import Divider from '../../../../components/Divider';
 import SegmentedBar from '../../../../components/SegmentedBar';
 import { formatTime, getTimeString } from '../../../../utils/timeUtils';
 
-import flight from './seats.json';
+// import flight from './seats.json';
 
 const isStopover = [false, true]; // 是否经停
 let dataSet = [];
@@ -23,27 +23,28 @@ class FlightDetailPage extends Component {
   }
 
   componentWillMount() {
-    // flight = this.props.flight;
+    flight = this.props.flight;
     tickets = flight.tickets;
   }
 
   componentDidMount() {
-    let economyClass = tickets.filter((item) => {
-      return item.mainClassName == '经济舱';
-    });
+    // let economyClass = tickets.filter((item) => {
+    //   return item.mainClassName == '经济舱';
+    // });
 
-    let businessClass = tickets.filter((item) => {
-      return item.mainClassName == '商务舱';
-    });
+    // let businessClass = tickets.filter((item) => {
+    //   return item.mainClassName == '商务舱';
+    // });
 
-    let firstClass = tickets.filter((item) => {
-      return item.mainClassName == '头等舱';
-    });
+    // let firstClass = tickets.filter((item) => {
+    //   return item.mainClassName == '头等舱';
+    // });
 
-    dataSet.push(economyClass);
-    dataSet.push(businessClass);
-    dataSet.push(firstClass);
-    this.setState({ index: 0 });
+    // dataSet.push(economyClass);
+    // dataSet.push(businessClass);
+    // dataSet.push(firstClass);
+    // this.setState({ index: 0 });
+    this.getHttpData();
   }
 
   getHttpData() {

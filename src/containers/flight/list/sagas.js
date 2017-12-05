@@ -40,10 +40,9 @@ const mockData = [
 
 export function* queryFlight(params) {
   try {
-    // let url = apiUrl.flightTicket + params.flightDate + "/" + params.fromCity + "/" + params.toCity;
-    // const result = yield call(get, url);
-    // const result = { code: "1001", message: "模拟请求" };
-    const result = mockData;
+    let url = apiUrl.flightTicket + params.flightDate + "/" + params.fromCity + "/" + params.toCity;
+    const result = yield call(get, url);
+    // const result = mockData;
     // console.log("返回结果" + JSON.stringify(result));
     yield put({ type: FLIGHT_QUERY_SUCESS, data: result });
   } catch (error) {
