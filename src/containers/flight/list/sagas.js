@@ -1,10 +1,11 @@
 import { takeEvery, delay } from 'redux-saga';
 import { put, call, take, fork } from 'redux-saga/effects';
 import { Alert } from 'react-native';
+import ModalIndicator from '../../../components/ModalIndicator';
 import { FLIGHT_QUERY, FLIGHT_QUERY_SUCESS } from './actionTypes';
 import { get } from '../../../service/request';
 import apiUrl from '../../../constants/api';
-import { Actions } from 'react-native-router-flux';
+
 const mockData = [
   {
     "flightId": "2017-12-2306450925CA1701HGHPEK",
@@ -40,13 +41,19 @@ const mockData = [
 
 export function* queryFlight(params) {
   try {
+    ModalIndicator.show();
     let url = apiUrl.flightTicket + params.flightDate + "/" + params.fromCity + "/" + params.toCity;
     const result = yield call(get, url);
     // const result = mockData;
-    // console.log("返回结果" + JSON.stringify(result));
-    yield put({ type: FLIGHT_QUERY_SUCESS, data: result });
+    ModalIndicator.hide();
+    console.log(JSON.stringify(result));
+    if (Array.isArray(result)) {
+      yield put({ type: FLIGHT_QUERY_SUCESS, data: result });
+    } else {
+      Alert.alert(result.message);
+    }
   } catch (error) {
-    Alert('网络故障' + error);
+    Alert.alert('网络故障' + error);
   }
 }
 

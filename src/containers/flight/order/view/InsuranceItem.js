@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, CheckBox, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import window from '../../../../utils/window';
+import Overlay from '../../../../components/Overlay';
 
 class InsuranceItem extends Component {
   static propTypes = {
@@ -21,17 +22,36 @@ class InsuranceItem extends Component {
     onPressItem && onPressItem();
   }
 
+  wordLimit(str) {
+    return str.length > 10 ? str.substr(0, 10) + '...' : str;
+  }
+
+  showPop(type, data) {
+    let overlayView = (
+      <Overlay.PopView
+        style={{ alignItems: 'center', justifyContent: 'center' }}
+        type={type}
+        modal={false}
+        ref={v => this.overlayPopView = v}>
+        <View style={styles.popView}>
+          <Text style={{ marginLeft: 20, marginRight: 20 }}>{`${data.insuranceName}:${data.insuranceDesc}`}</Text>
+        </View>
+      </Overlay.PopView>
+    );
+    Overlay.show(overlayView);
+  }
+
   render() {
     let rowData = this.props.insurance;
     return (
       <View style={styles.insuranceView} >
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10}}>
-          <Text numberOfLines={1} style={{ fontSize: 14, color: "#797f85" }}>{rowData.insuranceName}</Text>
-          <TouchableOpacity >
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
+          <Text numberOfLines={1} style={{ fontSize: 14, color: "#797f85" }}>{this.wordLimit(rowData.insuranceName)}</Text>
+          <TouchableOpacity onPress={() => this.showPop('zoomIn', rowData)}>
             <Text style={{ fontSize: 11, color: "#51a6f0", marginLeft: 5 }}>详细说明</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10, marginRight: 10, width: 100 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10, marginLeft: 10 }}>
           <Text style={{ marginRight: 10, fontSize: 14, color: "#323b43" }}>{`￥${rowData.unitPrice}/份`}</Text>
           <CheckBox
             value={this.state.isChecked}
@@ -53,6 +73,15 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15
   },
+  popView: {
+    backgroundColor: '#fff',
+    width: 300,
+    minWidth: 260,
+    minHeight: 120,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 export default InsuranceItem;

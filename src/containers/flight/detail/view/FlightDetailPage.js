@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Image, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { get } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
+import { flightDetailQuery } from '../actions';
 import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
 import SegmentedBar from '../../../../components/SegmentedBar';
@@ -28,23 +30,8 @@ class FlightDetailPage extends Component {
   }
 
   componentDidMount() {
-    // let economyClass = tickets.filter((item) => {
-    //   return item.mainClassName == '经济舱';
-    // });
-
-    // let businessClass = tickets.filter((item) => {
-    //   return item.mainClassName == '商务舱';
-    // });
-
-    // let firstClass = tickets.filter((item) => {
-    //   return item.mainClassName == '头等舱';
-    // });
-
-    // dataSet.push(economyClass);
-    // dataSet.push(businessClass);
-    // dataSet.push(firstClass);
-    // this.setState({ index: 0 });
-    this.getHttpData();
+    this.props.dispatch(flightDetailQuery(this.props.flight.flightId));
+    // this.getHttpData();
   }
 
   getHttpData() {
@@ -52,15 +39,15 @@ class FlightDetailPage extends Component {
     get(`${url}/1`).then((response) => {
       dataSet.push(response);
       this.setState({ index: 0 });
-      console.log('get经济舱返回：' + JSON.stringify(response));
+      // console.log('get经济舱返回：' + JSON.stringify(response));
     });
     get(`${url}/2`).then((response) => {
       dataSet.push(response);
-      console.log('get商务舱返回：' + JSON.stringify(response));
+      // console.log('get商务舱返回：' + JSON.stringify(response));
     });
     get(`${url}/3`).then((response) => {
       dataSet.push(response);
-      console.log('get头等舱返回：' + JSON.stringify(response));
+      // console.log('get头等舱返回：' + JSON.stringify(response));
     });
   }
 
@@ -102,7 +89,7 @@ class FlightDetailPage extends Component {
       </View>
     );
   }
-     
+
   renderSegmentedBar() {
     return (
       <SegmentedBar
@@ -145,8 +132,21 @@ class FlightDetailPage extends Component {
     );
   }
 
+  getListData() {
+    let datas = {};
+    if (this.state.index == 0) {
+      datas = this.props.economyClass;
+    }
+    if (this.state.index == 1) {
+      datas = this.props.businessClass;
+    }
+    if (this.state.index == 2) {
+      datas = this.props.firstClass;
+    }
+    return datas;
+  }
   renderList() {
-    let datas = dataSet.length == 0 ? [] : dataSet[this.state.index];
+    let datas = this.getListData();
     return (
       <ListView
         dataSource={this.state.dataSource.cloneWithRows(datas)}
@@ -236,4 +236,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FlightDetailPage;
+// export default FlightDetailPage;
+
+
+const select = store => ({
+  economyClass: store.flightDetailStore.economyClass,
+  businessClass: store.flightDetailStore.businessClass,
+  firstClass: store.flightDetailStore.firstClass,
+})
+export default connect(select)(FlightDetailPage);

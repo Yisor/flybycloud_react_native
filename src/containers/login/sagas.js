@@ -5,15 +5,23 @@ import { LOGGED_IN, LOGGED_DOING } from './actionTypes';
 import { post } from '../../service/request';
 import apiUrl from '../../constants/api';
 import { Actions } from 'react-native-router-flux';
+import Store from '../../utils/store';
+import { storeUserKey } from '../../constants/constDefines';
 
 export function* loginToServer(params) {
   try {
     const result = yield call(post, apiUrl.login, params);
-    global.token = result.token;
     console.log("返回结果" + JSON.stringify(result));
-    yield put({ type: LOGGED_DOING, data: result });  // 中间件发起一个 action 到 Store
+    if (result.message && result.code) {
+      Alert.alert(result.message);
+    } else {
+      global.token = result.token;
+      Store.set(storeUserKey, result);
+      yield put({ type: LOGGED_DOING, data: result });  // 中间件发起一个 action 到 Store
+    }
+
   } catch (error) {
-    Alert('网络故障' + error);
+    Alert.alert('网络故障' + error);
   }
 }
 

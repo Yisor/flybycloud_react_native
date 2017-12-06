@@ -11,6 +11,8 @@ import { Actions } from 'react-native-router-flux';
 import FlightMain from './FlightMain';
 import { ticketQuery } from '../action';
 import * as TYPES from '../actionTypes';
+import Store from '../../../../utils/store';
+import { storeUserKey } from '../../../../constants/constDefines';
 
 // 机票搜索
 class FlightMainPage extends Component {
@@ -33,6 +35,9 @@ class FlightMainPage extends Component {
     }
   }
 
+  componentWillMount() {
+
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === TYPES.SELECT_START_CITY) {
@@ -41,6 +46,17 @@ class FlightMainPage extends Component {
     if (nextProps.action === TYPES.SELECT_END_CITY) {
       this.setState({ endCity: nextProps.city });
     }
+  }
+
+  componentDidMount() {
+    Store.get(storeUserKey).then((res) => {
+      console.log('本地用户信息' + JSON.stringify(res));
+      if (res) {
+        this.props.dispatch({ 'type': 'LOGGED_DOING', data: res });
+      } else {
+        Actions.login();
+      }
+    });
   }
 
   onExchange = () => {
@@ -75,7 +91,6 @@ class FlightMainPage extends Component {
   }
 
   render() {
-    console.log('出发：' + this.state.startCity.cityName);
     return (
       <FlightMain
         startDate={this.state.startDate}

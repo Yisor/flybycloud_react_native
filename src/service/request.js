@@ -31,14 +31,14 @@ export const get = (api) => {
   console.log('路径：' + url);
   Headers.ts = getTs()
   Headers.sign = getSign(api)
-  Headers.token = mockToken
+  Headers.token = global.token
   return fetch(url, {
     method: 'GET',
     headers: Headers
   })
     .then((response) => response.json())
     .then((json) => { return json })
-    .catch((error) => { return { code: error.code, data: null, message: error.message } })
+    .catch((error) => { return { code: error.code, message: error.message } })
 }
 
 /**
@@ -60,7 +60,7 @@ export const post = (api, params) => {
   })
     .then((response) => response.json())
     .then((json) => { return json })
-    .catch((error) => { return { code: error.code, data: null, message: error.message } })
+    .catch((error) => { return { code: error.code, message: error.message } })
 }
 
 /**

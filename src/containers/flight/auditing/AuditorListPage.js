@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     marginLeft: 40
   },
   divider: {
-    width: 80,
+    width: 60,
     backgroundColor: '#51a6f0'
   },
   levelView: {

@@ -62,7 +62,8 @@ class rootRouter extends Component {
           key="root"
           titleStyle={{ alignSelf: 'center', color: 'white' }}
           navigationBarStyle={{ backgroundColor: "#51a6f0" }}
-          backButtonImage={require('./resources/assets/common/arrow_white_icon.png')}>
+          backButtonImage={require('./resources/assets/common/arrow_white_icon.png')}
+          renderRightButton={() => { <View /> }}>
           <Tabs key="tabbar" tabBarPosition="bottom" tabBarStyle={styles.tabbarContainer} >
             <Stack hideNavBar key="tab_home" title="首页" >
               <Scene key="home" component={HomePage} title="首页" />
@@ -79,16 +80,16 @@ class rootRouter extends Component {
           </Tabs>
 
           <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" />
-          <Scene key="flight" component={FlightMainPage} title="机票" />
+          <Scene key="flight" component={FlightMainPage} title="机票" initial />
           <Scene back key="city" component={SelectCityPage} title="城市" />
           <Scene back key="flightList" component={FlightListPage} title="航班" />
-          <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" initial />
+          <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" />
           <Scene back key="passengerSelect" component={PassengerSelectPage} title="选择乘客" />
           <Scene back key="fillOrder" component={FillOrderPage} title="订单填写" />
           <Scene back key="auditorList" component={AuditorListPage} title="查看审批人" />
           <Scene back key="addressList" component={AddressListPage} title="选择配送地址" />
           <Scene back key="costDetail" component={CostDetail} title="CostDetail" />
-          
+
         </Stack>
       </Router>
     );

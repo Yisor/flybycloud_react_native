@@ -10,6 +10,7 @@ class DeliveryMode extends Component {
     onPressAddress: PropTypes.func,
     selectedIndex: PropTypes.number.isRequired,
     receiveAddress: PropTypes.string,
+    expressFee: PropTypes.number,
   }
 
   // 配送方式
@@ -26,6 +27,7 @@ class DeliveryMode extends Component {
 
   render() {
     let expressType = expressTypes[this.props.selectedIndex];
+    let { expressFee } = this.props;
     if (expressType == '快递') {
       return (
         <View style={{ backgroundColor: "#fff", marginTop: 8 }}>
@@ -33,8 +35,7 @@ class DeliveryMode extends Component {
             <Text style={styles.rowItemLeftText}>配送方式</Text>
             <View style={styles.expressTypeView}>
               <Text style={styles.rowItemRightText}>{expressType}</Text>
-              <Text style={{ fontSize: 14, color: "#51a6f0" }}>{'(快递费￥)'}</Text>
-              <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/order/orderwrite_arrowright.png')} />
+              <Text style={{ fontSize: 14, color: "#51a6f0" }}>{`快递费￥${expressFee}`}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -43,7 +44,6 @@ class DeliveryMode extends Component {
             onPress={() => this.onPressAddress()}>
             <Text style={styles.rowItemLeftText}>配送地址</Text>
             <Text style={styles.rowItemRightText}>{this.props.receiveAddress}</Text>
-            <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/order/orderwrite_arrowright.png')} />
           </TouchableOpacity>
         </View>
       );
@@ -53,7 +53,6 @@ class DeliveryMode extends Component {
           <Text style={styles.rowItemLeftText}>配送方式</Text>
           <View style={styles.expressTypeView}>
             <Text style={styles.rowItemRightText}>{expressType}</Text>
-            <Image style={{ height: 20, width: 20 }} source={require('../../../../resources/assets/order/orderwrite_arrowright.png')} />
           </View>
         </TouchableOpacity>
       );

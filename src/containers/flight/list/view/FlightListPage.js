@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, Image, ListView, StyleSheet, ActivityIndicator, InteractionManager, Alert, TouchableOpacity, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { flightQuery } from '../action';

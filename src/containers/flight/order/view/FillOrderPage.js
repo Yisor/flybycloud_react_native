@@ -26,7 +26,7 @@ class FillOrderPage extends Component {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
       passengers: [],
       costCenterSelectedIndex: 0,
-      expressTypeSelectedIndex: 0,
+      expressTypeSelectedIndex: this.props.user.expressType,
       receiveAddress: null,
       selectedInsurances: []
     };
@@ -41,6 +41,7 @@ class FillOrderPage extends Component {
     this.props.dispatch(auditingQuery());
     this.props.dispatch(costCenterQuery());
     this.props.dispatch(insuranceQuery());
+    // console.log('订单用户：' + JSON.stringify(this.props.user));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -142,20 +143,21 @@ class FillOrderPage extends Component {
   }
 
   renderContacts() {
+    let { user } = this.props;
     return (
       <View style={{ backgroundColor: "#ffffff", marginTop: 8 }}>
         <View style={styles.contactItemView}>
           <Text style={{ fontSize: 14, color: "#797f85", marginLeft: 10 }}>联系人</Text>
-          <Text style={{ fontSize: 14, color: "#323b43", marginLeft: 40 }}>王测试</Text>
+          <Text style={{ fontSize: 14, color: "#323b43", marginLeft: 40 }}>{user.userName}</Text>
         </View>
         <Divider style={{ marginLeft: 10 }} />
         <View style={styles.contactItemView}>
           <Text style={{ fontSize: 14, color: "#797f85", marginLeft: 10 }}>联系方式</Text>
-          <Text style={{ fontSize: 14, color: "#323b43", marginLeft: 25 }}>134123456789</Text>
+          <Text style={{ fontSize: 14, color: "#323b43", marginLeft: 25 }}>{user.userPhone}</Text>
         </View>
         <View style={styles.contactItemView}>
           <Text style={{ fontSize: 14, color: "#797f85", marginLeft: 10 }}>选择短信接收人:</Text>
-          <Text style={{ fontSize: 14, color: "#323b43", marginLeft: 25 }}>134123456789</Text>
+          <Text style={{ fontSize: 14, color: "#323b43", marginLeft: 25 }}>{user.userPhone}</Text>
         </View>
       </View>
     );
@@ -172,8 +174,10 @@ class FillOrderPage extends Component {
 
   // 配送方式
   renderDeliveries() {
+    let { user } = this.props;
     return (
       <DeliveryMode
+        expressFee={user.expressFee}
         receiveAddress={this.state.receiveAddress}
         selectedIndex={this.state.expressTypeSelectedIndex}
         onPressDelivery={() => this.onPressDeliveries()}
@@ -183,10 +187,11 @@ class FillOrderPage extends Component {
 
   // 支付方式
   renderPayment() {
+    let { user } = this.props;
     return (
       <TouchableOpacity style={styles.rowItem} activeOpacity={0.6}>
         <Text style={styles.rowItemLeftText}>支付方式</Text>
-        <Text style={styles.rowItemRightText}>企业垫付</Text>
+        <Text style={styles.rowItemRightText}>{user.payType == 1 ? '在线支付' : '企业垫付'}</Text>
       </TouchableOpacity>
     );
   }
