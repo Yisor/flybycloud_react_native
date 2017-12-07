@@ -151,8 +151,8 @@ const styles = StyleSheet.create({
 });
 
 const select = store => ({
-  status: store.userStore.status,
-  user: store.userStore.user,
+  status: store.user.login.status,
+  user: store.user.login.user,
 })
 export default connect(select)(LoginPage);
 

@@ -9,7 +9,6 @@ import { View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import FlightMain from './FlightMain';
-import { ticketQuery } from '../action';
 import * as TYPES from '../actionTypes';
 import Store from '../../../../utils/store';
 import { storeUserKey } from '../../../../constants/constDefines';
@@ -35,10 +34,6 @@ class FlightMainPage extends Component {
     }
   }
 
-  componentWillMount() {
-
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === TYPES.SELECT_START_CITY) {
       this.setState({ startCity: nextProps.city });
@@ -50,7 +45,7 @@ class FlightMainPage extends Component {
 
   componentDidMount() {
     Store.get(storeUserKey).then((res) => {
-      console.log('本地用户信息' + JSON.stringify(res));
+      // console.log('本地用户信息' + JSON.stringify(res));
       if (res) {
         this.props.dispatch({ 'type': 'LOGGED_DOING', data: res });
       } else {
@@ -87,7 +82,6 @@ class FlightMainPage extends Component {
     let params = { flightDate, fromCity, toCity }
     let title = this.state.startCity.cityName + "-" + this.state.endCity.cityName;
     Actions.flightList({ 'title': title, 'params': params });
-    // this.props.dispatch(ticketQuery(params));
   }
 
   render() {
@@ -105,9 +99,5 @@ class FlightMainPage extends Component {
   }
 }
 
-
-const select = store => ({
-  status: store.flightStore.status,
-  data: store.flightStore.data,
-})
+const select = store => store
 export default connect(select)(FlightMainPage);

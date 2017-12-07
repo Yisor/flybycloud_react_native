@@ -37,9 +37,7 @@ class PassengerSelectPage extends Component {
     passengerList = [];
   }
 
-  componentDidMount() {
-
-  }
+  componentDidMount() { }
 
   async formatEmplist(datas) {
     let newList = [];
@@ -81,7 +79,6 @@ class PassengerSelectPage extends Component {
   }
 
   onSubmit() {
-    
     Actions.pop({ refresh: ({ 'passengers': empList }) });
   }
 

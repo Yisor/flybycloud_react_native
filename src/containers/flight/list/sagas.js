@@ -46,7 +46,7 @@ export function* queryFlight(params) {
     const result = yield call(get, url);
     // const result = mockData;
     ModalIndicator.hide();
-    console.log(JSON.stringify(result));
+    // console.log(JSON.stringify(result));
     if (Array.isArray(result)) {
       yield put({ type: FLIGHT_QUERY_SUCESS, data: result });
     } else {

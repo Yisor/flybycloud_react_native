@@ -66,6 +66,6 @@ const styles = StyleSheet.create({
 
 
 const select = store => ({
-  addresses: store.addressStore.addresses,
+  addresses: store.user.address.addresses,
 })
 export default connect(select)(AddressListPage);

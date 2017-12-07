@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
 });
 
 const select = store => ({
-  flights: store.flightStore.flights,
-  status: store.flightStore.status,
+  flights: store.flight.list.flights,
+  status: store.flight.list.status,
 })
 export default connect(select)(FlightListPage);

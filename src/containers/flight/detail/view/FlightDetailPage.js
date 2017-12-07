@@ -240,8 +240,8 @@ const styles = StyleSheet.create({
 
 
 const select = store => ({
-  economyClass: store.flightDetailStore.economyClass,
-  businessClass: store.flightDetailStore.businessClass,
-  firstClass: store.flightDetailStore.firstClass,
+  economyClass: store.flight.detail.economyClass,
+  businessClass: store.flight.detail.businessClass,
+  firstClass: store.flight.detail.firstClass,
 })
 export default connect(select)(FlightDetailPage);

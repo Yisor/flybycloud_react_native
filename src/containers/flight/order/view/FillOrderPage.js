@@ -9,15 +9,15 @@ import { get } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
 import { auditingQuery, costCenterQuery, insuranceQuery, insuranceChecked } from '../action';
 import { formatTime, getTimeString } from '../../../../utils/timeUtils';
-const isStopover = [false, true]; // 是否经停
 import costCenter from './costcenter.json';
 import InsuranceList from './InsuranceList';
 import CostCenterPicker from './CostCenterPicker';
 import ExpressTypePicker from './ExpressTypePicker';
-const expressTypes = ['不需要配送', '快递', '自取', '票务公司自取', '企业统一配送'];
 import FlightInfo from './FlightInfo';
 import DeliveryMode from './DeliveryMode';
 
+const isStopover = [false, true]; // 是否经停
+const expressTypes = ['不需要配送', '快递', '自取', '票务公司自取', '企业统一配送'];
 
 class FillOrderPage extends Component {
   constructor(props) {
@@ -41,7 +41,6 @@ class FillOrderPage extends Component {
     this.props.dispatch(auditingQuery());
     this.props.dispatch(costCenterQuery());
     this.props.dispatch(insuranceQuery());
-    // console.log('订单用户：' + JSON.stringify(this.props.user));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -380,11 +379,11 @@ const styles = StyleSheet.create({
 });
 
 const select = store => ({
-  audits: store.auditingStore.audits,
-  insurances: store.auditingStore.insurances,
-  insuranceChecked: store.auditingStore.insuranceChecked,
-  costCenter: store.auditingStore.costCenter,
-  status: store.auditingStore.status,
-  user: store.userStore.user,
+  audits: store.flight.order.audits,
+  insurances: store.flight.order.insurances,
+  insuranceChecked: store.flight.order.insuranceChecked,
+  costCenter: store.flight.order.costCenter,
+  status: store.flight.order.status,
+  user: store.user.login.user,
 })
 export default connect(select)(FillOrderPage);
