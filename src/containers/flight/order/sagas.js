@@ -72,3 +72,10 @@ export function* watchFetchFillOrderData() {
     yield fork(queryAuditPerson);
   }
 }
+
+export default function* orderSaga() {
+  yield [
+    fork(watchFetchFillOrderData),
+    fork(watchCheckInsurance)
+  ];
+}

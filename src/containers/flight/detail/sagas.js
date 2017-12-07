@@ -13,7 +13,7 @@ export function* queryEconomyClass(flightId) {
     // console.log("经济舱返回结果" + JSON.stringify(result));
     yield put({ type: TYPES.ECONOMY_QUERY_SUCESS, data: result });
   } catch (error) {
-    Alert('网络故障' + error);
+    Alert.alert('网络故障' + error);
   }
 }
 
@@ -24,7 +24,7 @@ export function* queryBusinessClass(flightId) {
     // console.log("返回结果" + JSON.stringify(result));
     yield put({ type: TYPES.BUSINESS_QUERY_SUCESS, data: result });
   } catch (error) {
-    Alert('网络故障' + error);
+    Alert.alert('网络故障' + error);
   }
 }
 
@@ -35,7 +35,7 @@ export function* queryFirstClass(flightId) {
     // console.log("返回结果" + JSON.stringify(result));
     yield put({ type: TYPES.FIRST_QUERY_SUCESS, data: result });
   } catch (error) {
-    Alert('网络故障' + error);
+    Alert.alert('网络故障' + error);
   }
 }
 

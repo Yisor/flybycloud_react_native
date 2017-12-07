@@ -51,5 +51,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     textDecorationLine: 'none',
     paddingLeft: 10,
+    textAlign: 'center',
   }
 });

@@ -12,7 +12,7 @@ export function* queryAddress() {
     console.log("地址返回" + JSON.stringify(result));
     yield put({ type: TYPES.ADDRESS_QUERY_SUCCESS, data: result });
   } catch (error) {
-    Alert('网络故障' + error);
+    Alert.alert('网络故障' + error);
   }
 }
 

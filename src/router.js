@@ -19,7 +19,7 @@ import UserInfoPage from './containers/UserInfoPage';
 import HomePage from './containers/HomePage';
 import CustomNavBar from './components/CustomNavBar';
 import { LoginPage } from './containers/login';
-import { FlightMainPage } from './containers/flight/main';
+import FlightMainPage from './containers/flight/main';
 import { AddressListPage } from './containers/user/address';
 import SelectCityPage from './containers/city/SelectCityPage';
 import FlightListPage from './containers/flight/list/view/FlightListPage';
@@ -79,7 +79,7 @@ class rootRouter extends Component {
             </Stack>
           </Tabs>
 
-          <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登 录" />
+          <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登录飞巴商旅" />
           <Scene key="flight" component={FlightMainPage} title="机票" initial />
           <Scene back key="city" component={SelectCityPage} title="城市" />
           <Scene back key="flightList" component={FlightListPage} title="航班" />
