@@ -7,7 +7,7 @@ import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
 import { get } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
-import { auditingQuery, costCenterQuery, insuranceQuery, insuranceChecked } from '../action';
+import { insuranceChecked, fetchFillOrderData } from '../action';
 import { formatTime, getTimeString } from '../../../../utils/timeUtils';
 import costCenter from './costcenter.json';
 import InsuranceList from './InsuranceList';
@@ -38,9 +38,7 @@ class FillOrderPage extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(auditingQuery());
-    this.props.dispatch(costCenterQuery());
-    this.props.dispatch(insuranceQuery());
+    this.props.dispatch(fetchFillOrderData());
   }
 
   componentWillReceiveProps(nextProps) {
