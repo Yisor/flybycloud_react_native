@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, Image, ImageBackground, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, Image, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import SegmentedBar from '../../../../components/SegmentedBar';
 import TabView from '../../../../components/TabView';
 import Button from '../../../../components/Button';
@@ -17,6 +17,7 @@ class FlightMain extends Component {
     onSelectStartDate: PropTypes.func,
     onSelectBackDate: PropTypes.func,
     onQuery: PropTypes.func,
+    onQueryGpticket: PropTypes.func,
     startCity: PropTypes.string,
     endCity: PropTypes.string,
     onExchange: PropTypes.func,
@@ -33,12 +34,14 @@ class FlightMain extends Component {
 
   // 查询
   onQuery = () => {
-    this.props.onQuery();
+    let { onQuery } = this.props;
+    onQuery && onQuery();
   }
 
   // 政采查询
   onQueryGovernment = () => {
-    Alert.alert('功能未开放！');
+    let { onQueryGpticket } = this.props;
+    onQueryGpticket && onQueryGpticket();
   }
 
   /** 
@@ -164,9 +167,11 @@ class FlightMain extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderAirTop()}
-        {this.renderMainContent()}
-        {this.renderExtra()}
+        <ScrollView contentContainerStyle={{ flex: 1 }} >
+          {this.renderAirTop()}
+          {this.renderMainContent()}
+          {this.renderExtra()}
+        </ScrollView>
         {this.renderBottomTab()}
       </View>
     );
@@ -233,7 +238,7 @@ const styles = StyleSheet.create({
   extraContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   }
 });
 export default FlightMain;

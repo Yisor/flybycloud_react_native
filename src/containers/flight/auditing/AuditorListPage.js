@@ -13,8 +13,6 @@ class AuditorListPage extends Component {
     };
   }
 
-  componentWillMount() { }
-
   componentDidMount() { }
 
   renderRow = (rowData) => {

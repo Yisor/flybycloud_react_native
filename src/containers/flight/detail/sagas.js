@@ -10,7 +10,7 @@ export function* queryEconomyClass(flightId) {
   try {
     let url = apiUrl.allSeat + flightId;
     const result = yield call(get, `${url}/1`);
-    // console.log("经济舱返回结果" + JSON.stringify(result));
+    console.log("经济舱返回结果" + JSON.stringify(result));
     yield put({ type: TYPES.ECONOMY_QUERY_SUCESS, data: result });
   } catch (error) {
     Alert.alert('网络故障' + error);
@@ -21,7 +21,7 @@ export function* queryBusinessClass(flightId) {
   try {
     let url = apiUrl.allSeat + flightId;
     const result = yield call(get, `${url}/2`);
-    // console.log("返回结果" + JSON.stringify(result));
+    console.log("返回商务结果" + JSON.stringify(result));
     yield put({ type: TYPES.BUSINESS_QUERY_SUCESS, data: result });
   } catch (error) {
     Alert.alert('网络故障' + error);
@@ -32,8 +32,19 @@ export function* queryFirstClass(flightId) {
   try {
     let url = apiUrl.allSeat + flightId;
     const result = yield call(get, `${url}/3`);
-    // console.log("返回结果" + JSON.stringify(result));
+    console.log("返回头等结果" + JSON.stringify(result));
     yield put({ type: TYPES.FIRST_QUERY_SUCESS, data: result });
+  } catch (error) {
+    Alert.alert('网络故障' + error);
+  }
+}
+
+export function* queryGpticket(flightId) {
+  try {
+    let url = apiUrl.gpticket + flightId;
+    const result = yield call(get, `${url}`);
+    console.log("政采票返回" + JSON.stringify(result));
+    yield put({ type: TYPES.GPTICKET_QUERY_SUCESS, data: result });
   } catch (error) {
     Alert.alert('网络故障' + error);
   }
@@ -43,8 +54,13 @@ export function* watchQueryFlightDetail() {
   while (true) {
     const action = yield take(TYPES.FLIGHT_DETAIL_QUERY);
     console.log('watchQueryFlightDetail' + JSON.stringify(action));
-    yield fork(queryEconomyClass, action.data);
-    yield fork(queryBusinessClass, action.data);
-    yield fork(queryFirstClass, action.data);
+    const { flightId, isGpTicket } = action.data;
+    if (isGpTicket) {
+      yield fork(queryGpticket, flightId);
+    } else {
+      yield fork(queryEconomyClass, flightId);
+      yield fork(queryBusinessClass, flightId);
+      yield fork(queryFirstClass, flightId);
+    }
   }
 }

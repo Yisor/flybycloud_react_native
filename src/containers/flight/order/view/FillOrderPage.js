@@ -15,6 +15,7 @@ import CostCenterPicker from './CostCenterPicker';
 import ExpressTypePicker from './ExpressTypePicker';
 import FlightInfo from './FlightInfo';
 import DeliveryMode from './DeliveryMode';
+import CostDetail from './CostDetail';
 
 const isStopover = [false, true]; // 是否经停
 const expressTypes = ['不需要配送', '快递', '自取', '票务公司自取', '企业统一配送'];
@@ -28,7 +29,8 @@ class FillOrderPage extends Component {
       costCenterSelectedIndex: 0,
       expressTypeSelectedIndex: this.props.user.expressType,
       receiveAddress: null,
-      selectedInsurances: []
+      selectedInsurances: [],
+      modalVisible: false,
     };
   }
 
@@ -85,8 +87,9 @@ class FillOrderPage extends Component {
   }
 
   onPressDetail() {
-    // alert('明细');
     Actions.costDetail({ flight: flight, ticket: ticket, passengers: this.state.passengers, insurances: this.props.insurances });
+    let visible = this.state.modalVisible;
+    this.setState({ modalVisible: !visible });
   }
 
   renderFlightInfo() { return (<FlightInfo flight={flight} ticket={ticket} />) }
@@ -258,9 +261,15 @@ class FillOrderPage extends Component {
     );
   }
 
+  renderModal() {
+    return (
+      <CostDetail flight={flight} ticket={ticket} passengers={this.state.passengers} insurances={this.props.insurances} />
+    )
+  }
+
   render() {
     return (
-      <View >
+      <View style={{ flex: 1 }}>
         <ScrollView style={styles.scrollView}>
           {this.renderFlightInfo()}
           {this.renderApprover()}

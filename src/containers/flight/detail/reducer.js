@@ -6,8 +6,9 @@ const initialState = {
   economyClass: {},
   businessClass: {},
   firstClass: {},
-  status: null,
-};
+  governmentClass: {},
+  status: null
+}
 
 const flight = (state = initialState, action) => {
   switch (action.type) {
@@ -27,6 +28,15 @@ const flight = (state = initialState, action) => {
       return {
         ...state,
         firstClass: action.data,
+        status: "Done"
+      };
+    case TYPES.GPTICKET_QUERY_SUCESS:
+      return {
+        ...state,
+        firstClass: {},
+        businessClass: {},
+        economyClass: {},
+        governmentClass: action.data,
         status: "Done"
       };
     default:

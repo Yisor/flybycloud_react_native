@@ -41,8 +41,10 @@ const mockData = [
 
 export function* queryFlight(params) {
   try {
+    console.log(JSON.stringify(params));
     ModalIndicator.show();
-    let url = apiUrl.flightTicket + params.flightDate + "/" + params.fromCity + "/" + params.toCity;
+    let baseUrl = params.isGpTicket ? apiUrl.gptickets : apiUrl.flightTicket;
+    let url = baseUrl + params.flightDate + "/" + params.fromCity + "/" + params.toCity;
     const result = yield call(get, url);
     // const result = mockData;
     ModalIndicator.hide();

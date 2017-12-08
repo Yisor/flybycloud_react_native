@@ -75,13 +75,18 @@ class FlightMainPage extends Component {
     // TODO 返程时间
   }
 
-  onQueryFlight = () => {
+  getRequestParams(isGpTicket) {
     let flightDate = this.state.startDate;
     let fromCity = this.state.startCity.cityCode;
     let toCity = this.state.endCity.cityCode;
-    let params = { flightDate, fromCity, toCity }
+    let params = { flightDate, fromCity, toCity, isGpTicket }
     let title = this.state.startCity.cityName + "-" + this.state.endCity.cityName;
-    Actions.flightList({ 'title': title, 'params': params });
+    return { 'title': title, 'params': params };
+  }
+
+  onQueryFlight(isGpTicket) {
+    let params = this.getRequestParams(isGpTicket);
+    Actions.flightList(params);
   }
 
   render() {
@@ -93,7 +98,8 @@ class FlightMainPage extends Component {
         endCity={this.state.endCity.cityName}
         onSelectCityStart={this.onSelectCityStart}
         onSelectCityEnd={this.onSelectCityEnd}
-        onQuery={this.onQueryFlight}
+        onQuery={() => this.onQueryFlight(false)}
+        onQueryGpticket={() => this.onQueryFlight(true)}
         onExchange={this.onExchange} />
     );
   }

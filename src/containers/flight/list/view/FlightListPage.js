@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ListView, StyleSheet, ActivityIndicator, InteractionManager, Alert, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, Image, ListView, StyleSheet, ActivityIndicator, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { flightQuery } from '../action';
@@ -11,7 +11,6 @@ import { formatTime } from '../../../../utils/timeUtils';
 const MealTypes = ['无餐食', '早餐', '午餐', '正餐', '小吃', '点心'];
 const isShare = [false, true];// 是否共享
 const isStopover = [false, true]; // 是否经停
-import mockData from './flight.json';
 
 class FlightListPage extends Component {
   constructor(props) {
@@ -39,9 +38,12 @@ class FlightListPage extends Component {
     return (isStopover[rowData.isStopover] ?
       <View style={{ alignItems: 'center', }}>
         <Text style={styles.stopoverText}>经停</Text>
-        <Image source={require('../../../../resources/assets/plane/plane_stopover_arrow_icon.png')} style={styles.flightArrowImg} />
+        <Image
+          style={styles.flightArrowImg}
+          source={require('../../../../resources/assets/plane/plane_stopover_arrow_icon.png')}
+        />
       </View>
-      : <Image source={require('../../../../resources/assets/plane/plane_arrow_icon.png')} style={styles.flightArrowImg} />
+      : <Image style={styles.flightArrowImg} source={require('../../../../resources/assets/plane/plane_arrow_icon.png')} />
     );
   }
 
@@ -75,7 +77,8 @@ class FlightListPage extends Component {
   }
 
   onPressItem(rowData) {
-    Actions.flightDetail({ 'flight': rowData });
+    let isGpTicket = this.props.params.isGpTicket;
+    Actions.flightDetail({ 'flight': rowData, 'isGpTicket': isGpTicket });
   }
 
   renderRow = (rowData) => {
@@ -126,18 +129,22 @@ class FlightListPage extends Component {
     return (
       <View style={styles.calendar}>
         <TouchableOpacity style={[styles.rowCenter, { marginLeft: 10 }]} activeOpacity={0.6}>
-          <Image style={[styles.arrowImg, { marginRight: 10 }]} resizeMode="contain" source={require('../../../../resources/assets/common/arrow_white_icon.png')} />
+          <Image style={[styles.arrowImg, { marginRight: 10 }]} resizeMode="contain"
+            source={require('../../../../resources/assets/common/arrow_white_icon.png')} />
           <Text style={{ color: 'white' }}>前一天</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.rowCenter, styles.dateView]} activeOpacity={0.6}>
           <Text style={{ marginLeft: 10 }}>02月27日</Text>
           <Text style={{ marginLeft: 10 }}>周一</Text>
-          <Image style={{ marginLeft: 10, marginRight: 10 }} resizeMode="contain" source={require('../../../../resources/assets/common/vertical_divider.png')} />
-          <Image style={{ width: 15, height: 15 }} resizeMode="contain" source={require('../../../../resources/assets/plane/plane_calendar.png')} />
+          <Image style={{ marginLeft: 10, marginRight: 10 }} resizeMode="contain"
+            source={require('../../../../resources/assets/common/vertical_divider.png')} />
+          <Image style={{ width: 15, height: 15 }} resizeMode="contain"
+            source={require('../../../../resources/assets/plane/plane_calendar.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={[styles.rowCenter, { marginRight: 10 }]} activeOpacity={0.6}>
           <Text style={{ color: 'white' }}>后一天</Text>
-          <Image style={[styles.arrowImg, { marginLeft: 10 }]} resizeMode="contain" source={require('../../../../resources/assets/common/arrow_next.png')} />
+          <Image style={[styles.arrowImg, { marginLeft: 10 }]} resizeMode="contain"
+            source={require('../../../../resources/assets/common/arrow_next.png')} />
         </TouchableOpacity>
       </View>
     );

@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, Image, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { get } from '../../../../service/request';
-import apiUrl from '../../../../constants/api';
 import { flightDetailQuery } from '../actions';
-import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
 import SegmentedBar from '../../../../components/SegmentedBar';
-import { formatTime, getTimeString } from '../../../../utils/timeUtils';
+import FlightInfo from './FlightInfo';
 
 // import flight from './seats.json';
 
@@ -25,30 +22,14 @@ class FlightDetailPage extends Component {
   }
 
   componentWillMount() {
+    this.isGpTicket = this.props.isGpTicket;
     flight = this.props.flight;
     tickets = flight.tickets;
   }
 
   componentDidMount() {
-    this.props.dispatch(flightDetailQuery(this.props.flight.flightId));
-    // this.getHttpData();
-  }
-
-  getHttpData() {
-    let url = apiUrl.allSeat + this.props.flight.flightId;
-    get(`${url}/1`).then((response) => {
-      dataSet.push(response);
-      this.setState({ index: 0 });
-      // console.log('get经济舱返回：' + JSON.stringify(response));
-    });
-    get(`${url}/2`).then((response) => {
-      dataSet.push(response);
-      // console.log('get商务舱返回：' + JSON.stringify(response));
-    });
-    get(`${url}/3`).then((response) => {
-      dataSet.push(response);
-      // console.log('get头等舱返回：' + JSON.stringify(response));
-    });
+    let params = { flightId: flight.flightId, isGpTicket: this.isGpTicket };
+    this.props.dispatch(flightDetailQuery(params));
   }
 
   // 预定
@@ -61,37 +42,10 @@ class FlightDetailPage extends Component {
     alert('改退签');
   }
 
-  renderFlight() {
-    return (
-      <View>
-        <View style={[styles.rowCenter, { marginTop: 20 }]}>
-          <Text style={{ fontSize: 18, color: "#323b43" }}>{flight.departureCityName}</Text>
-          <Text style={styles.isStopover}>{isStopover[flight.isStopover] ? 经停 : ''}</Text>
-          <Text style={{ fontSize: 18, color: "#323b43" }}>{flight.destinationCityName}</Text>
-        </View>
-        <View style={[styles.rowCenter, { marginTop: 10 }]}>
-          <Text style={{ fontSize: 24, color: "#323b43" }}>{formatTime(flight.departureTime)}</Text>
-          <Divider style={{ width: 60, marginLeft: 32, marginRight: 32 }} />
-          <Text style={{ fontSize: 24, color: "#323b43" }}>{formatTime(flight.destinationTime)}</Text>
-        </View>
-        <View style={[styles.rowCenter, { marginTop: 10 }]}>
-          <Text style={styles.airportName}>{flight.departureAirport}</Text>
-          <Text style={styles.flyingTimeText}>{getTimeString(flight.flyingTime)}</Text>
-          <Text style={styles.airportName}>{flight.destinationAirport}</Text>
-        </View>
-        <View style={[styles.rowCenter, { marginTop: 15 }]}>
-          <View style={{ borderRadius: 2, backgroundColor: "#36d7b7" }}>
-            <Text style={styles.carrierText}>实际承运</Text>
-          </View>
-          <Text style={styles.flightNumber}>{`${flight.airlineShortName}${flight.flightNumber}`} </Text>
-          <Text style={{ fontSize: 11, color: "#797f85" }}>{flight.planeType}</Text>
-        </View>
-      </View>
-    );
-  }
+  renderFlight() { return (<FlightInfo flight={flight} />); }
 
   renderSegmentedBar() {
-    return (
+    let SegmentedBarView = this.isGpTicket ? null :
       <SegmentedBar
         style={{ height: 50, marginTop: 10 }}
         indicatorPosition='bottom'
@@ -100,11 +54,38 @@ class FlightDetailPage extends Component {
         <SegmentedBar.Item title='经济舱' titleStyle={styles.barTitleStyle} activeTitleStyle={{ fontSize: 15 }} />
         <SegmentedBar.Item title='商务舱' titleStyle={styles.barTitleStyle} activeTitleStyle={{ fontSize: 15 }} />
         <SegmentedBar.Item title='头等舱' titleStyle={styles.barTitleStyle} activeTitleStyle={{ fontSize: 15 }} />
-      </SegmentedBar>
+      </SegmentedBar>;
+    return (SegmentedBarView);
+  }
+
+  renderFormHeader() {
+    let FormHeader = this.isGpTicket ?
+      <View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 12, paddingBottom: 12 }}>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <Text style={{ fontSize: 12, color: "#999999", marginRight: 20 }}>市场价</Text>
+          </View>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <Text style={{ fontSize: 12, color: "#f0b051", marginRight: 98 }}>预估政采价</Text>
+          </View>
+        </View>
+        <Divider />
+      </View> : null;
+    return (FormHeader)
+  }
+
+  renderRowMidView(item) {
+    let ChannelInfo = item.channelInfoId ?
+      <Text style={{ fontSize: 12, color: "#51a6f0" }}>特价抢票</Text> :
+      <Text style={{ fontSize: 12, color: "#ffa400" }}>保证出票</Text>
+    return (
+      <View>{this.isGpTicket ? <Text style={styles.gpPrice}>{`￥${item.price}`}</Text> : ChannelInfo} </View>
     );
   }
 
   renderRow = (item) => {
+    let bookBtnColor = item.channelInfoId ? "#51a6f0" : "#f0b051";
+    let price = this.isGpTicket ? item.gpPrice : item.price;
     return (
       <View style={styles.rowContainer}>
         <View style={{ marginTop: 16, marginBottom: 16 }}>
@@ -114,17 +95,16 @@ class FlightDetailPage extends Component {
           </TouchableOpacity>
         </View>
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          {item.channelInfoId ?
-            <Text style={{ fontSize: 12, color: "#51a6f0" }}>特价抢票</Text>
-            : <Text style={{ fontSize: 12, color: "#ffa400" }}>保证出票</Text>
-          }
+          {this.renderRowMidView(item)}
         </View>
         <View style={{ flexDirection: 'row', }}>
           <View style={{ alignItems: 'center', justifyContent: 'center', marginRight: 28 }}>
-            <Text style={{ fontSize: 11, color: "#323b43" }}>{`￥${item.price}`}</Text>
+            <Text style={{ fontSize: 11, color: "#323b43" }}>{`￥${price}`}</Text>
             <Text style={{ fontSize: 10, color: "#e26a6a" }}>{item.quantity < 9 ? `剩余${item.quantity}张` : ''}</Text>
           </View>
-          <TouchableOpacity activeOpacity={0.6} style={styles.preset} onPress={() => this.onBooked(item)}>
+          <TouchableOpacity
+            activeOpacity={0.6} style={[styles.preset, { backgroundColor: bookBtnColor }]}
+            onPress={() => this.onBooked(item)}>
             <Text style={{ fontSize: 12, color: "#ffffff" }}>预定</Text>
           </TouchableOpacity>
         </View>
@@ -134,17 +114,22 @@ class FlightDetailPage extends Component {
 
   getListData() {
     let datas = {};
-    if (this.state.index == 0) {
-      datas = this.props.economyClass;
-    }
-    if (this.state.index == 1) {
-      datas = this.props.businessClass;
-    }
-    if (this.state.index == 2) {
-      datas = this.props.firstClass;
+    if (this.isGpTicket) {
+      datas = this.props.governmentClass;
+    } else {
+      if (this.state.index == 0) {
+        datas = this.props.economyClass;
+      }
+      if (this.state.index == 1) {
+        datas = this.props.businessClass;
+      }
+      if (this.state.index == 2) {
+        datas = this.props.firstClass;
+      }
     }
     return datas;
   }
+
   renderList() {
     let datas = this.getListData();
     return (
@@ -161,6 +146,7 @@ class FlightDetailPage extends Component {
       <View style={styles.container}>
         {this.renderFlight()}
         {this.renderSegmentedBar()}
+        {this.renderFormHeader()}
         {this.renderList()}
       </View>
     );
@@ -171,9 +157,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffffff"
-  },
-  flightInfo: {
-    height: 130,
   },
   rowContainer: {
     flexDirection: 'row',
@@ -200,26 +183,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  carrierText: {
-    fontSize: 9,
-    color: "#ffffff",
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 2,
-    marginBottom: 2
-  },
-  flyingTimeText: {
-    fontSize: 11,
-    color: "#797f85",
-    marginLeft: 37,
-    marginRight: 37
-  },
-  flightNumber: {
-    fontSize: 11,
-    color: "#797f85",
-    marginLeft: 10,
-    marginRight: 10
-  },
   isStopover: {
     fontSize: 11,
     color: "#51a6f0",
@@ -230,18 +193,18 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#323b43"
   },
-  airportName: {
-    fontSize: 14,
-    color: "#797f85"
+  gpPrice: {
+    fontSize: 12,
+    color: "#999999",
+    textDecorationLine: 'line-through'
   }
 });
-
-// export default FlightDetailPage;
 
 
 const select = store => ({
   economyClass: store.flight.detail.economyClass,
   businessClass: store.flight.detail.businessClass,
   firstClass: store.flight.detail.firstClass,
+  governmentClass: store.flight.detail.governmentClass,
 })
 export default connect(select)(FlightDetailPage);

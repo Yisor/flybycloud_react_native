@@ -5,7 +5,7 @@
  * @Last Modified time: 2017-11-22 11:21:26
  */
 import React, { Component } from 'react';
-import { View, Text, TextInput, Image, ImageBackground, StyleSheet, TouchableOpacity, Alert, NativeModules } from 'react-native';
+import { View, Text, TextInput, Image, ImageBackground, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { login } from '../actions';
