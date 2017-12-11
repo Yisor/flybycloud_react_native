@@ -34,7 +34,15 @@ class InsuranceItem extends Component {
         modal={false}
         ref={v => this.overlayPopView = v}>
         <View style={styles.popView}>
-          <Text style={{ marginLeft: 20, marginRight: 20 }}>{`${data.insuranceName}:${data.insuranceDesc}`}</Text>
+          <Text style={{ textAlign: 'center', margin: 20, marginBottom: 0 }}>保险明细</Text>
+          <Text style={{ padding: 15 }}>{`${data.insuranceName}:${data.insuranceDesc}`}</Text>
+          <View style={styles.dividerHoriStyle} />
+          <TouchableOpacity
+            activeOpacity={0.6}
+            style={{ alignItems: 'center', justifyContent: 'center', height: 40 }}
+            onPress={() => this.overlayPopView && this.overlayPopView.close()}>
+            <Text style={{ color: '#51a6f0', textAlign: 'center', }}>确定</Text>
+          </TouchableOpacity>
         </View>
       </Overlay.PopView>
     );
@@ -74,13 +82,18 @@ const styles = StyleSheet.create({
     paddingBottom: 15
   },
   popView: {
+    justifyContent: "flex-end",
     backgroundColor: '#fff',
-    width: 300,
+    width: window.width * 0.8,
     minWidth: 260,
     minHeight: 120,
-    borderRadius: 15,
-    justifyContent: 'center',
+    borderRadius: 8,
     alignItems: 'center'
+  },
+  dividerHoriStyle: {
+    height: 1,
+    width: window.width * 0.8,
+    backgroundColor: "#00000011"
   }
 });
 

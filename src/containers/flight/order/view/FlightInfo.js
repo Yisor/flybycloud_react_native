@@ -29,7 +29,7 @@ class FlightInfo extends Component {
         type={type}
         modal={false}
         ref={v => this.overlayPopView = v}>
-        <View style={{ backgroundColor: '#fff', width: window.width - 40, minHeight: 180, borderRadius: 15, justifyContent: 'center' }}>
+        <View style={{ backgroundColor: '#fff', width: window.width * 0.8, minHeight: 180, borderRadius: 8, justifyContent: 'center' }}>
           <Text style={{ marginLeft: 30, marginBottom: 20, marginTop: 20 }}>退改签说明</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 30, marginRight: 30 }}>
             <Text style={{ marginRight: 20 }}>退票条件</Text>

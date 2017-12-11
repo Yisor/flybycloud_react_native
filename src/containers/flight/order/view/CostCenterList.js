@@ -19,7 +19,7 @@ export default class CostCenterList extends Overlay.PullView {
     items: PropTypes.array.isRequired,
     selectedIndex: PropTypes.number,
     onSelected: PropTypes.func, //(item, index)
-  };
+  }
 
   onItemPress(itemIndex) {
     let { items, onSelected } = this.props;
