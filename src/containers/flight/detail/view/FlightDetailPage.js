@@ -79,8 +79,10 @@ class FlightDetailPage extends Component {
       <Text style={{ fontSize: 12, color: "#51a6f0" }}>特价抢票</Text> :
       <Text style={{ fontSize: 12, color: "#ffa400" }}>保证出票</Text>
     return (
-      <View>{this.isGpTicket ? <Text style={styles.gpPrice}>{`￥${item.price}`}</Text> : ChannelInfo} </View>
-    );
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        {this.isGpTicket ? <Text style={styles.gpPrice}>{`￥${item.price}`}</Text> : ChannelInfo}
+      </View>
+    )
   }
 
   renderRow = (item) => {
@@ -94,9 +96,7 @@ class FlightDetailPage extends Component {
             <Text style={styles.resignOrRefund}>改退签</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          {this.renderRowMidView(item)}
-        </View>
+        {this.renderRowMidView(item)}
         <View style={{ flexDirection: 'row', }}>
           <View style={{ alignItems: 'center', justifyContent: 'center', marginRight: 28 }}>
             <Text style={{ fontSize: 11, color: "#323b43" }}>{`￥${price}`}</Text>
