@@ -3,6 +3,7 @@ import { put, call, take, fork } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 import ModalIndicator from '../../../components/ModalIndicator';
 import { FLIGHT_QUERY, FLIGHT_QUERY_SUCESS } from './actionTypes';
+import * as TYPES from './actionTypes';
 import { get } from '../../../service/request';
 import apiUrl from '../../../constants/api';
 
@@ -50,7 +51,7 @@ export function* queryFlight(params) {
     ModalIndicator.hide();
     // console.log(JSON.stringify(result));
     if (Array.isArray(result)) {
-      yield put({ type: FLIGHT_QUERY_SUCESS, data: result });
+      yield put({ type: TYPES.FLIGHT_QUERY_SUCESS, data: result });
     } else {
       Alert.alert(result.message);
     }
@@ -59,11 +60,63 @@ export function* queryFlight(params) {
   }
 }
 
+export function* orderByTimeDesc(params) {
+  try {
+    let temp = JSON.parse(JSON.stringify(params));
+    const result = temp.sort(compareUp("departureTime"))
+    yield put({ type: TYPES.FLIGHT_QUERY_SUCESS, data: result });
+  } catch (error) {
+    Alert.alert('网络故障' + error);
+  }
+}
+
+export function* orderByPriceDesc(params) {
+  try {
+    let temp = JSON.parse(JSON.stringify(params));
+    const result = temp.sort((a, b) => { return a.minPrice - b.minPrice })
+    yield put({ type: TYPES.FLIGHT_QUERY_SUCESS, data: result });
+  } catch (error) {
+    Alert.alert('网络故障' + error);
+  }
+}
+
 // watch actions and coordinate worker tasks
 export function* watchQueryFlight() {
   while (true) {
-    const action = yield take(FLIGHT_QUERY);
+    const action = yield take(TYPES.FLIGHT_QUERY);
     console.log('watchQueryFlight' + JSON.stringify(action));
     yield fork(queryFlight, action.data);
   }
+}
+
+export function* watchTimeDesc() {
+  while (true) {
+    const action = yield take(TYPES.TIME_DESC_ORDER);
+    yield fork(orderByTimeDesc, action.data);
+  }
+}
+
+export function* watchPriceDesc() {
+  while (true) {
+    const action = yield take(TYPES.PRICE_DESC_ORDER);
+    yield fork(orderByPriceDesc, action.data);
+  }
+}
+
+// 升序排序
+function compareUp(propertyName) {
+  return (a, b) => {
+    let v1 = a[propertyName];
+    let v2 = b[propertyName];
+    return v1.localeCompare(v2);
+  }
+}
+
+
+export default function* flightListSaga() {
+  yield [
+    fork(watchQueryFlight),
+    fork(watchTimeDesc),
+    fork(watchPriceDesc)
+  ];
 }
