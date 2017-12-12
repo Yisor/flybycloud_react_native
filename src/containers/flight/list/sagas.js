@@ -80,6 +80,23 @@ export function* orderByPriceDesc(params) {
   }
 }
 
+export function* queryAirline() {
+  try {
+    const result = yield call(get, apiUrl.airlines);
+    let tempList = [];
+    result.map((item) => {
+      if (!item['isCheck']) {
+        item['isCheck'] = false;
+      }
+      tempList.push(item);
+    });
+    tempList.unshift( { airlineShortName: "不限", isCheck: true });
+    yield put({ type: TYPES.AIRLINE_QUERY_SUCESS, data: tempList });
+  } catch (error) {
+    Alert.alert('网络故障' + error);
+  }
+}
+
 // watch actions and coordinate worker tasks
 export function* watchQueryFlight() {
   while (true) {
@@ -103,6 +120,13 @@ export function* watchPriceDesc() {
   }
 }
 
+export function* watchQueryAirline() {
+  while (true) {
+    const action = yield take(TYPES.AIRLINE_QUERY);
+    yield fork(queryAirline);
+  }
+}
+
 // 升序排序
 function compareUp(propertyName) {
   return (a, b) => {
@@ -117,6 +141,7 @@ export default function* flightListSaga() {
   yield [
     fork(watchQueryFlight),
     fork(watchTimeDesc),
-    fork(watchPriceDesc)
+    fork(watchPriceDesc),
+    fork(watchQueryAirline)
   ];
 }

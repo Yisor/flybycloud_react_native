@@ -4,6 +4,7 @@ import * as TYPES from './actionTypes';
 
 const initialState = {
   flights: {},
+  airlines: {},
   status: null,
 };
 
@@ -19,6 +20,12 @@ const flight = (state = initialState, action) => {
       return {
         ...state,
         flights: action.data,
+        status: "Done"
+      };
+    case TYPES.AIRLINE_QUERY_SUCESS:
+      return {
+        ...state,
+        airlines: action.data,
         status: "Done"
       };
     default:

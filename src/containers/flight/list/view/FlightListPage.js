@@ -10,22 +10,25 @@ import { View, Text, Image, ListView, StyleSheet, Alert, TouchableOpacity } from
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { flightQuery, flightDescByTime, flightDescByPrice } from '../action';
+import { flightQuery, flightDescByTime, flightDescByPrice, airlineQuery } from '../action';
 import TabView from '../../../../components/TabView';
 import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
 import FlightItem from './FlightItem';
+import FlightFilter from './FlightFilter';
 
 class FlightListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
+      visible: false,
     };
   }
 
   componentDidMount() {
     this.props.dispatch(flightQuery(this.props.params));
+    this.props.dispatch(airlineQuery());
   }
 
   onPressItem(rowData) {
@@ -47,28 +50,29 @@ class FlightListPage extends Component {
     this.props.dispatch(flightDescByPrice(flights));
   }
 
+  setFilterVisible(visible) {
+    this.setState({ visible });
+  }
+
   renderBottomTab() {
     let { flights } = this.props;
     return (
-      <TabView barStyle={{ backgroundColor: 'white' }} type='projector'>
+      <TabView barStyle={{ backgroundColor: 'white' }} type='projector' onChange={(index) => { }}>
         <TabView.Sheet
-          type='button'
           title='时间'
-          icon={require('../../../../resources/assets/plane/tab_annulus_1.png')}
-          activeIcon={require('../../../../resources/assets/plane/tab_annulus_2.png')}
+          icon={require('../../../../resources/assets/plane/tab_time_active.png')}
+          activeIcon={require('../../../../resources/assets/plane/tab_time_active.png')}
           onPress={() => this.descByTime()} />
         <TabView.Sheet
-          type='button'
           title='价格'
           icon={require('../../../../resources/assets/plane/tab_price.png')}
           activeIcon={require('../../../../resources/assets/plane/tab_price_2.png')}
           onPress={() => this.descByPrice()} />
         <TabView.Sheet
-          type='button'
           title='筛选'
           icon={require('../../../../resources/assets/plane/tab_screening_1.png')}
           activeIcon={require('../../../../resources/assets/plane/tab_screening_2.png')}
-          onPress={() => { alert('3') }} />
+          onPress={() => this.setFilterVisible(true)} />
       </TabView>
     );
   }
@@ -99,7 +103,6 @@ class FlightListPage extends Component {
   }
 
   render() {
-    console.log('新数据：' + JSON.stringify(this.props.flights));
     return (
       <View style={styles.container}>
         {this.renderCalendarNar()}
@@ -112,6 +115,14 @@ class FlightListPage extends Component {
             renderSeparator={() => <Divider />} />
         </View>
         {this.renderBottomTab()}
+        <FlightFilter
+          visible={this.state.visible}
+          onCancel={() => this.setFilterVisible(false)}
+          onSubmit={(datas) => {
+            console.log(JSON.stringify(datas));
+            this.setFilterVisible(false);
+          }}
+          datas={this.props.airlines} />
       </View>
     );
   }
@@ -152,6 +163,7 @@ const styles = StyleSheet.create({
 
 const select = store => ({
   flights: store.flight.list.flights,
+  airlines: store.flight.list.airlines,
   status: store.flight.list.status,
 })
 export default connect(select)(FlightListPage);

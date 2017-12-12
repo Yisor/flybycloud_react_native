@@ -2,6 +2,7 @@ export default {
   login: "/auth/login",
   sendSms: "/verifycode/sms",
   cityList: "/app/city",
+  airlines: '/app/airline',
   flightTicket: "/flight/ticket/",
   flightSeat: '/flight/ticket/seat/',
   insurances: '/insurances/',// 1飞机
@@ -14,5 +15,5 @@ export default {
   costCenter: '/user/cost/center',
   orderSubmit: '/corp/auditing/order/submit',
   auditing: '/corp/auditing/default/person',
-  addressList: '/user/address/list'
+  addressList: '/user/address/list',
 }
