@@ -7,7 +7,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, Modal, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
 import Overlay from '../../../../components/Overlay';
@@ -29,19 +29,19 @@ class FlightInfo extends Component {
         type={type}
         modal={false}
         ref={v => this.overlayPopView = v}>
-        <View style={{ backgroundColor: '#fff', width: window.width * 0.8, minHeight: 180, borderRadius: 8, justifyContent: 'center' }}>
-          <Text style={{ marginLeft: 30, marginBottom: 20, marginTop: 20 }}>退改签说明</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 30, marginRight: 30 }}>
-            <Text style={{ marginRight: 20 }}>退票条件</Text>
-            <Text style={{ marginRight: 50 }}>{policy.refundPolicy}</Text>
+        <View style={{ backgroundColor: '#fff', width: window.width * 0.8, minHeight: 180, borderRadius: 8, justifyContent: 'center', }}>
+          <Text style={{ margin: 20 }}>退改签说明</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={{ marginLeft: 20, marginRight: 20 }}>退票条件</Text>
+            <Text style={{ paddingRight: 20, width: window.width * 0.56 }}>{policy.refundPolicy}</Text>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 30, marginRight: 30, marginTop: 20 }}>
-            <Text style={{ marginRight: 20 }}>改签条件</Text>
-            <Text style={{ marginRight: 50 }}>{policy.changePolicy}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+            <Text style={{ paddingLeft: 20, marginRight: 20, }}>改签条件</Text>
+            <Text style={{ paddingRight: 20, width: window.width * 0.56 }}>{policy.changePolicy}</Text>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', margin: 20, }}>
-            <Text style={{ marginLeft: 10, marginRight: 20 }}>签转政策</Text>
-            <Text style={{ marginRight: 60 }}>{policy.signPolicy}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, marginBottom: 20 }}>
+            <Text style={{ marginLeft: 20, marginRight: 20 }}>签转政策</Text>
+            <Text style={{ paddingRight: 20, width: window.width * 0.56 }}>{policy.signPolicy}</Text>
           </View>
         </View>
       </Overlay.PopView>
