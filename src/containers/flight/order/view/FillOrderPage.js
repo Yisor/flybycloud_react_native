@@ -11,8 +11,7 @@ import { insuranceChecked, fetchFillOrderData, checkPassenger } from '../action'
 import { formatTime, getTimeString } from '../../../../utils/timeUtils';
 import costCenter from './costcenter.json';
 import InsuranceList from './InsuranceList';
-import CostCenterPicker from './CostCenterPicker';
-import ExpressTypePicker from './ExpressTypePicker';
+import PopupListPicker from './PopupListPicker';
 import FlightInfo from './FlightInfo';
 import DeliveryMode from './DeliveryMode';
 import CostDetail from './CostDetail';
@@ -61,7 +60,7 @@ class FillOrderPage extends Component {
 
   // 显示违规原因选择窗口
   onPressCheckPolicy() {
-    CostCenterPicker.showReason(
+    PopupListPicker.showReason(
       this.props.reasons,
       this.state.reasonSelectedIndex,
       (item, index) => { this.setState({ reasonSelectedIndex: index }) }
@@ -75,7 +74,7 @@ class FillOrderPage extends Component {
 
   // 配送方式
   onPressDeliveries() {
-    ExpressTypePicker.show(
+    PopupListPicker.showExpressType(
       expressTypes,
       this.state.expressTypeSelectedIndex,
       (item, index) => { this.setState({ expressTypeSelectedIndex: index }) }
@@ -89,7 +88,7 @@ class FillOrderPage extends Component {
 
   // 成本中心点击
   onPressCostCenter() {
-    CostCenterPicker.show(
+    PopupListPicker.showCostCenter(
       this.props.costCenter,
       this.state.costCenterSelectedIndex,
       (item, index) => { this.setState({ costCenterSelectedIndex: index }) }
