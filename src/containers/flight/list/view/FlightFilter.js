@@ -10,8 +10,8 @@ import FilterItem from './FilterItem';
 // import airlines from './airlines.json';
 const categories = ['起飞时间', '航空公司']
 const times = [
-  { 'title': '不限', 'isCheck': false },
-  { 'title': '00:00-06:00', 'isCheck': true },
+  { 'title': '不限', 'isCheck': true },
+  { 'title': '00:00-06:00', 'isCheck': false },
   { 'title': '06:00-12:00', 'isCheck': false },
   { 'title': '12:00-18:00', 'isCheck': false },
   { 'title': '18:00-24:00', 'isCheck': false },
@@ -34,10 +34,11 @@ class FlightFilter extends Component {
   }
 
   onSubmit() {
-    let { onSubmit } = this.props;
+    let { onSubmit, dataSource } = this.props;
     let timeFilters = times.filter((item) => {
       return item.isCheck == true;
     });
+    // 增加原始数据筛选
     onSubmit && onSubmit(timeFilters);
   }
 
@@ -94,7 +95,7 @@ class FlightFilter extends Component {
   }
 
   render() {
-    let options = this.state.selectedIndex == 0 ? times : this.props.datas;
+    let options = this.state.selectedIndex == 0 ? times : this.props.filters;
     return (
       <Modal
         transparent={true}

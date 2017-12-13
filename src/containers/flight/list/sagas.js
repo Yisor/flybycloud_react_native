@@ -97,7 +97,6 @@ export function* queryAirline() {
   }
 }
 
-// watch actions and coordinate worker tasks
 export function* watchQueryFlight() {
   while (true) {
     const action = yield take(TYPES.FLIGHT_QUERY);

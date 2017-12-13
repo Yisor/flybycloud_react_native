@@ -1,0 +1,26 @@
+﻿[
+    {
+        "reasonId":1,
+        "reasonInfo":"陪同领导或客户"
+    },
+    {
+        "reasonId":2,
+        "reasonInfo":"其他航班的航空公司不合适"
+    },
+    {
+        "reasonId":3,
+        "reasonInfo":"其他航班的机场不合适"
+    },
+    {
+        "reasonId":4,
+        "reasonInfo":"需要购买可以改签或退票的机票"
+    },
+    {
+        "reasonId":5,
+        "reasonInfo":"其他航班起飞或到达时间不合适"
+    },
+    {
+        "reasonId":6,
+        "reasonInfo":"经过批准可以不选择最低价"
+    }
+]

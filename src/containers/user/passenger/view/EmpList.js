@@ -39,7 +39,7 @@ class EmpList extends Component {
 
   async handleData(datas) {
     dataBlob = [];
-    let newList = await this.extendedAttr(datas);
+    let newList = await this.formatEmplist(datas);
     let sortList = newList.sort(this.compareUp("pinyin"));
     sortList.map(passenger => {
       let firstLetter = passenger.pinyin.substr(0, 1).toUpperCase();

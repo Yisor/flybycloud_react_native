@@ -7,6 +7,8 @@ const initialState = {
   costCenter: [],
   insurances: [],
   insuranceChecked: [],
+  checkResult: [],
+  reasons: [],
   status: null,
 };
 
@@ -16,6 +18,8 @@ const flight = (state = initialState, action) => {
       return {
         ...state,
         audits: action.data,
+        checkResult: [],
+        reasons: [],
         status: "Done"
       };
     case TYPES.COST_CENTER_QUERY_SUCESS:
@@ -36,6 +40,15 @@ const flight = (state = initialState, action) => {
         ...state,
         insurances: action.data,
         insuranceChecked: action.filters,
+        status: "Done"
+      };
+    case TYPES.PASSENGER_CHECK_SUCESS:
+      let checkResult = action.data ? action.data.checkResult : [];
+      let reasons = action.data ? action.data.reasons : [];
+      return {
+        ...state,
+        checkResult: checkResult,
+        reasons: reasons,
         status: "Done"
       };
     default:

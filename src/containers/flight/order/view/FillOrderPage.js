@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Modal, ListView, ScrollView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ListView, ScrollView, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Overlay from '../../../../components/Overlay';
 import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
-import { get } from '../../../../service/request';
+import { get, post } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
-import { insuranceChecked, fetchFillOrderData } from '../action';
+import { insuranceChecked, fetchFillOrderData, checkPassenger } from '../action';
 import { formatTime, getTimeString } from '../../../../utils/timeUtils';
 import costCenter from './costcenter.json';
 import InsuranceList from './InsuranceList';
@@ -26,6 +26,7 @@ class FillOrderPage extends Component {
     this.state = {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
       passengers: [],
+      reasonSelectedIndex: -1,
       costCenterSelectedIndex: 0,
       expressTypeSelectedIndex: this.props.user.expressType,
       receiveAddress: null,
@@ -44,13 +45,27 @@ class FillOrderPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.passengers) {
-      console.log(JSON.stringify(nextProps.passengers));
+    if (nextProps.passengers && nextProps.passengers != this.state.passengers) {
+      this.checkPolicy(nextProps.passengers);
       this.setState({ passengers: nextProps.passengers });
     }
     if (nextProps.address) {
       this.setState({ receiveAddress: nextProps.address.receiveAddress });
     }
+  }
+
+  // 校验乘客是否违规
+  checkPolicy(passengers) {
+    this.props.dispatch(checkPassenger({ ticket, passengers }));
+  }
+
+  // 显示违规原因选择窗口
+  onPressCheckPolicy() {
+    CostCenterPicker.showReason(
+      this.props.reasons,
+      this.state.reasonSelectedIndex,
+      (item, index) => { this.setState({ reasonSelectedIndex: index }) }
+    );
   }
 
   // 添加乘客
@@ -87,12 +102,31 @@ class FillOrderPage extends Component {
   }
 
   onPressDetail() {
-    Actions.costDetail({ flight: flight, ticket: ticket, passengers: this.state.passengers, insurances: this.props.insurances });
-    let visible = this.state.modalVisible;
-    this.setState({ modalVisible: !visible });
+    // Actions.costDetail({ flight: flight, ticket: ticket, passengers: this.state.passengers, insurances: this.props.insurances });
+    // let visible = this.state.modalVisible;
+    // this.setState({ modalVisible: !visible });
   }
 
   renderFlightInfo() { return (<FlightInfo flight={flight} ticket={ticket} />) }
+
+  // 是否违反差旅政策
+  renderTravelPolicy() {
+    let { reasonSelectedIndex } = this.state;
+    let { reasons, checkResult } = this.props;
+    let reason = (reasonSelectedIndex > -1 && reasons.length > 0) ? reasons[reasonSelectedIndex].reasonInfo : '请选择原因';
+    let TravelPolicyItem = checkResult.length > 0 ?
+      <View style={styles.approverView}>
+        <View>
+          <Text style={[styles.approverTxt, { color: "#e26a6a", marginRight: 55 }]}>
+            已选乘机人当中有人违反了对应级别的差旅政策
+          </Text>
+          <TouchableOpacity activeOpacity={0.6} onPress={() => this.onPressCheckPolicy()}>
+            <Text style={[styles.approverTxt, { color: "#e26a6a", marginRight: 55, marginTop: 0 }]}>{reason}</Text>
+          </TouchableOpacity>
+        </View>
+      </View> : null;
+    return TravelPolicyItem;
+  }
 
   // 审批人
   renderApprover() {
@@ -273,6 +307,7 @@ class FillOrderPage extends Component {
         <ScrollView style={styles.scrollView}>
           {this.renderFlightInfo()}
           {this.renderApprover()}
+          {this.renderTravelPolicy()}
           {this.renderPassenger()}
           {this.renderContacts()}
           {this.renderInsurance()}
@@ -390,7 +425,9 @@ const select = store => ({
   insurances: store.flight.order.insurances,
   insuranceChecked: store.flight.order.insuranceChecked,
   costCenter: store.flight.order.costCenter,
+  checkResult: store.flight.order.checkResult,
+  reasons: store.flight.order.reasons,
   status: store.flight.order.status,
-  user: store.user.login.user,
+  user: store.user.login.user
 })
 export default connect(select)(FillOrderPage);

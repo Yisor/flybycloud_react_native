@@ -80,7 +80,7 @@ class rootRouter extends Component {
           </Tabs>
 
           <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登录飞巴商旅" />
-          <Scene key="flight" component={FlightMainPage} title="机票"  initial/>
+          <Scene key="flight" component={FlightMainPage} title="机票" initial />
           <Scene back key="city" component={SelectCityPage} title="城市" />
           <Scene back key="flightList" component={FlightListPage} title="航班" />
           <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" />
@@ -89,7 +89,6 @@ class rootRouter extends Component {
           <Scene back key="auditorList" component={AuditorListPage} title="查看审批人" />
           <Scene back key="addressList" component={AddressListPage} title="选择配送地址" />
           <Scene back key="costDetail" component={CostDetail} title="CostDetail" />
-
         </Stack>
       </Router>
     );

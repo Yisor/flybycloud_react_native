@@ -41,7 +41,7 @@ class PassengerList extends Component {
 
   async handleData(datas) {
     dataBlob = [];
-    let newList = await this.extendedAttr(datas);
+    let newList = await this.formatPasengerList(datas);
     let sortList = newList.sort(this.compareUp("pinyin"));
     sortList.map(passenger => {
       let firstLetter = passenger.pinyin.substr(0, 1).toUpperCase();
@@ -80,7 +80,7 @@ class PassengerList extends Component {
     for (let item of datas) {
       let newObj = {};
       let letter = await pinyin.getPinYin(item.name);
-      newObj['name'] = item.userName;
+      newObj['name'] = item.name;
       newObj['idcardType'] = item.idcardType;
       newObj['idcardCode'] = item.idcardCode;
       newObj['passengerId'] = item.passengerId;

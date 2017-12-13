@@ -10,7 +10,7 @@ import { View, Text, Image, ListView, StyleSheet, Alert, TouchableOpacity } from
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { flightQuery, flightDescByTime, flightDescByPrice, airlineQuery } from '../action';
+import { flightQuery, flightSortUpTime, flightSortUpPrice, airlineQuery } from '../action';
 import TabView from '../../../../components/TabView';
 import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
@@ -40,14 +40,14 @@ class FlightListPage extends Component {
     return (<FlightItem rowData={rowData} onPressItem={(data) => this.onPressItem(data)} />)
   }
 
-  descByTime() {
+  sortUpTime() {
     let { flights } = this.props;
-    this.props.dispatch(flightDescByTime(flights));
+    this.props.dispatch(flightSortUpTime(flights));
   }
 
-  descByPrice() {
+  sortUpPrice() {
     let { flights } = this.props;
-    this.props.dispatch(flightDescByPrice(flights));
+    this.props.dispatch(flightSortUpPrice(flights));
   }
 
   setFilterVisible(visible) {
@@ -60,18 +60,18 @@ class FlightListPage extends Component {
       <TabView barStyle={{ backgroundColor: 'white' }} type='projector' onChange={(index) => { }}>
         <TabView.Sheet
           title='时间'
-          icon={require('../../../../resources/assets/plane/tab_time_active.png')}
-          activeIcon={require('../../../../resources/assets/plane/tab_time_active.png')}
-          onPress={() => this.descByTime()} />
+          icon={require('../../../../resources/assets/plane/plane_time_order2.png')}
+          activeIcon={require('../../../../resources/assets/plane/plane_time_order1.png')}
+          onPress={() => this.sortUpTime()} />
         <TabView.Sheet
           title='价格'
-          icon={require('../../../../resources/assets/plane/tab_price.png')}
-          activeIcon={require('../../../../resources/assets/plane/tab_price_2.png')}
-          onPress={() => this.descByPrice()} />
+          icon={require('../../../../resources/assets/plane/plane_price_order2.png')}
+          activeIcon={require('../../../../resources/assets/plane/plane_price_order1.png')}
+          onPress={() => this.sortUpPrice()} />
         <TabView.Sheet
           title='筛选'
-          icon={require('../../../../resources/assets/plane/tab_screening_1.png')}
-          activeIcon={require('../../../../resources/assets/plane/tab_screening_2.png')}
+          icon={require('../../../../resources/assets/plane/plane_filter_order2.png')}
+          activeIcon={require('../../../../resources/assets/plane/plane_filter_order1.png')}
           onPress={() => this.setFilterVisible(true)} />
       </TabView>
     );
@@ -117,12 +117,13 @@ class FlightListPage extends Component {
         {this.renderBottomTab()}
         <FlightFilter
           visible={this.state.visible}
+          dataSource={this.props.flights}
+          filters={this.props.airlines}
           onCancel={() => this.setFilterVisible(false)}
           onSubmit={(datas) => {
             console.log(JSON.stringify(datas));
             this.setFilterVisible(false);
-          }}
-          datas={this.props.airlines} />
+          }} />
       </View>
     );
   }

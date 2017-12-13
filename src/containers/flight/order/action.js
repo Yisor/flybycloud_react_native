@@ -10,3 +10,5 @@ export const auditingQuery = () => ({ 'type': TYPES.AUDITING_QUERY })
 export const costCenterQuery = () => ({ 'type': TYPES.COST_CENTER_QUERY })
 
 export const insuranceQuery = () => ({ 'type': TYPES.INSURANCE_QUERY })
+
+export const checkPassenger = (params) => ({ 'type': TYPES.PASSENGER_CHECK, data: params })

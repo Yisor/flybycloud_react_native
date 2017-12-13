@@ -2,11 +2,11 @@ import { takeEvery, delay } from 'redux-saga';
 import { put, call, take, fork } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 import * as TYPES from './actionTypes';
-import { get } from '../../../service/request';
+import { get, post } from '../../../service/request';
 import apiUrl from '../../../constants/api';
 import { Actions } from 'react-native-router-flux';
 
-
+// 查询审批人
 export function* queryAuditPerson() {
   try {
     let url = apiUrl.auditing;
@@ -17,6 +17,7 @@ export function* queryAuditPerson() {
   }
 }
 
+// 查询所在公司的成本中心
 export function* queryCostCenter() {
   try {
     let url = apiUrl.costCenter;
@@ -27,6 +28,7 @@ export function* queryCostCenter() {
   }
 }
 
+// 获取保险（飞机）
 export function* queryInsurance() {
   try {
     let url = apiUrl.insurances + "1";
@@ -44,13 +46,32 @@ export function* queryInsurance() {
   }
 }
 
+// 选择保险
 export function* checkInsurance(params) {
   try {
     let filters = params.filter((item) => {
       return item['isChecked'] == true;
     });
-    // console.log("保险返回" + JSON.stringify(result));
     yield put({ type: TYPES.INSURANCE_CHECKED_SUCESS, data: params, filters: filters });
+  } catch (error) {
+    Alert.alert('网络故障' + error);
+  }
+}
+
+// 校验乘客是否违反差旅政策
+export function* checkPassenger(params) {
+  try {
+    const checkResult = yield call(post, apiUrl.check, params);
+    let temp = checkResult.filter((item) => {
+      return item.overData && item.overData.length > 0;
+    });
+    if (temp.length > 0) {
+      // 违规原因查询
+      const reasons = yield call(get, apiUrl.illegalReason);
+      yield put({ type: TYPES.PASSENGER_CHECK_SUCESS, data: { checkResult, reasons } });
+    } else {
+      yield put({ type: TYPES.PASSENGER_CHECK_SUCESS });
+    }
   } catch (error) {
     Alert.alert('网络故障' + error);
   }
@@ -59,8 +80,25 @@ export function* checkInsurance(params) {
 export function* watchCheckInsurance() {
   while (true) {
     const action = yield take(TYPES.INSURANCE_CHECKED);
-    // console.log('watchCheckInsurance' + JSON.stringify(action));
     yield fork(checkInsurance, action.data);
+  }
+}
+
+export function* watchCheckPassenger() {
+  while (true) {
+    const action = yield take(TYPES.PASSENGER_CHECK);
+    let { ticket, passengers } = action.data;
+    let policyOverParams = [];
+    let passengerUserId = [];
+    let ticketInfo = { flightId: ticket.flightId, ticketId: ticket.ticketId };
+    policyOverParams.push(ticketInfo);
+    for (let item of passengers) {
+      if (item.userId) {
+        passengerUserId.push(item.userId);
+      }
+    }
+    const params = { policyOverParams, passengerUserId }
+    yield fork(checkPassenger, params);
   }
 }
 
@@ -76,6 +114,7 @@ export function* watchFetchFillOrderData() {
 export default function* orderSaga() {
   yield [
     fork(watchFetchFillOrderData),
-    fork(watchCheckInsurance)
+    fork(watchCheckInsurance),
+    fork(watchCheckPassenger)
   ];
 }

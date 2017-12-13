@@ -14,7 +14,7 @@ import { Actions } from 'react-native-router-flux';
 import SegmentedBar from '../../../../components/SegmentedBar';
 import window from '../../../../utils/window';
 import { pinyin } from '../../../../utils/pinyin';
-import { get } from '../../../../service/request';
+import { get, post } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
 import passengerJson from './passengers.json';
 import empJson from './emplist.json'
@@ -73,13 +73,13 @@ class PassengerSelectPage extends Component {
 
   // 常旅客选择
   onPassengerSelected = (datas) => {
-    console.log(JSON.stringify(datas));
     passengerList = datas;
     this.setState({ total: empList.length + passengerList.length });
   }
 
   onSubmit() {
-    Actions.pop({ refresh: ({ 'passengers': empList }) });
+    let passengers = empList.concat(passengerList);
+    Actions.pop({ refresh: ({ 'passengers': passengers }) });
   }
 
   renderSegmentedBar() {
