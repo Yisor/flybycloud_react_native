@@ -11,27 +11,24 @@ import { Actions } from 'react-native-router-flux';
 import FlightMain from './FlightMain';
 import * as TYPES from '../actionTypes';
 import Store from '../../../../utils/store';
-import { storeUserKey } from '../../../../constants/constDefines';
+import { storeUserKey, flightMarkerKey } from '../../../../constants/constDefines';
 
 // 机票搜索
 class FlightMainPage extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      startCity: {
-        "cityCode": "HGH",
-        "cityName": "杭州",
-        "cityPinyin": "HANGZHOU"
-      },
-      endCity: {
-        "cityCode": "PEK",
-        "cityName": "北京",
-        "cityPinyin": "BEIJING"
-      },
-      startDate: '2017-12-23',
-      endDate: '2017-12-25'
-    }
+  state = {
+    startCity: {
+      "cityCode": "HGH",
+      "cityName": "杭州",
+      "cityPinyin": "HANGZHOU"
+    },
+    endCity: {
+      "cityCode": "PEK",
+      "cityName": "北京",
+      "cityPinyin": "BEIJING"
+    },
+    startDate: null,
+    endDate: null
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,14 +41,23 @@ class FlightMainPage extends Component {
   }
 
   componentDidMount() {
+    this.checkLogin();
+    this.initData();
+  }
+
+  checkLogin() {
     Store.get(storeUserKey).then((res) => {
-      // console.log('本地用户信息' + JSON.stringify(res));
       if (res) {
         this.props.dispatch({ 'type': 'LOGGED_DOING', data: res });
       } else {
         Actions.login();
       }
     });
+  }
+
+  initData() {
+    Store.remove(flightMarkerKey);// 清除缓存
+    this.setState({ startDate: '2017-12-23', endDate: '2017-12-25' });
   }
 
   onExchange = () => {
@@ -75,17 +81,19 @@ class FlightMainPage extends Component {
     // TODO 返程时间
   }
 
-  getRequestParams(isGpTicket) {
+  getRequestParams(isOneWay, isGpTicket) {
+    let startDate = this.state.startDate;
+    let endDate = this.state.endDate;
     let flightDate = this.state.startDate;
     let fromCity = this.state.startCity.cityCode;
     let toCity = this.state.endCity.cityCode;
-    let params = { flightDate, fromCity, toCity, isGpTicket }
+    let params = { startDate, endDate, flightDate, fromCity, toCity, isOneWay, isGpTicket }
     let title = this.state.startCity.cityName + "-" + this.state.endCity.cityName;
     return { 'title': title, 'params': params };
   }
 
-  onQueryFlight(isGpTicket) {
-    let params = this.getRequestParams(isGpTicket);
+  onQueryFlight(isOneWay, isGpTicket) {
+    let params = this.getRequestParams(isOneWay, isGpTicket);
     Actions.flightList(params);
   }
 
@@ -98,12 +106,14 @@ class FlightMainPage extends Component {
         endCity={this.state.endCity.cityName}
         onSelectCityStart={this.onSelectCityStart}
         onSelectCityEnd={this.onSelectCityEnd}
-        onQuery={() => this.onQueryFlight(false)}
-        onQueryGpticket={() => this.onQueryFlight(true)}
+        onQuery={(isOneWay) => this.onQueryFlight(isOneWay, false)}
+        onQueryGpticket={(isOneWay) => this.onQueryFlight(isOneWay, true)}
         onExchange={this.onExchange} />
     );
   }
 }
 
-const select = store => store
+const select = store => ({
+  user: store.user.login.user
+})
 export default connect(select)(FlightMainPage);

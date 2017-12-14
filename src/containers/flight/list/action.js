@@ -1,9 +1,11 @@
 'use strict';
 import * as TYPES from './actionTypes';
 
+export const fetchFlightList = data => ({ 'type': TYPES.FETCH_FLIGHT_LIST, 'data': data })
+
 export const flightQuery = data => ({ 'type': TYPES.FLIGHT_QUERY, 'data': data })
 
-export const airlineQuery = data => ({ 'type': TYPES.AIRLINE_QUERY })
+export const airlineQuery = () => ({ 'type': TYPES.AIRLINE_QUERY })
 
 export const flightSortUpTime = data => ({ 'type': TYPES.TIME_DESC_ORDER, 'data': data })
 

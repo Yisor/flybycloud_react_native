@@ -40,16 +40,13 @@ const mockData = [
     "seatType": "1"
   }];
 
+// 普通查询
 export function* queryFlight(params) {
   try {
-    console.log(JSON.stringify(params));
     ModalIndicator.show();
-    let baseUrl = params.isGpTicket ? apiUrl.gptickets : apiUrl.flightTicket;
-    let url = baseUrl + params.flightDate + "/" + params.fromCity + "/" + params.toCity;
+    let url = apiUrl.flightTicket + params.flightDate + "/" + params.fromCity + "/" + params.toCity;
     const result = yield call(get, url);
-    // const result = mockData;
     ModalIndicator.hide();
-    // console.log(JSON.stringify(result));
     if (Array.isArray(result)) {
       yield put({ type: TYPES.FLIGHT_QUERY_SUCESS, data: result });
     } else {
@@ -60,7 +57,24 @@ export function* queryFlight(params) {
   }
 }
 
-export function* orderByTimeDesc(params) {
+// 政采查询
+export function* queryGovernmentFlight(params) {
+  try {
+    ModalIndicator.show();
+    let url = apiUrl.gptickets + params.flightDate + "/" + params.fromCity + "/" + params.toCity;
+    const result = yield call(get, url);
+    ModalIndicator.hide();
+    if (Array.isArray(result)) {
+      yield put({ type: TYPES.FLIGHT_QUERY_SUCESS, data: result });
+    } else {
+      Alert.alert(result.message);
+    }
+  } catch (error) {
+    Alert.alert('网络故障' + error);
+  }
+}
+
+export function* sortUpTime(params) {
   try {
     let temp = JSON.parse(JSON.stringify(params));
     const result = temp.sort(compareUp("departureTime"))
@@ -70,7 +84,7 @@ export function* orderByTimeDesc(params) {
   }
 }
 
-export function* orderByPriceDesc(params) {
+export function* sortUpPrice(params) {
   try {
     let temp = JSON.parse(JSON.stringify(params));
     const result = temp.sort((a, b) => { return a.minPrice - b.minPrice })
@@ -97,32 +111,28 @@ export function* queryAirline() {
   }
 }
 
-export function* watchQueryFlight() {
+export function* watchFetchFlightList() {
   while (true) {
-    const action = yield take(TYPES.FLIGHT_QUERY);
-    console.log('watchQueryFlight' + JSON.stringify(action));
-    yield fork(queryFlight, action.data);
+    const action = yield take(TYPES.FETCH_FLIGHT_LIST);
+    console.log('watchFetchFlightList' + JSON.stringify(action));
+    // 区分是否政采
+    let params = action.data;
+    params.isGpTicket ? yield fork(queryGovernmentFlight, params) : yield fork(queryFlight, params);
+    yield fork(queryAirline);
   }
 }
 
-export function* watchTimeDesc() {
+export function* watchSortUpTime() {
   while (true) {
     const action = yield take(TYPES.TIME_DESC_ORDER);
-    yield fork(orderByTimeDesc, action.data);
+    yield fork(sortUpTime, action.data);
   }
 }
 
-export function* watchPriceDesc() {
+export function* watchSortUpPrice() {
   while (true) {
     const action = yield take(TYPES.PRICE_DESC_ORDER);
-    yield fork(orderByPriceDesc, action.data);
-  }
-}
-
-export function* watchQueryAirline() {
-  while (true) {
-    const action = yield take(TYPES.AIRLINE_QUERY);
-    yield fork(queryAirline);
+    yield fork(sortUpPrice, action.data);
   }
 }
 
@@ -138,9 +148,8 @@ function compareUp(propertyName) {
 
 export default function* flightListSaga() {
   yield [
-    fork(watchQueryFlight),
-    fork(watchTimeDesc),
-    fork(watchPriceDesc),
-    fork(watchQueryAirline)
+    fork(watchFetchFlightList),
+    fork(watchSortUpTime),
+    fork(watchSortUpPrice)
   ];
 }

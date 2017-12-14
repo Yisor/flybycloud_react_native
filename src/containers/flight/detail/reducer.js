@@ -7,6 +7,8 @@ const initialState = {
   businessClass: {},
   firstClass: {},
   governmentClass: {},
+  flightDetails: null,
+  returnDetails: null,
   status: null
 }
 
@@ -38,6 +40,17 @@ const flight = (state = initialState, action) => {
         economyClass: {},
         governmentClass: action.data,
         status: "Done"
+      };
+    case TYPES.FLIGHT_DETAILS:
+      return {
+        ...state,
+        flightDetails: action.data,
+        returnDetails: {},
+      };
+    case TYPES.RETURN_DETAILS:
+      return {
+        ...state,
+        returnDetails: action.data,
       };
     default:
       return state;

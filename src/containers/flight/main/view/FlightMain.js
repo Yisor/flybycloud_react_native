@@ -35,13 +35,13 @@ class FlightMain extends Component {
   // 查询
   onQuery = () => {
     let { onQuery } = this.props;
-    onQuery && onQuery();
+    onQuery && onQuery(this.state.index == 0);
   }
 
   // 政采查询
   onQueryGovernment = () => {
     let { onQueryGpticket } = this.props;
-    onQueryGpticket && onQueryGpticket();
+    onQueryGpticket && onQueryGpticket(this.state.index == 0);
   }
 
   /** 

@@ -23,12 +23,12 @@ import FlightMainPage from './containers/flight/main';
 import { AddressListPage } from './containers/user/address';
 import SelectCityPage from './containers/city/SelectCityPage';
 import FlightListPage from './containers/flight/list/view/FlightListPage';
+import ReturnFlightListPage from './containers/flight/list/view/ReturnFlightListPage';
 import FlightDetailPage from './containers/flight/detail/view/FlightDetailPage';
 import FillOrderPage from './containers/flight/order/view/FillOrderPage';
 import PassengerList from './containers/user/passenger/view/PassengerList';
 import PassengerSelectPage from './containers/user/passenger/view/PassengerSelectPage';
 import AuditorListPage from './containers/flight/auditing/AuditorListPage';
-import CostDetail from './containers/flight/order/view/CostDetail';
 // const HomeIcon = (props) => {
 //   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
 //   return (
@@ -83,12 +83,13 @@ class rootRouter extends Component {
           <Scene key="flight" component={FlightMainPage} title="机票" initial />
           <Scene back key="city" component={SelectCityPage} title="城市" />
           <Scene back key="flightList" component={FlightListPage} title="航班" />
+          <Scene back key="returnFlightList" component={ReturnFlightListPage} title="航班" />
           <Scene back key="flightDetail" component={FlightDetailPage} title="航班详情" />
           <Scene back key="passengerSelect" component={PassengerSelectPage} title="选择乘客" />
           <Scene back key="fillOrder" component={FillOrderPage} title="订单填写" />
           <Scene back key="auditorList" component={AuditorListPage} title="查看审批人" />
           <Scene back key="addressList" component={AddressListPage} title="选择配送地址" />
-          <Scene back key="costDetail" component={CostDetail} title="CostDetail" />
+
         </Stack>
       </Router>
     );

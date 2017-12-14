@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, Image, ListView, StyleSheet, InteractionManager, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { flightMarkerKey } from '../../../../constants/constDefines';
 import { flightDetailQuery } from '../actions';
+import Store from '../../../../utils/store';
 import Divider from '../../../../components/Divider';
 import SegmentedBar from '../../../../components/SegmentedBar';
 import FlightInfo from './FlightInfo';
@@ -22,7 +24,9 @@ class FlightDetailPage extends Component {
   }
 
   componentWillMount() {
-    this.isGpTicket = this.props.isGpTicket;
+    let { params } = this.props;
+    this.isGpTicket = params.isGpTicket;
+    this.isOneWay = params.isOneWay;
     flight = this.props.flight;
     tickets = flight.tickets;
   }
@@ -32,14 +36,42 @@ class FlightDetailPage extends Component {
     this.props.dispatch(flightDetailQuery(params));
   }
 
+
   // 预定
   onBooked(item) {
-    Actions.fillOrder({ 'flight': flight, 'ticket': item });
+    if (this.isOneWay) {
+      Actions.fillOrder({ 'flight': flight, 'ticket': item });
+    } else {
+      Store.get(flightMarkerKey).then((res) => {
+        if (res == null) {
+          Store.set(flightMarkerKey, 1);
+          this.props.dispatch({ 'type': 'FLIGHT_DETAILS', 'data': { 'flight': flight, 'ticket': item } });
+
+          let { params } = this.props;
+          console.log('详情接收：' + JSON.stringify(params));
+          let endDate = params.endDate;
+          let fromCity = params.fromCity;
+          let toCity = params.toCity;
+          params.flightDate = endDate;
+          params.fromCity = toCity;
+          params.toCity = fromCity;
+
+          Actions.returnFlightList({ params: params });
+
+        } else if (res && res == 1) {
+          this.props.dispatch({ 'type': 'RETURN_DETAILS', 'data': { 'flight': flight, 'ticket': item } });
+          Actions.fillOrder({ 'flight': flight, 'ticket': item });
+        }
+      });
+    }
   }
 
   // 改退签
   onResignOrRefund(item) {
-    alert('改退签');
+    // alert('改退签');
+    let { params } = this.props;
+    params.flightDate = params.endDate;
+    Actions.popTo("flightList", { test: params });
   }
 
   renderFlight() { return (<FlightInfo flight={flight} />); }
@@ -71,7 +103,7 @@ class FlightDetailPage extends Component {
         </View>
         <Divider />
       </View> : null;
-    return (FormHeader)
+    return FormHeader;
   }
 
   renderRowMidView(item) {

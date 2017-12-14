@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, CheckBox, StyleSheet, Image } from 'react-native';
 

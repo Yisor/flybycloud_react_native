@@ -1,15 +1,7 @@
-/*
- *  @File   : FlightListPage
- *  @Author : lsl
- *  @Date   : 2017-12-1 16:12:7
- *  @Last Modified   : 2017-12-1 16:12:7
- *  @Desc 航班列表
- */
 import React, { Component } from 'react';
 import { View, Text, Image, ListView, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-
 import { flightSortUpTime, flightSortUpPrice, fetchFlightList } from '../action';
 import { flightMarkerKey } from '../../../../constants/constDefines';
 import TabView from '../../../../components/TabView';
@@ -19,7 +11,7 @@ import Divider from '../../../../components/Divider';
 import FlightItem from './FlightItem';
 import FlightFilter from './FlightFilter';
 
-class FlightListPage extends Component {
+class ReturnFlightListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,8 +39,9 @@ class FlightListPage extends Component {
   }
 
   onPressItem(rowData) {
+    // 判断是否往返
     let { params } = this.props;
-    Actions.flightDetail({ 'flight': rowData, params: params });
+    Actions.flightDetail({ 'flight': rowData, params });
   }
 
   renderRow = (rowData) => {
@@ -163,9 +156,10 @@ const styles = StyleSheet.create({
   }
 });
 
+
 const select = store => ({
   flights: store.flight.list.flights,
   airlines: store.flight.list.airlines,
   status: store.flight.list.status
 })
-export default connect(select)(FlightListPage);
+export default connect(select)(ReturnFlightListPage);
