@@ -87,11 +87,21 @@ export function* watchCheckInsurance() {
 export function* watchCheckPassenger() {
   while (true) {
     const action = yield take(TYPES.PASSENGER_CHECK);
-    let { ticket, passengers } = action.data;
+    // 未考虑票和人有多个情况
+    let { flightDetails, returnDetails, passengers } = action.data;
     let policyOverParams = [];
-    let passengerUserId = [];
+
+    let ticket = flightDetails.ticket;
     let ticketInfo = { flightId: ticket.flightId, ticketId: ticket.ticketId };
     policyOverParams.push(ticketInfo);
+
+    if (returnDetails) {
+      let returnTicket = returnDetails.ticket;
+      let returnTicketInfo = { flightId: returnTicket.flightId, ticketId: returnTicket.ticketId };
+      policyOverParams.push(returnTicketInfo);
+    }
+
+    let passengerUserId = [];
     for (let item of passengers) {
       if (item.userId) {
         passengerUserId.push(item.userId);

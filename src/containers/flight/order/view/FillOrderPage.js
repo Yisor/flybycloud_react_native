@@ -9,7 +9,6 @@ import { get, post } from '../../../../service/request';
 import apiUrl from '../../../../constants/api';
 import { insuranceChecked, fetchFillOrderData, checkPassenger } from '../action';
 import { formatTime, getTimeString } from '../../../../utils/timeUtils';
-import costCenter from './costcenter.json';
 import InsuranceList from './InsuranceList';
 import PopupListPicker from './PopupListPicker';
 import FlightInfo from './FlightInfo';
@@ -34,11 +33,6 @@ class FillOrderPage extends Component {
     };
   }
 
-  componentWillMount() {
-    flight = this.props.flight;
-    ticket = this.props.ticket;
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchFillOrderData());
   }
@@ -55,7 +49,8 @@ class FillOrderPage extends Component {
 
   // 校验乘客是否违规
   checkPolicy(passengers) {
-    this.props.dispatch(checkPassenger({ ticket, passengers }));
+    let { flightDetails, returnDetails } = this.props;
+    this.props.dispatch(checkPassenger({ flightDetails, returnDetails, passengers }));
   }
 
   // 显示违规原因选择窗口
@@ -68,9 +63,7 @@ class FillOrderPage extends Component {
   }
 
   // 添加乘客
-  onAddPassenger() {
-    Actions.passengerSelect();
-  }
+  onAddPassenger() { Actions.passengerSelect(); }
 
   // 配送方式
   onPressDeliveries() {
@@ -88,11 +81,13 @@ class FillOrderPage extends Component {
 
   // 成本中心点击
   onPressCostCenter() {
-    PopupListPicker.showCostCenter(
-      this.props.costCenter,
-      this.state.costCenterSelectedIndex,
-      (item, index) => { this.setState({ costCenterSelectedIndex: index }) }
-    );
+    let { user } = this.props;
+    (user.isChooseCostCenter == 1) ?
+      PopupListPicker.showCostCenter(
+        this.props.costCenter,
+        this.state.costCenterSelectedIndex,
+        (item, index) => { this.setState({ costCenterSelectedIndex: index }) }
+      ) : null;
   }
 
   // 保险选择
@@ -101,19 +96,21 @@ class FillOrderPage extends Component {
   }
 
   onPressDetail() {
-    // Actions.costDetail({ flight: flight, ticket: ticket, passengers: this.state.passengers, insurances: this.props.insurances });
-    // let visible = this.state.modalVisible;
-    // this.setState({ modalVisible: !visible });
+    let { flightDetails, returnDetails } = this.props;
+    Actions.costDetail({ flightDetails, returnDetails, passengers: this.state.passengers, insurances: this.props.insurances });
   }
 
-  renderFlightInfo() { return (<FlightInfo flight={flight} ticket={ticket} />) }
+  renderFlightInfo() {
+    let { flightDetails, returnDetails } = this.props;
+    return (<FlightInfo flightDetails={flightDetails} returnDetails={returnDetails} />)
+  }
 
   // 是否违反差旅政策
   renderTravelPolicy() {
     let { reasonSelectedIndex } = this.state;
     let { reasons, checkResult } = this.props;
     let reason = (reasonSelectedIndex > -1 && reasons.length > 0) ? reasons[reasonSelectedIndex].reasonInfo : '请选择原因';
-    let TravelPolicyItem = checkResult.length > 0 ?
+    return (checkResult.length > 0) ?
       <View style={styles.approverView}>
         <View>
           <Text style={[styles.approverTxt, { color: "#e26a6a", marginRight: 55 }]}>
@@ -124,23 +121,23 @@ class FillOrderPage extends Component {
           </TouchableOpacity>
         </View>
       </View> : null;
-    return TravelPolicyItem;
   }
 
   // 审批人
   renderApprover() {
-    return (
+    let { user } = this.props;
+    return (user.auditIsOpen == 1) ?
       <TouchableOpacity
         style={styles.approverView}
         activeOpacity={0.6}
         onPress={() => { Actions.auditorList({ audits: this.props.audits }) }}>
         <Text style={styles.approverTxt}>查看审批人</Text>
-      </TouchableOpacity>
-    );
+      </TouchableOpacity> : null;
   }
 
   renderPassenger() {
-    return (
+    let { user } = this.props;
+    return (user.orderRole == 2) ?
       <View>
         <View style={styles.passengerView}>
           <View style={{ flexDirection: 'row', alignItems: 'center', }}>
@@ -159,8 +156,7 @@ class FillOrderPage extends Component {
           renderRow={this.renderPassengeRow}
           enableEmptySections={true}
           renderSeparator={() => <Divider />} />
-      </View>
-    );
+      </View> : null;
   }
 
   renderPassengeRow = (rowData) => {
@@ -226,7 +222,7 @@ class FillOrderPage extends Component {
         <Text style={styles.rowItemLeftText}>支付方式</Text>
         <Text style={styles.rowItemRightText}>{user.payType == 1 ? '在线支付' : '企业垫付'}</Text>
       </TouchableOpacity>
-    );
+    )
   }
 
   // 成本中心
@@ -239,7 +235,7 @@ class FillOrderPage extends Component {
         <Text style={styles.rowItemLeftText}>成本中心</Text>
         <Text style={styles.rowItemRightText}>{costCenterName}</Text>
       </TouchableOpacity>
-    );
+    )
   }
 
   // 常旅客卡积分
@@ -249,7 +245,7 @@ class FillOrderPage extends Component {
         <Text style={styles.rowItemLeftText}>常旅客卡积分</Text>
         <Text style={styles.rowItemRightText}>不累计</Text>
       </TouchableOpacity>
-    );
+    )
   }
 
   renderExtraInfo() {
@@ -264,14 +260,25 @@ class FillOrderPage extends Component {
 
   // 计算总价
   calculateCost() {
+    let { flightDetails, returnDetails, user } = this.props;
     let insurancesTotal = 0;
     this.props.insuranceChecked.map((item) => {
       insurancesTotal += item.unitPrice;
     });
+    let expressType = expressTypes[this.state.expressTypeSelectedIndex];
+    let expressFee = expressType == '快递' ? user.expressFee : 0;
 
     let totalPerson = this.state.passengers.length == 0 ? 1 : this.state.passengers.length;
-    let totalPrice = (Number(ticket.price) + Number(ticket.buildFee) + Number(ticket.oilFee) + Number(insurancesTotal)) * totalPerson;
-    return totalPrice;
+    let ticket = flightDetails.ticket;
+    let oneWayPrice = (Number(ticket.price) + Number(ticket.buildFee) + Number(ticket.oilFee) + Number(insurancesTotal)) * totalPerson;
+
+    let twoWayPrice = 0;
+    if (returnDetails) {
+      let returnTicket = returnDetails.ticket;
+      twoWayPrice = (Number(returnTicket.price) + Number(returnTicket.buildFee) +
+        Number(returnTicket.oilFee) + Number(insurancesTotal)) * totalPerson;
+    }
+    return oneWayPrice + twoWayPrice + expressFee;
   }
 
   renderBottom() {
@@ -292,12 +299,6 @@ class FillOrderPage extends Component {
         </View>
       </View>
     );
-  }
-
-  renderModal() {
-    return (
-      <CostDetail flight={flight} ticket={ticket} passengers={this.state.passengers} insurances={this.props.insurances} />
-    )
   }
 
   render() {
@@ -427,6 +428,8 @@ const select = store => ({
   checkResult: store.flight.order.checkResult,
   reasons: store.flight.order.reasons,
   status: store.flight.order.status,
-  user: store.user.login.user
+  user: store.user.login.user,
+  flightDetails: store.flight.detail.flightDetails,
+  returnDetails: store.flight.detail.returnDetails,
 })
 export default connect(select)(FillOrderPage);

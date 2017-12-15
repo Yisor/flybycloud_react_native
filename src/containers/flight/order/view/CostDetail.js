@@ -23,46 +23,59 @@ class CostDetail extends Component {
               <Text style={{ fontSize: 14, color: "#323b43" }}>{`x${totalPerson}人`}</Text>
             </View>
           </View>
-        ))
-        }
+        ))}
       </View>
     );
   }
 
-  render() {
-    let { flight, ticket, passengers, insurances } = this.props;
+  renderTicketInfo(flight, ticket, passengers) {
     let totalPerson = passengers.length == 0 ? 1 : passengers.length;
+    return (flight && ticket) ?
+      <View style={{ marginLeft: 10, marginRight: 10, backgroundColor: '#fff', width: window.width, marginBottom: 20 }}>
+        <Text style={{ fontSize: 15, color: "#323b43", marginTop: 15, }}>
+          {`${flight.airlineShortName}${flight.flightNumber}`}
+        </Text>
+        <Divider style={{ marginTop: 15, marginBottom: 15, backgroundColor: 'gray' }} />
+        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+          <Text style={{ flex: 1, fontSize: 14, color: "#323b43" }}>成人票</Text>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
+            <Text style={{ fontSize: 10, color: "#e26a6a" }}>{`￥${ticket.price}`}</Text>
+            <Text style={{ fontSize: 14, color: "#323b43" }}>{`x${totalPerson}人`}</Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center', }}>
+          <Text style={{ flex: 1, fontSize: 14, color: "#323b43" }}>机建燃油</Text>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
+            <Text style={{ fontSize: 10, color: "#e26a6a" }}>{`￥${ticket.buildFee + ticket.oilFee}`}</Text>
+            <Text style={{ fontSize: 14, color: "#323b43" }}>{`x${totalPerson}人`}</Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center', }}>
+          <Text style={{ flex: 1, fontSize: 14, color: "#323b43" }}>服务费</Text>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
+            <Text style={{ fontSize: 10, color: "#e26a6a" }}>{`￥${ticket.buildFee}`}</Text>
+            <Text style={{ fontSize: 14, color: "#323b43" }}>{`x${totalPerson}人`}</Text>
+          </View>
+        </View>
+        <Divider style={{ marginTop: 15, marginBottom: 15, backgroundColor: 'gray' }} />
+        {this.renderInsurances(totalPerson)}
+      </View> : null;
+  }
+
+  render() {
+    let { flightDetails, returnDetails, passengers } = this.props;
+    let { flight, ticket } = flightDetails;
+    let backFlight = null;
+    let backTicket = null;
+    if (returnDetails) {
+      let { returnFlight, returnTicket } = returnDetails;
+      backFlight = returnFlight;
+      backTicket = returnTicket;
+    }
     return (
       <View style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'flex-end', alignItems: 'center', }}>
-        <View style={{ marginLeft: 10, marginRight: 10, backgroundColor: '#fff', width: window.width, marginBottom: 20 }}>
-          <Text style={{ fontSize: 15, color: "#323b43", marginTop: 15, }}>
-            {`${flight.airlineShortName}${flight.flightNumber}`}
-          </Text>
-          <Divider style={{ marginTop: 15, marginBottom: 15, backgroundColor: 'gray' }} />
-          <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-            <Text style={{ flex: 1, fontSize: 14, color: "#323b43" }}>成人票</Text>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-              <Text style={{ fontSize: 10, color: "#e26a6a" }}>{`￥${ticket.price}`}</Text>
-              <Text style={{ fontSize: 14, color: "#323b43" }}>{`x${totalPerson}人`}</Text>
-            </View>
-          </View>
-          <View style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center', }}>
-            <Text style={{ flex: 1, fontSize: 14, color: "#323b43" }}>机建燃油</Text>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-              <Text style={{ fontSize: 10, color: "#e26a6a" }}>{`￥${ticket.buildFee + ticket.oilFee}`}</Text>
-              <Text style={{ fontSize: 14, color: "#323b43" }}>{`x${totalPerson}人`}</Text>
-            </View>
-          </View>
-          <View style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center', }}>
-            <Text style={{ flex: 1, fontSize: 14, color: "#323b43" }}>服务费</Text>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-              <Text style={{ fontSize: 10, color: "#e26a6a" }}>{`￥${ticket.buildFee}`}</Text>
-              <Text style={{ fontSize: 14, color: "#323b43" }}>{`x${totalPerson}人`}</Text>
-            </View>
-          </View>
-          <Divider style={{ marginTop: 15, marginBottom: 15, backgroundColor: 'gray' }} />
-          {this.renderInsurances(totalPerson)}
-        </View>
+        {this.renderTicketInfo(flight, ticket, passengers)}
+        {this.renderTicketInfo(backFlight, backTicket, passengers)}
       </View>
     );
   }

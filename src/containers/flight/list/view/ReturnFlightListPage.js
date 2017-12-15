@@ -39,7 +39,6 @@ class ReturnFlightListPage extends Component {
   }
 
   onPressItem(rowData) {
-    // 判断是否往返
     let { params } = this.props;
     Actions.flightDetail({ 'flight': rowData, params });
   }

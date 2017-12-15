@@ -29,6 +29,7 @@ import FillOrderPage from './containers/flight/order/view/FillOrderPage';
 import PassengerList from './containers/user/passenger/view/PassengerList';
 import PassengerSelectPage from './containers/user/passenger/view/PassengerSelectPage';
 import AuditorListPage from './containers/flight/auditing/AuditorListPage';
+import CostDetail from './containers/flight/order/view/CostDetail';
 // const HomeIcon = (props) => {
 //   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
 //   return (
@@ -89,7 +90,8 @@ class rootRouter extends Component {
           <Scene back key="fillOrder" component={FillOrderPage} title="订单填写" />
           <Scene back key="auditorList" component={AuditorListPage} title="查看审批人" />
           <Scene back key="addressList" component={AddressListPage} title="选择配送地址" />
-
+          <Scene back key="costDetail" component={CostDetail} title="订单明细" />
+          
         </Stack>
       </Router>
     );

@@ -45,7 +45,7 @@ const flight = (state = initialState, action) => {
       return {
         ...state,
         flightDetails: action.data,
-        returnDetails: {},
+        returnDetails: null,
       };
     case TYPES.RETURN_DETAILS:
       return {

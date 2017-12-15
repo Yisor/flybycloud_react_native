@@ -3,7 +3,7 @@ import { View, Text, Image, ListView, StyleSheet, InteractionManager, Alert, Tou
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { flightMarkerKey } from '../../../../constants/constDefines';
-import { flightDetailQuery } from '../actions';
+import { flightDetailQuery, flightDetails, returnDetails } from '../actions';
 import Store from '../../../../utils/store';
 import Divider from '../../../../components/Divider';
 import SegmentedBar from '../../../../components/SegmentedBar';
@@ -40,27 +40,25 @@ class FlightDetailPage extends Component {
   // 预定
   onBooked(item) {
     if (this.isOneWay) {
-      Actions.fillOrder({ 'flight': flight, 'ticket': item });
+      this.props.dispatch(flightDetails({ 'flight': flight, 'ticket': item }));
+      Actions.fillOrder();
     } else {
       Store.get(flightMarkerKey).then((res) => {
         if (res == null) {
           Store.set(flightMarkerKey, 1);
-          this.props.dispatch({ 'type': 'FLIGHT_DETAILS', 'data': { 'flight': flight, 'ticket': item } });
+          this.props.dispatch(flightDetails({ 'flight': flight, 'ticket': item }));
 
           let { params } = this.props;
-          console.log('详情接收：' + JSON.stringify(params));
           let endDate = params.endDate;
           let fromCity = params.fromCity;
           let toCity = params.toCity;
           params.flightDate = endDate;
           params.fromCity = toCity;
           params.toCity = fromCity;
-
           Actions.returnFlightList({ params: params });
-
         } else if (res && res == 1) {
-          this.props.dispatch({ 'type': 'RETURN_DETAILS', 'data': { 'flight': flight, 'ticket': item } });
-          Actions.fillOrder({ 'flight': flight, 'ticket': item });
+          this.props.dispatch(returnDetails({ 'flight': flight, 'ticket': item }));
+          Actions.fillOrder();
         }
       });
     }
@@ -68,10 +66,7 @@ class FlightDetailPage extends Component {
 
   // 改退签
   onResignOrRefund(item) {
-    // alert('改退签');
-    let { params } = this.props;
-    params.flightDate = params.endDate;
-    Actions.popTo("flightList", { test: params });
+    alert('改退签');
   }
 
   renderFlight() { return (<FlightInfo flight={flight} />); }
@@ -91,7 +86,7 @@ class FlightDetailPage extends Component {
   }
 
   renderFormHeader() {
-    let FormHeader = this.isGpTicket ?
+    return this.isGpTicket ?
       <View>
         <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 12, paddingBottom: 12 }}>
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
@@ -103,7 +98,6 @@ class FlightDetailPage extends Component {
         </View>
         <Divider />
       </View> : null;
-    return FormHeader;
   }
 
   renderRowMidView(item) {
