@@ -57,7 +57,7 @@ class FlightMainPage extends Component {
 
   initData() {
     Store.remove(flightMarkerKey);// 清除缓存
-    this.setState({ startDate: '2017-12-23', endDate: '2017-12-25' });
+    this.setState({ startDate: '2018-01-16', endDate: '2018-01-18' });
   }
 
   onExchange = () => {

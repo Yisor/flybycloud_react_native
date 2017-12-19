@@ -7,6 +7,7 @@ export default {
   passengers: '/user/passenger/list',
   emplist: '/user/emplist',
   costCenter: '/user/cost/center',
+  address: '/user/address',// 新增配送地址
   addressList: '/user/address/list',
   flightTicket: "/flight/ticket/",
   flightSeat: '/flight/ticket/seat/',
@@ -17,5 +18,6 @@ export default {
   auditing: '/corp/auditing/default/person',
   check: '/passenger/policy/check',
   express: '/passenger/corp/express',
-  illegalReason: '/passenger/policy/reason'
+  illegalReason: '/passenger/policy/reason',
+  flightOrder: '/order/flight/'
 }

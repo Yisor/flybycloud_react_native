@@ -15,6 +15,16 @@ const address = (state = initialState, action) => {
         addresses: action.data,
         status: "Done"
       };
+    case TYPES.ADDRESS_ADD_SUCCESS:
+      return {
+        ...state,
+        status: "Done"
+      };
+    case TYPES.ADDRESS_UPDATE_SUCCESS:
+      return {
+        ...state,
+        status: "Done"
+      };
     default:
       return state;
   }

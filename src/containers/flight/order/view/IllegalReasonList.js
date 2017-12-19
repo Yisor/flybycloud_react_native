@@ -3,7 +3,7 @@
  *  @Author : lsl
  *  @Date   : 2017-12-1 11:8:36
  *  @Last Modified   : 2017-12-1 11:8:36
- *  @Desc: 配送方式
+ *  @Desc: 违规原因
  */
 
 import React, { Component } from 'react';

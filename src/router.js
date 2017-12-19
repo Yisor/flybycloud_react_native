@@ -30,6 +30,8 @@ import PassengerList from './containers/user/passenger/view/PassengerList';
 import PassengerSelectPage from './containers/user/passenger/view/PassengerSelectPage';
 import AuditorListPage from './containers/flight/auditing/AuditorListPage';
 import CostDetail from './containers/flight/order/view/CostDetail';
+import FlightInfo from './containers/flight/order/view/FlightInfo';
+import FlightOrderList from './containers/order/flight/view/FlightOrderList';
 // const HomeIcon = (props) => {
 //   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
 //   return (
@@ -81,7 +83,7 @@ class rootRouter extends Component {
           </Tabs>
 
           <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登录飞巴商旅" />
-          <Scene key="flight" component={FlightMainPage} title="机票" initial />
+          <Scene key="flight" component={FlightMainPage} title="机票"  />
           <Scene back key="city" component={SelectCityPage} title="城市" />
           <Scene back key="flightList" component={FlightListPage} title="航班" />
           <Scene back key="returnFlightList" component={ReturnFlightListPage} title="航班" />
@@ -91,7 +93,9 @@ class rootRouter extends Component {
           <Scene back key="auditorList" component={AuditorListPage} title="查看审批人" />
           <Scene back key="addressList" component={AddressListPage} title="选择配送地址" />
           <Scene back key="costDetail" component={CostDetail} title="订单明细" />
-          
+          <Scene back key="flightInfo" component={FlightInfo} title="订单明细" />
+          <Scene back key="flightOrder" component={FlightOrderList} title="机票订单" initial/>
+
         </Stack>
       </Router>
     );

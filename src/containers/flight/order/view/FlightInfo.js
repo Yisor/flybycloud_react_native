@@ -12,39 +12,31 @@ import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
 import Overlay from '../../../../components/Overlay';
 import { formatTime, getTimeString } from '../../../../utils/timeUtils';
+import { RETURN_DETAILS } from '../../detail/actionTypes';
+import GridItem from './GridItem';
+import ResignRule from './ResignRule';
 const isStopover = [false, true]; // 是否经停
 
 class FlightInfo extends Component {
 
   static propTypes = {
-    flightDetails: PropTypes.object.isRequired,
+    flightDetails: PropTypes.object,
     returnDetails: PropTypes.object,
-  };
+  }
 
-  showPop(ticket) {
-    let policy = ticket.policy;
+  /**
+   * 退改签政策
+   * @param {机票} ticket 
+   */
+  showResignRule(ticket) {
     let overlayView = (
-      <Overlay.PopView
+      <Overlay.PullView
         style={{ alignItems: 'center', justifyContent: 'center' }}
-        type='zoomIn'
+        side='bottom'
         modal={false}
         ref={v => this.overlayPopView = v}>
-        <View style={{ backgroundColor: '#fff', width: window.width * 0.8, minHeight: 180, borderRadius: 8, justifyContent: 'center', }}>
-          <Text style={{ margin: 20 }}>退改签说明</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ marginLeft: 20, marginRight: 20 }}>退票条件</Text>
-            <Text style={{ paddingRight: 20, width: window.width * 0.56 }}>{policy.refundPolicy}</Text>
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
-            <Text style={{ paddingLeft: 20, marginRight: 20, }}>改签条件</Text>
-            <Text style={{ paddingRight: 20, width: window.width * 0.56 }}>{policy.changePolicy}</Text>
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, marginBottom: 20 }}>
-            <Text style={{ marginLeft: 20, marginRight: 20 }}>签转政策</Text>
-            <Text style={{ paddingRight: 20, width: window.width * 0.56 }}>{policy.signPolicy}</Text>
-          </View>
-        </View>
-      </Overlay.PopView>
+        <ResignRule ticket={ticket} />
+      </Overlay.PullView>
     );
     Overlay.show(overlayView);
   }
@@ -53,8 +45,8 @@ class FlightInfo extends Component {
     return (
       <View>
         <View style={{ flexDirection: 'row', marginLeft: 10, marginTop: 10, }}>
-          <View style={{ borderRadius: 2, marginRight: 10, backgroundColor: "#f0b051" }}>
-            <Text style={{ fontSize: 9, color: "#ffffff", marginLeft: 5, marginRight: 5 }}>实际承运</Text>
+          <View style={styles.carrierView}>
+            <Text style={styles.carrierTxt}>实际承运</Text>
           </View>
           <Text style={{ fontSize: 11, color: "#797f85" }}>{`${flight.airlineShortName}${flight.flightNumber}`}</Text>
         </View>
@@ -82,7 +74,7 @@ class FlightInfo extends Component {
             <Text style={{ fontSize: 11, color: "#797f85", marginRight: 20 }}>{`成人票价￥${ticket.price}`}</Text>
             <Text style={{ fontSize: 11, color: "#797f85" }}>{`机建燃油￥${ticket.buildFee + ticket.oilFee}`}</Text>
           </View>
-          <TouchableOpacity activeOpacity={0.6} onPress={() => this.showPop(ticket)}>
+          <TouchableOpacity activeOpacity={0.6} onPress={() => this.showResignRule(ticket)}>
             <Text style={{ fontSize: 11, color: "#51a6f0" }}>查看退改签</Text>
           </TouchableOpacity>
         </View>
@@ -132,6 +124,35 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  gridItem: {
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
+    borderTopWidth: 1
+  },
+  promptTxt: {
+    fontSize: 11,
+    color: "#e26a6a",
+    margin: 10,
+    marginBottom: 30
+  },
+  carrierTxt: {
+    fontSize: 9,
+    color: "#ffffff",
+    marginLeft: 5,
+    marginRight: 5
+  },
+  carrierView: {
+    borderRadius: 2,
+    marginRight: 10,
+    backgroundColor: "#f0b051"
+  },
+  resignInstr: {
+    fontSize: 14,
+    color: "#323b43",
+    margin: 10,
+    marginTop: 20
+  }
 });
 
 export default FlightInfo;
