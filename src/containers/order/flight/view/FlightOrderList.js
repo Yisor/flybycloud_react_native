@@ -6,8 +6,9 @@
  *  @Desc 机票订单
  */
 import React, { Component } from 'react';
-import { View, Text, Image, ListView, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { View, Text, Image, ListView, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 
 import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
@@ -50,6 +51,10 @@ class FlightOrderList extends Component {
     return;
   }
 
+  onPressRow(rowData) {
+    Actions.flightOrderDetail({ order: rowData });
+  }
+
   renderSegmentedBar() {
     return (
       <SegmentedBar
@@ -64,23 +69,31 @@ class FlightOrderList extends Component {
     )
   }
 
-  renderRow(rowData) {
+  renderRow = (rowData) => {
     let date = new Date(rowData.departureTime);
     let year = date.getFullYear();
     let month = date.getMonth();
     let day = date.getDate();
     return (
-      <TouchableOpacity activeOpacity={0.6} style={styles.rowContainer} onPress={() => { alert('点击：' + day) }}>
+      <TouchableOpacity activeOpacity={0.6} style={styles.rowContainer} onPress={() => this.onPressRow(rowData)}>
         <View style={{ marginLeft: 18 }}>
           <Text style={{ color: '#323b43', marginTop: 10 }}>{`${rowData.departureCityName} - ${rowData.destinationCityName}`}</Text>
           <Text style={{ color: '#797f85', marginTop: 10 }}>{rowData.airlineShortName}</Text>
           <Text style={{ color: '#797f85', marginTop: 10, marginBottom: 10 }}>{`出发时间：${year} - ${month} - ${day}`}</Text>
         </View>
         <View style={{ marginRight: 18, alignItems: 'flex-end' }}>
-          <Text style={{ color: '#e26a6a', marginBottom: 12 }}>{`￥${rowData.ticketPrice}`}</Text>
+          <Text style={{ color: '#e26a6a', marginBottom: 12 }}>{`￥${rowData.orderPay}`}</Text>
           <Text>{`${orderStatus[rowData.orderStatus]}`}</Text>
         </View>
       </TouchableOpacity>
+    );
+  }
+
+  renderFooter() {
+    let { status } = this.props;
+    let loadState = status && status == 'Done';
+    return (
+      <LoadMoreFooter isLoadAll={loadState} />
     );
   }
 
@@ -94,7 +107,7 @@ class FlightOrderList extends Component {
           renderRow={this.renderRow}
           enableEmptySections={true}
           renderSeparator={() => <Divider />}
-          renderFooter={() => <LoadMoreFooter />}
+          renderFooter={() => this.renderFooter()}
           onEndReachedThreshold={50}
           onEndReached={() => { this.loadMoreData(0, getCurrentTime(this.getLastElement())) }} />
       </View>
@@ -128,5 +141,6 @@ const styles = StyleSheet.create({
 
 const select = store => ({
   orders: store.order.flightOrders,
+  status: store.order.status,
 })
 export default connect(select)(FlightOrderList);
