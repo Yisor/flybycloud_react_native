@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { View, Text, Image, ListView, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import window from '../../../../utils/window';
 import Divider from '../../../../components/Divider';
@@ -44,12 +45,14 @@ class FlightOrderDetail extends Component {
 
   // 改签
   onResign() {
-    alert('改签');
+    let { detail } = this.props;
+    Actions.flightResign({ detail: detail });
   }
 
   // 退票
   onRefund() {
-    alert('退票');
+    let { detail } = this.props;
+    Actions.flightRefund({ detail: detail });
   }
 
   // 去付款
@@ -61,7 +64,6 @@ class FlightOrderDetail extends Component {
   onCancel() {
     alert('取消订单');
   }
-
 
   getFormatTime(timeStamp) {
     let date = new Date(timeStamp);
@@ -169,7 +171,7 @@ class FlightOrderDetail extends Component {
           renderRow={this.renderPassengeRow}
           enableEmptySections={true}
           renderSeparator={() => <Divider />} />
-      </View >
+      </View>
     );
   }
 
@@ -225,8 +227,8 @@ class FlightOrderDetail extends Component {
     return (
       <TouchableOpacity style={styles.rowItem} activeOpacity={0.6}>
         <Text style={styles.rowItemLeftText}>差旅违规</Text>
-        {policys && policys.map((policy) => (
-          <Text style={styles.rowItemRightText}>{policy.overReason}</Text>
+        {policys && policys.map((policy, index) => (
+          <Text key={index} style={styles.rowItemRightText}>{policy.overReason}</Text>
         ))}
       </TouchableOpacity>
     )

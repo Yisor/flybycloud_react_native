@@ -33,6 +33,11 @@ import CostDetail from './containers/flight/order/view/CostDetail';
 import FlightInfo from './containers/flight/order/view/FlightInfo';
 import FlightOrderList from './containers/order/flight/view/FlightOrderList';
 import FlightOrderDetail from './containers/order/flight/view/FlightOrderDetail';
+import RefundPage from './containers/order/refund/view/RefundPage';
+import RefundConfirmPage from './containers/order/refund/view/RefundConfirmPage';
+import ResignPage from './containers/order/resign/view/ResignPage';
+import ChangeAirlistPage from './containers/flight/list/view/ChangeAirlistPage';
+import ChangeAirDetailPage from './containers/flight/detail/view/ChangeAirDetailPage';
 // const HomeIcon = (props) => {
 //   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
 //   return (
@@ -84,7 +89,7 @@ class rootRouter extends Component {
           </Tabs>
 
           <Scene key="login" navBar={CustomNavBar} component={LoginPage} title="登录飞巴商旅" />
-          <Scene key="flight" component={FlightMainPage} title="机票" initial/>
+          <Scene key="flight" component={FlightMainPage} title="机票" />
           <Scene back key="city" component={SelectCityPage} title="城市" />
           <Scene back key="flightList" component={FlightListPage} title="航班" />
           <Scene back key="returnFlightList" component={ReturnFlightListPage} title="航班" />
@@ -97,6 +102,11 @@ class rootRouter extends Component {
           <Scene back key="flightInfo" component={FlightInfo} title="订单明细" />
           <Scene back key="flightOrder" component={FlightOrderList} title="机票订单" />
           <Scene back key="flightOrderDetail" component={FlightOrderDetail} title="订单详情" />
+          <Scene back key="flightRefund" component={RefundPage} title="申请退票" />
+          <Scene back key="flightRefundConfirm" component={RefundConfirmPage} title="退票确认" initial />
+          <Scene back key="flightResign" component={ResignPage} title="申请改签" />
+          <Scene back key="changeAirlist" component={ChangeAirlistPage} title="选择航班" />
+          <Scene back key="changeAirDetail" component={ChangeAirDetailPage} title="航班详情" />
 
         </Stack>
       </Router>
