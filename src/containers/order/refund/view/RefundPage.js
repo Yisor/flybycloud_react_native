@@ -19,7 +19,8 @@ export default class RefundPage extends Component {
 
   onConfirm() {
     if (selectedUser.length > 0) {
-      Actions.flightRefundConfirm();
+      let { detail } = this.props;
+      Actions.flightRefundConfirm({passengers:selectedUser,detail});
     } else {
       Alert.alert(null, '请至少选择一名乘客');
     }

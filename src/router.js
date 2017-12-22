@@ -100,10 +100,10 @@ class rootRouter extends Component {
           <Scene back key="addressList" component={AddressListPage} title="选择配送地址" />
           <Scene back key="costDetail" component={CostDetail} title="订单明细" />
           <Scene back key="flightInfo" component={FlightInfo} title="订单明细" />
-          <Scene back key="flightOrder" component={FlightOrderList} title="机票订单" />
+          <Scene back key="flightOrder" component={FlightOrderList} title="机票订单" initial/>
           <Scene back key="flightOrderDetail" component={FlightOrderDetail} title="订单详情" />
           <Scene back key="flightRefund" component={RefundPage} title="申请退票" />
-          <Scene back key="flightRefundConfirm" component={RefundConfirmPage} title="退票确认" initial />
+          <Scene back key="flightRefundConfirm" component={RefundConfirmPage} title="退票确认" />
           <Scene back key="flightResign" component={ResignPage} title="申请改签" />
           <Scene back key="changeAirlist" component={ChangeAirlistPage} title="选择航班" />
           <Scene back key="changeAirDetail" component={ChangeAirDetailPage} title="航班详情" />

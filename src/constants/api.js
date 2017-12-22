@@ -19,5 +19,6 @@ export default {
   check: '/passenger/policy/check',
   express: '/passenger/corp/express',
   illegalReason: '/passenger/policy/reason',
-  flightOrder: '/order/flight/'
+  flightOrder: '/order/flight/',
+  refundDetail: '/search/order/refund/detail'
 }

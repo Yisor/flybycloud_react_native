@@ -1,0 +1,12 @@
+﻿{
+    "refundTotalMoney":700,
+    "paidTicketFee":1280,
+    "paidTaxFee":50,
+    "paidServiceFee":20,
+    "deductTicketFee":640,
+    "deductServiceFee":10,
+    "flightDate":"12月19日",
+    "depCityName":"杭州",
+    "arrCityName":"北京",
+    "depTime":"16:00"
+}

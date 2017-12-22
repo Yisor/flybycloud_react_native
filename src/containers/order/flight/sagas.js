@@ -21,7 +21,7 @@ export function* fetchOrderDetail(params) {
   try {
     let url = apiUrl.flightOrder + 'ticket/info/' + params.orderId;
     const result = yield call(get, url);
-    console.log("详情返回：" + JSON.stringify(result));
+    // console.log("详情返回：" + JSON.stringify(result));
     yield put({ type: TYPES.QUERY_FLIGHT_ORDER_DETAIL_SUCESS, data: result });
   } catch (error) {
     Alert.alert('网络故障' + error);
@@ -32,7 +32,7 @@ export function* loadMoreFlightOrder(params) {
   try {
     let url = apiUrl.flightOrder + 'list/' + params.status + '/' + params.orderTime;
     const result = yield call(get, url);
-    console.log("订单返回" + JSON.stringify(result));
+    // console.log("订单返回" + JSON.stringify(result));
     yield put({ type: TYPES.LOAD_MORE_ORDER_SUCCESS, data: result });
   } catch (error) {
     Alert.alert('网络故障' + error);
