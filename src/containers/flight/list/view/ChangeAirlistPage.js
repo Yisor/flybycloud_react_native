@@ -32,20 +32,6 @@ class ChangeAirlistPage extends Component {
     this.props.dispatch(fetchFlightList(this.props.params));
   }
 
-  sortUpTime() {
-    let { flights } = this.props;
-    this.props.dispatch(flightSortUpTime(flights));
-  }
-
-  sortUpPrice() {
-    let { flights } = this.props;
-    this.props.dispatch(flightSortUpPrice(flights));
-  }
-
-  setFilterVisible(visible) {
-    this.setState({ visible });
-  }
-
   onPressItem(rowData) {
     let { params } = this.props;
     Actions.changeAirDetail({ 'flight': rowData, params: params });
@@ -53,29 +39,6 @@ class ChangeAirlistPage extends Component {
 
   renderRow = (rowData) => {
     return (<FlightItem rowData={rowData} onPressItem={(data) => this.onPressItem(data)} />)
-  }
-
-  renderBottomTab() {
-    let { flights } = this.props;
-    return (
-      <TabView barStyle={{ backgroundColor: 'white' }} type='projector' onChange={(index) => { }}>
-        <TabView.Sheet
-          title='时间'
-          icon={require('../../../../resources/assets/plane/plane_time_order2.png')}
-          activeIcon={require('../../../../resources/assets/plane/plane_time_order1.png')}
-          onPress={() => this.sortUpTime()} />
-        <TabView.Sheet
-          title='价格'
-          icon={require('../../../../resources/assets/plane/plane_price_order2.png')}
-          activeIcon={require('../../../../resources/assets/plane/plane_price_order1.png')}
-          onPress={() => this.sortUpPrice()} />
-        <TabView.Sheet
-          title='筛选'
-          icon={require('../../../../resources/assets/plane/plane_filter_order2.png')}
-          activeIcon={require('../../../../resources/assets/plane/plane_filter_order1.png')}
-          onPress={() => this.setFilterVisible(true)} />
-      </TabView>
-    );
   }
 
   renderCalendarNar() {
@@ -115,16 +78,6 @@ class ChangeAirlistPage extends Component {
             enableEmptySections={true}
             renderSeparator={() => <Divider />} />
         </View>
-        {this.renderBottomTab()}
-        <FlightFilter
-          visible={this.state.visible}
-          dataSource={this.props.flights}
-          filters={this.props.airlines}
-          onCancel={() => this.setFilterVisible(false)}
-          onSubmit={(datas) => {
-            console.log(JSON.stringify(datas));
-            this.setFilterVisible(false);
-          }} />
       </View>
     );
   }

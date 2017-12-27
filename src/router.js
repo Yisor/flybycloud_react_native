@@ -38,6 +38,7 @@ import RefundConfirmPage from './containers/order/refund/view/RefundConfirmPage'
 import ResignPage from './containers/order/resign/view/ResignPage';
 import ChangeAirlistPage from './containers/flight/list/view/ChangeAirlistPage';
 import ChangeAirDetailPage from './containers/flight/detail/view/ChangeAirDetailPage';
+import FlightResignConfirm from './containers/order/resign/view/FlightResignConfirm';
 // const HomeIcon = (props) => {
 //   const tab = props.focused ? require('../icons/tabbar_home_down_icon.png') : require('../icons/tabbar_home_icon.png');
 //   return (
@@ -107,7 +108,8 @@ class rootRouter extends Component {
           <Scene back key="flightResign" component={ResignPage} title="申请改签" />
           <Scene back key="changeAirlist" component={ChangeAirlistPage} title="选择航班" />
           <Scene back key="changeAirDetail" component={ChangeAirDetailPage} title="航班详情" />
-
+          <Scene back key="flightResignConfirm" component={FlightResignConfirm} title="改签确认" />
+          
         </Stack>
       </Router>
     );

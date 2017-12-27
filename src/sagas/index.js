@@ -4,6 +4,7 @@ import { addressSaga } from '../containers/user/address';
 import { flightSaga } from '../containers/flight';
 import { flightOrderSaga } from '../containers/order/flight';
 import { flightRefundSaga } from '../containers/order/refund';
+import { flightResignSaga } from '../containers/order/resign';
 
 export default function* rootSaga() {
   yield [
@@ -11,6 +12,7 @@ export default function* rootSaga() {
     fork(watchLoginRequests),
     fork(addressSaga),
     fork(flightSaga),
-    fork(flightRefundSaga)
+    fork(flightRefundSaga),
+    fork(flightResignSaga)
   ];
 }

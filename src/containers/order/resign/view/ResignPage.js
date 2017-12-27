@@ -25,7 +25,7 @@ export default class ResignPage extends Component {
       let toCity = detail.destination;
       let isGpTicket = (detail.isGovernmentOrder == 1);
       let title = detail.departureCityName + "-" + detail.destinationCityName;
-      let params = { flightDate:'2018-01-16', fromCity, toCity, isOneWay: true, isGpTicket }
+      let params = { flightDate: '2018-01-16', fromCity, toCity, isOneWay: true, isGpTicket, passengers: selectedUser, orderDetail:detail }
       Actions.changeAirlist({ params });
     } else {
       Alert.alert('请至少选择一名乘客');

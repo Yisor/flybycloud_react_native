@@ -31,7 +31,7 @@ export const get = (api) => {
   console.log('路径：' + url);
   Headers.ts = getTs()
   Headers.sign = getSign(api)
-  Headers.token = global.token
+  Headers.token = mockToken
   return fetch(url, {
     method: 'GET',
     headers: Headers

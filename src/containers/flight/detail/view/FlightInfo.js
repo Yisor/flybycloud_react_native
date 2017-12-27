@@ -17,7 +17,7 @@ class FlightInfo extends Component {
       <View>
         <View style={[styles.rowCenter, { marginTop: 20 }]}>
           <Text style={{ fontSize: 18, color: "#323b43" }}>{flight.departureCityName}</Text>
-          <Text style={styles.isStopover}>{isStopover[flight.isStopover] ? 经停 : ''}</Text>
+          <Text style={styles.isStopover}>{isStopover[flight.isStopover] ? '经停' : ''}</Text>
           <Text style={{ fontSize: 18, color: "#323b43" }}>{flight.destinationCityName}</Text>
         </View>
         <View style={[styles.rowCenter, { marginTop: 10 }]}>

@@ -20,5 +20,6 @@ export default {
   express: '/passenger/corp/express',
   illegalReason: '/passenger/policy/reason',
   flightOrder: '/order/flight/',
-  refundDetail: '/search/order/refund/detail'
+  refundDetail: '/search/order/refund/detail',
+  changeFee: '/search/order/change/fee'
 }

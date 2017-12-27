@@ -209,13 +209,13 @@ class RefundConfirmPage extends Component {
     return (
       <View style={{ backgroundColor: '#fff', marginTop: 8 }}>
         <TouchableOpacity activeOpacity={0.6} style={styles.reasonContainer} onPress={() => this.showRefundReason()}>
-          <Text style={{ fontSize: 14, color: "#797f85", margin: 15, marginLeft: 10 }}>改签原因</Text>
+          <Text style={{ fontSize: 14, color: "#797f85", margin: 15, marginLeft: 10 }}>退票原因</Text>
           <Text style={{ fontSize: 14, color: "#323b43", margin: 15, }}>{reasonTxt}</Text>
           <Image style={{ margin: 15, transform: [{ rotate: '180deg' }] }} source={require('../../../../resources/assets/common/1_arrow_icon.png')} />
         </TouchableOpacity>
         {index && index > 0 ? <View>
           <View style={styles.resignView} >
-            <Text style={{ fontSize: 14, color: "#797f85", margin: 15, marginLeft: 10 }}>改签说明</Text>
+            <Text style={{ fontSize: 14, color: "#797f85", margin: 15, marginLeft: 10 }}>退票说明</Text>
             <TextInput style={styles.textInput} placeholder='最少1字，最多120字' placeholderTextColor="#a0a4a8" underlineColorAndroid='transparent' />
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }} >

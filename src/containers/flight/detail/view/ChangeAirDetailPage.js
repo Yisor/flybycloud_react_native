@@ -34,11 +34,11 @@ class ChangeAirDetailPage extends Component {
     this.props.dispatch(flightDetailQuery(params));
   }
 
-
   // 预定
   onBooked(item) {
     this.props.dispatch(flightDetails({ 'flight': flight, 'ticket': item }));
-    Actions.flightRefundConfirm();
+    let { params } = this.props;
+    Actions.flightResignConfirm({ params: params });
   }
 
   // 改退签

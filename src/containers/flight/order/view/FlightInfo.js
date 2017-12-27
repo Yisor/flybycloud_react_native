@@ -53,7 +53,7 @@ class FlightInfo extends Component {
         <View style={[styles.rowCenter, { marginTop: 10 }]}>
           <Text style={{ fontSize: 24, color: "#323b43" }}>{formatTime(flight.departureTime)}</Text>
           <View style={{ alignItems: 'center', }}>
-            <Text style={{ fontSize: 11, color: "#797f85" }}>{isStopover[flight.isStopover] ? 经停 : ' '}</Text>
+            <Text style={{ fontSize: 11, color: "#797f85" }}>{isStopover[flight.isStopover] ? '经停' : ' '}</Text>
             <Divider style={{ width: 60, marginLeft: 32, marginRight: 32, marginTop: 5, marginBottom: 5 }} />
             <Text style={{ fontSize: 11, color: "#797f85" }}>{getTimeString(flight.flyingTime)}</Text>
           </View>
