@@ -15,9 +15,11 @@ import { flightMarkerKey } from '../../../../constants/constDefines';
 import TabView from '../../../../components/TabView';
 import window from '../../../../utils/window';
 import Store from '../../../../utils/store';
+import { dateFormat } from '../utils';
 import Divider from '../../../../components/Divider';
 import FlightItem from './FlightItem';
 import FlightFilter from './FlightFilter';
+import CalendarBar from './CalendarBar';
 
 class FlightListPage extends Component {
   constructor(props) {
@@ -78,35 +80,17 @@ class FlightListPage extends Component {
     );
   }
 
-  renderCalendarNar() {
-    return (
-      <View style={styles.calendar}>
-        <TouchableOpacity style={[styles.rowCenter, { marginLeft: 10 }]} activeOpacity={0.6}>
-          <Image style={[styles.arrowImg, { marginRight: 10 }]} resizeMode="contain"
-            source={require('../../../../resources/assets/common/arrow_white_icon.png')} />
-          <Text style={{ color: 'white' }}>前一天</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.rowCenter, styles.dateView]} activeOpacity={0.6}>
-          <Text style={{ marginLeft: 10 }}>02月27日</Text>
-          <Text style={{ marginLeft: 10 }}>周一</Text>
-          <Image style={{ marginLeft: 10, marginRight: 10 }} resizeMode="contain"
-            source={require('../../../../resources/assets/common/vertical_divider.png')} />
-          <Image style={{ width: 15, height: 15 }} resizeMode="contain"
-            source={require('../../../../resources/assets/plane/plane_calendar.png')} />
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.rowCenter, { marginRight: 10 }]} activeOpacity={0.6}>
-          <Text style={{ color: 'white' }}>后一天</Text>
-          <Image style={[styles.arrowImg, { marginLeft: 10 }]} resizeMode="contain"
-            source={require('../../../../resources/assets/common/arrow_next.png')} />
-        </TouchableOpacity>
-      </View>
-    );
+  // 更新请求
+  updateFlightDate = (date) => {
+    let { params } = this.props;
+    params.flightDate = dateFormat(date);
+    this.props.dispatch(fetchFlightList(params));
   }
 
   render() {
     return (
       <View style={styles.container}>
-        {this.renderCalendarNar()}
+        <CalendarBar onChange={(date) => this.updateFlightDate(date)} />
         <View style={{ height: window.heigh - 175, }}>
           <ListView
             contentContainerStyle={styles.contentContainer}

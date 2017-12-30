@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { flightSortUpTime, flightSortUpPrice, fetchFlightList } from '../action';
 import { flightMarkerKey } from '../../../../constants/constDefines';
+import { dateFormat } from '../utils';
 import TabView from '../../../../components/TabView';
 import window from '../../../../utils/window';
 import Store from '../../../../utils/store';
 import Divider from '../../../../components/Divider';
 import FlightItem from './FlightItem';
 import FlightFilter from './FlightFilter';
+import CalendarBar from './CalendarBar';
 
 class ReturnFlightListPage extends Component {
   constructor(props) {
@@ -95,10 +97,17 @@ class ReturnFlightListPage extends Component {
     );
   }
 
+  // 更新请求
+  updateFlightDate = (date) => {
+    let { params } = this.props;
+    params.flightDate = dateFormat(date);
+    this.props.dispatch(fetchFlightList(params));
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        {this.renderCalendarNar()}
+        <CalendarBar onChange={(date) => this.updateFlightDate(date)} />
         <View style={{ height: window.heigh - 175, }}>
           <ListView
             contentContainerStyle={styles.contentContainer}

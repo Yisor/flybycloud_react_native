@@ -10,8 +10,8 @@
  */
 function sameMonth(a, b) {
 	return a instanceof Date && b instanceof Date &&
-			a.getFullYear() === b.getFullYear() &&
-			a.getMonth() === b.getMonth();
+		a.getFullYear() === b.getFullYear() &&
+		a.getMonth() === b.getMonth();
 }
 
 /**
@@ -22,9 +22,9 @@ function sameMonth(a, b) {
  */
 function sameDate(a, b) {
 	return a instanceof Date && b instanceof Date &&
-			a.getFullYear() === b.getFullYear() &&
-			a.getMonth() === b.getMonth() &&
-			a.getDate() === b.getDate();
+		a.getFullYear() === b.getFullYear() &&
+		a.getMonth() === b.getMonth() &&
+		a.getDate() === b.getDate();
 }
 
 /**
@@ -47,10 +47,28 @@ function isLTE(a, b) {
 	return a.diffDays(b) > -1;
 }
 
+/**
+ * 日期格式化 'YYYY-MM-DD'
+ * 
+ * @export
+ * @param {any} date 
+ * @returns 
+ */
+function dateFormat(date) {
+	const year = date.getFullYear()
+	const month = date.getMonth() + 1
+	const day = date.getDate()
+	const monthStr = month < 10 ? `0${month}` : `${month}`
+	const dayStr = day < 10 ? `0${day}` : `${day}`
+
+	return `${year}年${monthStr}月${dayStr}日`
+}
+
 export default {
 	sameMonth,
 	sameDate,
 	isGTE,
-	isLTE
+	isLTE,
+	dateFormat
 }
 
